@@ -109,7 +109,7 @@ spawn(function()
     for i = 1,math.huge do
         game:GetService("RunService").RenderStepped:wait()
             if _G.FastAttack1 then
-                pcall(function()
+                pcall(function() -- activeController.timeToNextAttack = -(math.huge * math.huge)
                     maxincrement = i
                     CameraShakerR:Stop()
                     CombatShaker.CameraShakeInstance.CameraShakeState = {FadingIn = 3,FadingOut =  2,Sustained = 0,Inactive = 1} 
@@ -703,12 +703,11 @@ end
 spawn(function()
     while wait() do 
     pcall(function()
-    if  _G.Auto_Farm == true or Clip == true or _G.FarmMasteryFruit == true or _G.BuddySword == true then
+    if  _G.Auto_Farm or Clip == true or _G.FarmMasteryFruit == true or _G.BuddySword == true then
     local Xd = Instance.new("Part")
     Xd.Name = "xd"
     Xd.Parent = game.Workspace
     Xd.Anchored = true
-    Xd.Transparency = 0
     Xd.Color = Color3.fromRGB(255, 155, 0)
     Xd.Size = Vector3.new(15,0.5,15)
     Xd.Material = "Neon"
@@ -765,7 +764,7 @@ function BringMon()
 spawn(function()
         while game:GetService("RunService").Stepped:wait(5) do
             character = game.Players.LocalPlayer.Character 
-            if _G.NoClip or Clip then
+            if _G.NoClip or Clip or _G.Auto_Farm then
                 pcall(function()
                     for _, v in pairs(character:GetChildren()) do
                         pcall(function()
