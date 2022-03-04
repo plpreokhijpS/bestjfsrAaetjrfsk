@@ -64,8 +64,8 @@ spawn(function()
                                         end
                                         _G.Mas = 0
                                         _G.PosMon = v.HumanoidRootPart.CFrame*CFrame.new(0,2,0)
+                                        _G.StartMagnetAutoFarm = true
                                         repeat game:GetService("RunService").Heartbeat:wait()
-                                            _G.StartMagnetAutoFarm = false
                                             v.HumanoidRootPart.CanCollide = false
                                             v.HumanoidRootPart.Size = Vector3.new(5,5,5)
                                             v.HumanoidRootPart.Transparency = 0.80
@@ -74,7 +74,7 @@ spawn(function()
                                                 TP(_G.PosMon * CFrame.new(0,15,0)*CFrame.Angles(0, math.rad(_G.Mas), 0))
                                                 game:GetService'VirtualUser':CaptureController()
                                                 game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
-                                            _G.StartMagnetAutoFarm = true
+                                            --_G.StartMagnetAutoFarm = true
                                         until v.Humanoid.Health <= 0 or _G.Auto_Farm == false or game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false
                                         _G.StartMagnetAutoFarm = false
                                         game:GetService'VirtualUser':CaptureController()
