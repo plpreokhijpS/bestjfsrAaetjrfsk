@@ -34,6 +34,7 @@ spawn(function()
             pcall(function()
                 if _G.Auto_Farm == true then
                     if game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false then
+                        _G.StartMagnetAutoFarm = false
         				CheckLevel()
         				TP(CFrameQ)
         				if (CFrameQ.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 4 then
@@ -47,22 +48,14 @@ spawn(function()
         					end
         				end
                     elseif game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == true then
-                        pcall(function()
+                        _G.StartMagnetAutoFarm = false
+                        --pcall(function()
                         CheckLevel()
                         if game:GetService("Workspace").Enemies:FindFirstChild(Ms) then
                             for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                                 if v.Name == Ms then
     								if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) then
-                                        _G.PosMon = v.HumanoidRootPart.CFrame*CFrame.new(0,15,0)
-                                        v.HumanoidRootPart.Size = Vector3.new(5,5,5)
-                                        v.HumanoidRootPart.Transparency = 0.5
-                                        if v.Humanoid.Health == v.Humanoid.MaxHealth then
-                                            v.Humanoid.Health = v.Humanoid.Health - 1
-                                        end
-                                        --v.Humanoid:ChangeState(11)
-                                        --v.Head.CanCollide = false
-                                        --v.HumanoidRootPart.CanCollide = false
-                                        --v.Humanoid.WalkSpeed = 0
+                                       
                                         if not game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") then
                                             local args = {
                                                 [1] = "Buso"
@@ -70,21 +63,28 @@ spawn(function()
                                             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
                                         end
                                         _G.Mas = 0
-                                        repeat game:GetService("RunService").Heartbeat:wait(0.2)
-                                            pcall(function()
-                                                if _G.Mas < 360 then
-                                                    _G.Mas = _G.Mas + 5
-                                                elseif _G.Mas >= 360 then
-                                                    _G.Mas = 0
-                                                end
-                                                BringMon()
+                                        _G.PosMon = v.HumanoidRootPart.CFrame*CFrame.new(0,2,0)
+                                        repeat game:GetService("RunService").Heartbeat:wait()
+                                            _G.StartMagnetAutoFarm = false
+                                            v.HumanoidRootPart.CanCollide = false
+                                            v.HumanoidRootPart.Size = Vector3.new(5,5,5)
+                                            v.HumanoidRootPart.Transparency = 0.80
+                                            v.Humanoid:ChangeState(11)
+                                            sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
                                                 TP(_G.PosMon * CFrame.new(0,15,0)*CFrame.Angles(0, math.rad(_G.Mas), 0))
                                                 game:GetService'VirtualUser':CaptureController()
                                                 game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
-                                            end)
+                                            _G.StartMagnetAutoFarm = true
                                         until v.Humanoid.Health <= 0 or _G.Auto_Farm == false or game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false
+                                        _G.StartMagnetAutoFarm = false
+                                        game:GetService'VirtualUser':CaptureController()
+                                        game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                                         if v.Humanoid.Health <= 0 then
                                             v:Destroy()
+                                        elseif v.Humanoid.Health == v.Humanoid.MaxHealth then
+                                            v:Destroy()
+                                        elseif _G.Mon.Humanoid.Health == _G.Mon.Humanoid.MaxHealth then
+                                            _G.Mon:Destroy()
                                         end
                                     else
     									game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
@@ -95,7 +95,7 @@ spawn(function()
                             TP(CFrameMon)
                             wait(0.5)
                         end
-                    end)
+                    --end)
                 end
                 end
             end)
@@ -704,18 +704,18 @@ spawn(function()
     while wait() do 
     pcall(function()
     if  _G.Auto_Farm or Clip == true or _G.FarmMasteryFruit == true or _G.BuddySword == true then
-    local Xd = Instance.new("Part")
-    Xd.Name = "xd"
-    Xd.Parent = game.Workspace
-    Xd.Anchored = true
-    Xd.Color = Color3.fromRGB(255, 155, 0)
-    Xd.Size = Vector3.new(15,0.5,15)
-    Xd.Material = "Neon"
-    Xd.Transparency = 1
-
-
-    game.Workspace["xd"].CFrame = CFrame.new(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.X,game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.Y - 3.92,game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.Z)
-
+        if game.Workspace:FindFirstChild("xd") then
+            game.Workspace["xd"].CFrame = CFrame.new(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.X,game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.Y - 3.92,game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.Z)
+        else
+            local Xd = Instance.new("Part")
+            Xd.Name = "xd"
+            Xd.Parent = game.Workspace
+            Xd.Anchored = true
+            Xd.Color = Color3.fromRGB(255, 155, 0)
+            Xd.Size = Vector3.new(15,0.5,15)
+            Xd.Material = "Neon"
+            Xd.Transparency = 1
+        end
 else
     if game:GetService("Workspace").xd then
         game:GetService("Workspace").xd:Destroy()
@@ -723,7 +723,7 @@ else
 end
     end)
     end
-    end)
+end)
 
 function TP(P1)
     Distance = (P1.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
@@ -743,23 +743,23 @@ function TP(P1)
     ):Play()
 end
 
-function BringMon()
-    for i2,v2 in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                if v2.Name == Ms and (v2.HumanoidRootPart.Position-game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 250 then
-                                    v2.HumanoidRootPart.CFrame = _G.PosMon
-                                    v2.HumanoidRootPart.Size = Vector3.new(5,5,5)
-                                    v2.HumanoidRootPart.Transparency = 0.5
-                                    if v2.Humanoid.Health == v2.Humanoid.MaxHealth then
-                                        v2.Humanoid.Health = v2.Humanoid.Health - 1
-                                    end
-                                    --v2.Humanoid:ChangeState(11)
-                                    --v2.Head.CanCollide = false
-                                    --v2.HumanoidRootPart.CanCollide = false
-                                    sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
-                    end
-
+spawn(function()
+    for i = 1,math.huge do game:GetService("RunService").RenderStepped:Wait()
+        if _G.StartMagnetAutoFarm then
+            for k,x in pairs(game.Workspace.Enemies:GetChildren()) do
+                if x.Name == Ms and x:FindFirstChild("HumanoidRootPart") and x:FindFirstChild("Humanoid") and x.Humanoid.Health > 0 and (x.HumanoidRootPart.Position-game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 250 then
+                    _G.Mon = x
+                    x.HumanoidRootPart.CanCollide = false
+                    x.HumanoidRootPart.CFrame = _G.PosMon
+                    x.HumanoidRootPart.Size = Vector3.new(5,5,5)
+                    x.HumanoidRootPart.Transparency = 0.80
+                    x.Humanoid:ChangeState(11)
+                    sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+                end 
+            end
         end
     end
+end)
 
 spawn(function()
         while game:GetService("RunService").Stepped:wait(5) do
