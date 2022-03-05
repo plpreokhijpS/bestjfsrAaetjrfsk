@@ -115,7 +115,7 @@ spawn(function()
                     CameraShakerR:Stop()
                     CombatShaker.CameraShakeInstance.CameraShakeState = {FadingIn = 3,FadingOut =  2,Sustained = 0,Inactive = 1} 
                     CombatFrameworkR.activeController.attacking = false
-                    CombatFrameworkR.activeController.timeToNextAttack = -(math.huge * math.huge)
+                    CombatFrameworkR.activeController.timeToNextAttack = -(5 * 5)
                     CombatFrameworkR.activeController.increment = 3
                     CombatFrameworkR.activeController.hitboxMagnitude = 25
                     CombatFrameworkR.activeController.blocking = false
