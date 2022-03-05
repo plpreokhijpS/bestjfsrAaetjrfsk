@@ -73,7 +73,7 @@ spawn(function()
                                             }
                                             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
                                         end
-                                        CheckLevel()
+                                        --CheckLevel()
                                         repeat game:GetService("RunService").Heartbeat:wait(0.2)
                                             --pcall(function()
                                                 _G.StartMagnetAutoFarm = true
