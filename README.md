@@ -34,6 +34,7 @@ spawn(function()
             pcall(function()
                 if _G.Auto_Farm == true then
                     if game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false then
+                        _G.AttackOP = false
                         _G.StartMagnetAutoFarm = false
         				CheckLevel()
         				TP(CFrameQ)
@@ -53,9 +54,8 @@ spawn(function()
                         CheckLevel()
                         if game:GetService("Workspace").Enemies:FindFirstChild(Ms) then
                             for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                                if v.Name == Ms then
+                                if v.Name == Ms and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
     								if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) then
-                                       
                                         if not game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") then
                                             local args = {
                                                 [1] = "Buso"
@@ -63,9 +63,10 @@ spawn(function()
                                             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
                                         end
                                         _G.Mas = 0
-                                        _G.PosMon = v.HumanoidRootPart.CFrame*CFrame.new(0,2,0)
-                                        _G.StartMagnetAutoFarm = true
-                                        repeat game:GetService("RunService").Heartbeat:wait()
+                                        _G.StartMagnetAutoFarm = false
+                                        _G.PosMon = v.HumanoidRootPart.CFrame*CFrame.new(0,5,0)
+                                        TP(_G.PosMon * CFrame.new(0,15,0)*CFrame.Angles(0, math.rad(_G.Mas), 0))
+                                        repeat game:GetService("RunService").Heartbeat:wait(.3)
                                             v.HumanoidRootPart.CanCollide = false
                                             v.HumanoidRootPart.Size = Vector3.new(5,5,5)
                                             v.HumanoidRootPart.Transparency = 0.80
@@ -74,7 +75,7 @@ spawn(function()
                                                 TP(_G.PosMon * CFrame.new(0,15,0)*CFrame.Angles(0, math.rad(_G.Mas), 0))
                                                 game:GetService'VirtualUser':CaptureController()
                                                 game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
-                                            --_G.StartMagnetAutoFarm = true
+                                            _G.StartMagnetAutoFarm = true
                                         until v.Humanoid.Health <= 0 or _G.Auto_Farm == false or game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false
                                         _G.StartMagnetAutoFarm = false
                                         game:GetService'VirtualUser':CaptureController()
@@ -747,7 +748,7 @@ spawn(function()
     for i = 1,math.huge do game:GetService("RunService").RenderStepped:Wait()
         if _G.StartMagnetAutoFarm then
             for k,x in pairs(game.Workspace.Enemies:GetChildren()) do
-                if x.Name == Ms and x:FindFirstChild("HumanoidRootPart") and x:FindFirstChild("Humanoid") and x.Humanoid.Health > 0 and (x.HumanoidRootPart.Position-game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 250 then
+                if x.Name == Ms and x:FindFirstChild("HumanoidRootPart") and x:FindFirstChild("Humanoid") and x.Humanoid.Health > 0 and (x.HumanoidRootPart.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 300 then
                     _G.Mon = x
                     x.HumanoidRootPart.CanCollide = false
                     x.HumanoidRootPart.CFrame = _G.PosMon
