@@ -177,16 +177,6 @@ spawn(function()
     end
 end)
 
-if _G.FastAttack1 == true then
-    while _G.FastAttack1 do wait()
-        for i, v in pairs(game.Workspace["_WorldOrigin"]:GetChildren()) do
-            if v.Name == "Sounds" then
-                v:Destroy() 
-            end
-        end
-    end
-end
-
 	spawn(function()
 		game:GetService("Players").LocalPlayer.Idled:connect(function()
 			if _G.AntiAFK then
@@ -978,7 +968,7 @@ end
 spawn(function()
     while wait() do 
     pcall(function()
-    if  _G.Auto_Farm == true or Clip == true or _G.FarmMasteryFruit == true or _G.BuddySword == true or _G.AutoFarm_Boss then
+    if  _G.Auto_Farm == true or Clip == true or _G.FarmMasteryFruit == true or _G.BuddySword == true or _G.AutoFarm_Boss or _G.AutoRaid then
     local Xd = Instance.new("Part")
     Xd.Name = "xd"
     Xd.Parent = game.Workspace
@@ -1100,6 +1090,108 @@ spawn(function()
 		end
 	end
 end)
+local PlaceID = game.PlaceId
+local AllIDs = {}
+local foundAnything = ""
+local actualHour = os.date("!*t").hour
+local Deleted = false
+local File = pcall(function()
+	AllIDs = game:GetService('HttpService'):JSONDecode(readfile("NotSameServers.json"))
+end)
+if not File then
+	table.insert(AllIDs, actualHour)
+	writefile("NotSameServers.json", game:GetService('HttpService'):JSONEncode(AllIDs))
+end
+function TPReturner()
+	local Site;
+	if foundAnything == "" then
+		Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100'))
+	else
+		Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100&cursor=' .. foundAnything))
+	end
+	local ID = ""
+	if Site.nextPageCursor and Site.nextPageCursor ~= "null" and Site.nextPageCursor ~= nil then
+		foundAnything = Site.nextPageCursor
+	end
+	local num = 0;
+	for i,v in pairs(Site.data) do
+		local Possible = true
+		ID = tostring(v.id)
+		if tonumber(v.maxPlayers) > tonumber(v.playing) then
+			for _,Existing in pairs(AllIDs) do
+				if num ~= 0 then
+					if ID == tostring(Existing) then
+						Possible = false
+					end
+				else
+				if tonumber(actualHour) ~= tonumber(Existing) then
+					local delFile = pcall(function()
+						--delfile("NotSameServers.json")
+						AllIDs = {}
+						table.insert(AllIDs, actualHour)
+					end)
+				end
+			end
+			num = num + 1
+		end
+		if Possible == true then
+			table.insert(AllIDs, ID)
+			wait(0.2)
+			pcall(function()
+				--writefile("NotSameServers.json", game:GetService('HttpService'):JSONEncode(AllIDs))
+				wait(0.2)
+				game:GetService("TeleportService"):TeleportToPlaceInstance(PlaceID, ID, game.Players.LocalPlayer)
+			end)
+			end
+		end
+	end
+end
+
+function Teleport()
+	while wait(0.2) do
+		pcall(function()
+			TPReturner()
+			if foundAnything ~= "" then
+				TPReturner()
+			end
+		end)
+	end
+end
+
+function HopLowerServer()
+	local maxplayers, gamelink, goodserver, data_table = math.huge, "https://games.roblox.com/v1/games/" .. game.PlaceId .. "/servers/Public?sortOrder=Asc&limit=100"
+	if not _G.FailedServerID then _G.FailedServerID = {} end
+	local function serversearch()
+		data_table = game:GetService"HttpService":JSONDecode(game:HttpGetAsync(gamelink))
+		for _, v in pairs(data_table.data) do
+			pcall(function()
+				if type(v) == "table" and v.id and v.playing and tonumber(maxplayers) > tonumber(v.playing) and not table.find(_G.FailedServerID, v.id) then
+					maxplayers = v.playing
+					goodserver = v.id
+				end
+			end)
+		end
+	end
+	function getservers()
+		pcall(serversearch)
+		for i, v in pairs(data_table) do
+			if i == "nextPageCursor" then
+				if gamelink:find"&cursor=" then
+					local a = gamelink:find"&cursor="
+					local b = gamelink:sub(a)
+					gamelink = gamelink:gsub(b, "")
+				end
+				gamelink = gamelink .. "&cursor=" .. v
+				pcall(getservers)
+			end
+		end
+	end
+	pcall(getservers)
+	if goodserver == game.JobId or maxplayers == #game:GetService"Players":GetChildren() - 1 then
+	end
+	table.insert(_G.FailedServerID, goodserver)
+	game:GetService"TeleportService":TeleportToPlaceInstance(game.PlaceId, goodserver)
+end
 
 spawn(function()
     while wait(2) do
@@ -1151,20 +1243,44 @@ spawn(function()
                 game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
             end
             if game.Players.LocalPlayer.Backpack:FindFirstChild("Fishman Karate") and game.Players.LocalPlayer.Backpack:FindFirstChild("Fishman Karate").Level.Value >= 300 and game.Players.LocalPlayer.Character.Humanoid.Health > 0 then
-                local args = {
-                    [1] = "BlackbeardReward",
-                    [2] = "DragonClaw",
-                    [3] = "2"
-                }
-                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                local FG = game:GetService("Players").LocalPlayer.Data.Fragments.Value
+                if FG < 1500 then
+                    if _G.Auto_Farm then
+                        _G.PO = true
+                        _G.Auto_Farm = false
+                    end
+                else
+                    if _G.PO == true then
+                        _G.Auto_Farm = true
+                        _G.PO = nil
+                    end
+                    local args = {
+                        [1] = "BlackbeardReward",
+                        [2] = "DragonClaw",
+                        [3] = "2"
+                    }
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                end
             end
             if game.Players.LocalPlayer.Character:FindFirstChild("Fishman Karate") and game.Players.LocalPlayer.Character:FindFirstChild("Fishman Karate").Level.Value >= 300 and game.Players.LocalPlayer.Character.Humanoid.Health > 0 then
-                local args = {
-                    [1] = "BlackbeardReward",
-                    [2] = "DragonClaw",
-                    [3] = "2"
-                }
-                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                local FG = game:GetService("Players").LocalPlayer.Data.Fragments.Value
+                if FG < 1500 then
+                    if _G.Auto_Farm then
+                        _G.PO = true
+                        _G.Auto_Farm = false
+                    end
+                else
+                    if _G.PO == true then
+                        _G.Auto_Farm = true
+                        _G.PO = nil
+                    end
+                    local args = {
+                        [1] = "BlackbeardReward",
+                        [2] = "DragonClaw",
+                        [3] = "2"
+                    }
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                end
             end
             if game.Players.LocalPlayer.Backpack:FindFirstChild("Dragon Claw") and game.Players.LocalPlayer.Backpack:FindFirstChild("Dragon Claw").Level.Value >= 300 and game.Players.LocalPlayer.Character.Humanoid.Health > 0 then
                 local args = {
@@ -1315,6 +1431,81 @@ end)
             end
 	    end
 	end)
+	
+spawn(function()
+    while wait() do
+        if Killaura or _G.AutoRaid or RaidSuperhuman or _G.Auto_Raid then
+            for i,v in pairs(game.Workspace.Enemies:GetDescendants()) do
+                if v:FindFirstChild("Humanoid") and v:FindFirstChild("HumanoidRootPart") and v.Humanoid.Health > 0 then
+                    pcall(function()
+                        repeat wait(.1)
+                            sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+                            v.Humanoid.Health = 0
+                            v.HumanoidRootPart.CanCollide = false
+                            v.HumanoidRootPart.Size = Vector3.new(50,50,50)
+                            v.HumanoidRootPart.Transparency = 0.5
+                        until not Killaura or not _G.AutoRaid or not RaidSuperhuman or not v.Parent or v.Humanoid.Health <= 0
+                    end)
+                end
+            end
+        end
+    end
+end)
+
+spawn(function()
+	pcall(function()
+		while game:GetService("RunService").Heartbeat:wait() do
+			if NextIsland or RaidSuperhuman or _G.AutoRaid or _G.Auto_Raid then
+				if game:GetService("Players")["LocalPlayer"].PlayerGui.Main.Timer.Visible == true and game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 5") or game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 4") or game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 3") or game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 2") or game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 1") then
+					if game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 5") then
+						TP2(game:GetService("Workspace")["_WorldOrigin"].Locations["Island 5"].CFrame*CFrame.new(0,80,0))
+					elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 4") then
+						TP2(game:GetService("Workspace")["_WorldOrigin"].Locations["Island 4"].CFrame*CFrame.new(0,80,0))
+					elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 3") then
+						TP2(game:GetService("Workspace")["_WorldOrigin"].Locations["Island 3"].CFrame*CFrame.new(0,80,0))
+					elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 2") then
+						TP2(game:GetService("Workspace")["_WorldOrigin"].Locations["Island 2"].CFrame*CFrame.new(0,80,0))
+					elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 1") then
+						TP2(game:GetService("Workspace")["_WorldOrigin"].Locations["Island 1"].CFrame*CFrame.new(0,80,0))
+					end
+				end
+			end
+		end
+	end)
+end)
+
+spawn(function()
+	pcall(function()
+		while wait(2) do
+			if _G.AutoAwakener then
+				local args = {
+					[1] = "Awakener",
+					[2] = "Check"
+				}
+				game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+				local args = {
+					[1] = "Awakener",
+					[2] = "Awaken"
+				}
+				game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+			end
+		end
+	end)
+end)
+
+spawn(function()
+    while wait() do
+        if _G.BringFruit then
+            for i,v in pairs(game:GetService("Workspace"):GetChildren()) do
+                if v:IsA ("Tool") then
+                    v.Handle.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+                end
+            end
+        end
+    end
+end)
+
+
 -------------------------------------------------------------- Code
 
 local DiscordLib = loadstring(game:HttpGet"https://raw.githubusercontent.com/x7Swiftz/UI-V3/main/README.md")()
@@ -1330,6 +1521,7 @@ local Melee = serv:Channel("Melee")
 local Sword = serv:Channel("Sword")
 local Fruit = serv:Channel("Fruit")
 local PVP = serv:Channel("PVP")
+local Raid = serv:Channel("Raid")
 local Shop = serv:Channel("Shop")
 local Teleport = serv:Channel("Teleport")
 local Misc = serv:Channel("Misc")
@@ -1362,6 +1554,7 @@ end)
 
 Main:Toggle("Fast Attack",true,function(vu)
     _G.FastAttack1 = vu
+    game:GetService("ReplicatedStorage").Assets.SlashHit:Destroy()
 end)
 Main:Toggle("Effect Attack",true,function(vu)
     _G.Effect_Attack = vu
@@ -1476,3 +1669,88 @@ end)
 
 
 ---------------- Combat
+
+---------------- Fruit
+Fruit:Label("Fruit")
+Fruit:Toggle("Devil Fruit Sniper",false,function(vu)
+	BuyFruitSinper = vu
+end)
+local l__Remotes__11 = game.ReplicatedStorage:WaitForChild("Remotes");
+u45 = l__Remotes__11.CommF_:InvokeServer("GetFruits");
+Table_DevilFruitSniper = {}
+for i,v in next,u45 do
+    table.insert(Table_DevilFruitSniper,v.Name)
+end
+Fruit:Dropdown("Select Devil Fruit",Table_DevilFruitSniper,function(ply)
+	SelectDevil = ply
+end)
+spawn(function()
+	while wait(2) do
+		if BuyFruitSinper then
+			game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("GetFruits")
+			game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("PurchaseRawFruit",SelectDevil)
+		end 
+	end
+end)
+Fruit:Toggle("Bring Fruit",false,function(vu)
+    _G.BringFruit = vu
+end)
+
+Fruit:Toggle("Auto Buy Random Fruit",false, function(vu)
+	_G.RandomFruit = vu
+	game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Cousin","Buy")
+end)
+spawn(function()
+    while wait(5) do
+        if _G.RandomFruit then
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Cousin","Buy")
+        end
+    end
+end)
+
+---------------- Fruit
+
+---------------- Raid
+Raid:Toggle("AutoRaid",false, function(vu)
+    if _G.selectchip == nil then
+	    DiscordLib:Notification("Notification", "Select Chip!", "Okay!")
+	else
+	    _G.Auto_Raid = vu
+	end
+end)
+Raid:Dropdown("Select Chip",{"Flame","Ice","Quake","Light","Dark","String","Rumble","Magma","Human: Buddha"},function(t)
+	_G.selectchip = t
+end)
+
+Raid:Button("Buy Chip", function(vu)
+	game:GetService("ReplicatedStorage").Remotes["CommF_"]:InvokeServer( "RaidsNpc", "Select", _G.selectchip)
+end)
+
+spawn(function()
+    while wait() do
+        if _G.Auto_Raid then
+			game:GetService("ReplicatedStorage").Remotes["CommF_"]:InvokeServer( "RaidsNpc", "Select", _G.selectchip)
+				if game.Players.LocalPlayer.Backpack:FindFirstChild("Special Microchip") or  game.Players.LocalPlayer.Character:FindFirstChild("Special Microchip")  then
+    				if New_World then
+    					fireclickdetector(game:GetService("Workspace").Map.CircleIsland.RaidSummon2.Button.Main.ClickDetector)
+    				elseif Three_World then
+    					fireclickdetector(game:GetService("Workspace").Map["Boat Castle"].RaidSummon2.Button.Main.ClickDetector)
+    				end
+    			else
+    				wait(10)
+    				if game:GetService("Players")["LocalPlayer"].PlayerGui.Main.Timer.Visible == false and not game.Players.LocalPlayer.Backpack:FindFirstChild("Special Microchip") and not game.Players.LocalPlayer.Character:FindFirstChild("Special Microchip") then
+    				    if _G.Hop then
+    				        Teleport()
+    				    end
+    			    else
+    			        repeat wait(1)
+    			        until game:GetService("Players")["LocalPlayer"].PlayerGui.Main.Timer.Visible == false
+    			        wait(2)
+    				end
+				end
+        end
+    end
+end)
+
+
+---------------- Raid
