@@ -34,8 +34,6 @@ spawn(function()
             pcall(function()
                 if _G.Auto_Farm == true then
                     if game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false then
-                        _G.AttackOP = false
-                        _G.StartMagnetAutoFarm = false
         				CheckLevel()
         				TP(CFrameQ)
         				if (CFrameQ.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 4 then
@@ -49,44 +47,39 @@ spawn(function()
         					end
         				end
                     elseif game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == true then
-                        _G.StartMagnetAutoFarm = false
-                        --pcall(function()
+                        pcall(function()
                         CheckLevel()
-                        game:GetService("ReplicatedStorage").Assets.GUI.DamageCounter.Enabled = false
+                        _G.StartMagnetAutoFarm = false
                         if game:GetService("Workspace").Enemies:FindFirstChild(Ms) then
                             for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                                if v.Name == Ms and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
+                                if v.Name == Ms then
     								if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) then
+                                        _G.PosMon = v.HumanoidRootPart.CFrame*CFrame.new(0,5,0)
+                                        v.HumanoidRootPart.Size = Vector3.new(5,5,5)
+                                        v.HumanoidRootPart.Transparency = 0.5
+                                        v.Humanoid.Health = v.Humanoid.Health - 1
+                                        --v.Humanoid:ChangeState(11)
+                                        --v.Head.CanCollide = false
+                                        --v.HumanoidRootPart.CanCollide = false
+                                        --v.Humanoid.WalkSpeed = 0
                                         if not game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") then
                                             local args = {
                                                 [1] = "Buso"
                                             }
                                             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
                                         end
-                                        _G.Mas = 0
-                                        _G.StartMagnetAutoFarm = false
-                                        _G.PosMon = v.HumanoidRootPart.CFrame*CFrame.new(0,5,0)
-                                        TP(_G.PosMon * CFrame.new(0,15,0)*CFrame.Angles(0, math.rad(_G.Mas), 0))
-                                        repeat game:GetService("RunService").Heartbeat:wait(.3)
-                                            v.HumanoidRootPart.CanCollide = false
-                                            v.HumanoidRootPart.Size = Vector3.new(5,5,5)
-                                            v.HumanoidRootPart.Transparency = 0.80
-                                            v.Humanoid:ChangeState(11)
-                                            sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
-                                                TP(_G.PosMon * CFrame.new(0,15,0)*CFrame.Angles(0, math.rad(_G.Mas), 0))
+                                        repeat game:GetService("RunService").Heartbeat:wait(0.2)
+                                            --pcall(function()
+                                                _G.StartMagnetAutoFarm = true
+                                                --BringMon()
+                                                TP(_G.PosMon * CFrame.new(0,15,0))
                                                 game:GetService'VirtualUser':CaptureController()
                                                 game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
-                                            _G.StartMagnetAutoFarm = true
+                                            --end)
                                         until v.Humanoid.Health <= 0 or _G.Auto_Farm == false or game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false
                                         _G.StartMagnetAutoFarm = false
-                                        game:GetService'VirtualUser':CaptureController()
-                                        game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                                         if v.Humanoid.Health <= 0 then
                                             v:Destroy()
-                                        elseif v.Humanoid.Health == v.Humanoid.MaxHealth then
-                                            v:Destroy()
-                                        elseif _G.Mon.Humanoid.Health == _G.Mon.Humanoid.MaxHealth then
-                                            _G.Mon:Destroy()
                                         end
                                     else
     									game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
@@ -97,7 +90,7 @@ spawn(function()
                             TP(CFrameMon)
                             wait(0.5)
                         end
-                    --end)
+                    end)
                 end
                 end
             end)
@@ -111,13 +104,13 @@ spawn(function()
     for i = 1,math.huge do
         game:GetService("RunService").RenderStepped:wait()
             if _G.FastAttack1 then
-                pcall(function() -- activeController.timeToNextAttack = -(math.huge * math.huge)
+                pcall(function()
                     maxincrement = i
                     CameraShakerR:Stop()
                     CombatShaker.CameraShakeInstance.CameraShakeState = {FadingIn = 3,FadingOut =  2,Sustained = 0,Inactive = 1} 
                     CombatFrameworkR.activeController.attacking = false
-                    CombatFrameworkR.activeController.timeToNextAttack = -(20 * 20)
-                    CombatFrameworkR.activeController.increment = 0
+                    CombatFrameworkR.activeController.timeToNextAttack = -(math.huge * math.huge)
+                    CombatFrameworkR.activeController.increment = 3
                     CombatFrameworkR.activeController.hitboxMagnitude = 25
                     CombatFrameworkR.activeController.blocking = false
                     CombatFrameworkR.activeController.timeToNextBlock = 0
@@ -130,7 +123,7 @@ end)
 if _G.FastAttack1 == true then
     while _G.FastAttack1 do wait()
         for i, v in pairs(game.Workspace["_WorldOrigin"]:GetChildren()) do
-            if v.Name == "Sounds" or v.Name == "SlashHit" or v.Name == "Part" then
+            if v.Name == "Sounds" then
                 v:Destroy() 
             end
         end
@@ -705,19 +698,20 @@ end
 spawn(function()
     while wait() do 
     pcall(function()
-    if  _G.Auto_Farm or Clip == true or _G.FarmMasteryFruit == true or _G.BuddySword == true then
-        if game.Workspace:FindFirstChild("xd") then
-            game.Workspace["xd"].CFrame = CFrame.new(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.X,game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.Y - 3.92,game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.Z)
-        else
-            local Xd = Instance.new("Part")
-            Xd.Name = "xd"
-            Xd.Parent = game.Workspace
-            Xd.Anchored = true
-            Xd.Color = Color3.fromRGB(255, 155, 0)
-            Xd.Size = Vector3.new(15,0.5,15)
-            Xd.Material = "Neon"
-            Xd.Transparency = 1
-        end
+    if  _G.Auto_Farm == true or Clip == true or _G.FarmMasteryFruit == true or _G.BuddySword == true then
+    local Xd = Instance.new("Part")
+    Xd.Name = "xd"
+    Xd.Parent = game.Workspace
+    Xd.Anchored = true
+    Xd.Transparency = 0
+    Xd.Color = Color3.fromRGB(255, 155, 0)
+    Xd.Size = Vector3.new(15,0.5,15)
+    Xd.Material = "Neon"
+    Xd.Transparency = 1
+
+
+    game.Workspace["xd"].CFrame = CFrame.new(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.X,game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.Y - 3.92,game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.Z)
+
 else
     if game:GetService("Workspace").xd then
         game:GetService("Workspace").xd:Destroy()
@@ -725,7 +719,7 @@ else
 end
     end)
     end
-end)
+    end)
 
 function TP(P1)
     Distance = (P1.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
@@ -750,7 +744,6 @@ spawn(function()
         if _G.StartMagnetAutoFarm then
             for k,x in pairs(game.Workspace.Enemies:GetChildren()) do
                 if x.Name == Ms and x:FindFirstChild("HumanoidRootPart") and x:FindFirstChild("Humanoid") and x.Humanoid.Health > 0 and (x.HumanoidRootPart.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 300 then
-                    _G.Mon = x
                     x.HumanoidRootPart.CanCollide = false
                     x.HumanoidRootPart.CFrame = _G.PosMon
                     x.HumanoidRootPart.Size = Vector3.new(5,5,5)
@@ -766,7 +759,7 @@ end)
 spawn(function()
         while game:GetService("RunService").Stepped:wait(5) do
             character = game.Players.LocalPlayer.Character 
-            if _G.NoClip or Clip or _G.Auto_Farm then
+            if _G.NoClip or Clip then
                 pcall(function()
                     for _, v in pairs(character:GetChildren()) do
                         pcall(function()
@@ -781,53 +774,6 @@ spawn(function()
             end
         end
 end)
-
-spawn(function()
-	while game:GetService("RunService").Heartbeat:wait() do
-		Level:Refresh("Point : "..tostring(game:GetService("Players").LocalPlayer.Data.Points.Value))
-	end
-end)
-
-spawn(function()
-	while wait(.1) do
-		if _G.Melee then
-			game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AddPoint", "Melee", _G.SelectPoint)
-		end
-	end
-end)
-
-spawn(function()
-	while wait(.1) do
-		if _G.Defense then
-			game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AddPoint", "Defense", _G.SelectPoint)
-		end
-	end
-end)
-
-spawn(function()
-	while wait(.1) do
-		if _G.Sword then
-			game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AddPoint", "Sword", _G.SelectPoint)
-		end
-	end
-end)
-
-spawn(function()
-	while wait(.1) do
-		if _G.Gun then
-			game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AddPoint", "Gun", _G.SelectPoint)
-		end
-	end
-end)
-
-spawn(function()
-	while wait(.1) do
-		if _G.Fruit then
-			game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AddPoint", "Demon Fruit", _G.SelectPoint)
-		end
-	end
-end)
-
 --------------------------------------- Code
 local gui = Library:create{
     Name = "Liver Hub",
@@ -860,65 +806,20 @@ page_Main:Toggle{
 page_Misc:Toggle{
 	Name = "Fast Attack",
 	StartingState = true,
-	Description = "---------- Misc Game",
+	Description = "Misc Game",
 	Callback = function(state) _G.FastAttack1 = state end
 }
 page_Misc:Toggle{
 	Name = "NoClip",
 	StartingState = false,
-	Description = "---------- Misc Game",
+	Description = "Misc Game",
 	Callback = function(state) _G.NoClip = state end
 }
 page_Misc:Toggle{
 	Name = "AntiAFK",
 	StartingState = true,
-	Description = "---------- Misc Game",
+	Description = "Misc Game",
 	Callback = function(state) _G.AntiAFK = state end
-}
-
-
-_G.Melee = false
-page_Misc:Toggle{
-	Name = "Melee",
-	StartingState = _G.Melee,
-	Description = "---------- Auto Stats",
-	Callback = function(state) _G.Melee = state end
-}
-_G.Defense = false
-page_Misc:Toggle{
-	Name = "Defense",
-	StartingState = _G.Defense,
-	Description = "---------- Auto Stats",
-	Callback = function(state) _G.Defense = state end
-}
-_G.Sword = false
-page_Misc:Toggle{
-	Name = "Sword",
-	StartingState = _G.Sword,
-	Description = "---------- Auto Stats",
-	Callback = function(state) _G.Sword = state end
-}
-_G.Gun = false
-page_Misc:Toggle{
-	Name = "Gun",
-	StartingState = _G.Gun,
-	Description = "---------- Auto Stats",
-	Callback = function(state) _G.Gun = state end
-}
-_G.Fruit = false
-page_Misc:Toggle{
-	Name = "Devil Fruit",
-	StartingState = _G.Fruit,
-	Description = "---------- Auto Stats",
-	Callback = function(state) _G.Fruit = state end
-}
-
-page_Misc:Slider{
-	Name = "SelectPoint",
-	Default = 1,
-	Min = 1,
-	Max = 20,
-	Callback = function(t) _G.SelectPoint = t end
 }
 --------------------------------------- Misc
 page_Main:Toggle{
