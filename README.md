@@ -74,7 +74,7 @@ spawn(function()
                         _G.Magnet = false
                         if game:GetService("Workspace").Enemies:FindFirstChild(Ms) then
                             for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                                if v.Name == Ms then
+                                if v.Name == Ms and x:FindFirstChild("HumanoidRootPart") and x:FindFirstChild("Humanoid") and x.Humanoid.Health > 0  then
     								if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) then
                                         _G.PosMon = v.HumanoidRootPart.CFrame*CFrame.new(0,5,0)
                                         v.HumanoidRootPart.Size = Vector3.new(5,5,5)
