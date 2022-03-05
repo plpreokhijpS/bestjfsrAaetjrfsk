@@ -35,6 +35,11 @@ spawn(function()
                 if _G.Auto_Farm == true then
                     if game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false then
         				CheckLevel()
+        				if _G.FM and (CFrameQ.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 1000 then
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(61163.8515625, 11.6796875, 1819.7841796875))
+        				elseif _G.FM and (CFrameQ - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 1000 then
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(61163.8515625, 11.6796875, 1819.7841796875))
+                        end
         				TP(CFrameQ)
         				if (CFrameQ.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude <= 4 then
         					wait(1.1)
@@ -68,6 +73,7 @@ spawn(function()
                                             }
                                             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
                                         end
+                                        CheckLevel()
                                         repeat game:GetService("RunService").Heartbeat:wait(0.2)
                                             --pcall(function()
                                                 _G.StartMagnetAutoFarm = true
@@ -76,7 +82,7 @@ spawn(function()
                                                 game:GetService'VirtualUser':CaptureController()
                                                 game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                                             --end)
-                                        until v.Humanoid.Health <= 0 or _G.Auto_Farm == false or game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false
+                                        until v.Humanoid.Health <= 0 or _G.Auto_Farm == false or game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false or game.Players.LocalPlayer.Character.Humanoid.Health <= 0
                                         _G.StartMagnetAutoFarm = false
                                         if v.Humanoid.Health <= 0 then
                                             v:Destroy()
@@ -278,6 +284,7 @@ function CheckLevel()
             CFrameQ = CFrame.new(-5316.1157226563, 12.262831687927, 8517.00390625)
             CFrameMon = CFrame.new(-5984.0532226563, 82.14656829834, 8753.326171875)
         elseif Lv == 375 or Lv <= 399 or SelectMonster == "Fishman Warrior [Lv. 375]" then -- Fishman Warrior 
+            _G.FM = true
             Ms = "Fishman Warrior [Lv. 375]"
             NameQuest = "FishmanQuest"
             QuestLv = 1
@@ -288,6 +295,7 @@ function CheckLevel()
 				game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(61163.8515625, 11.6796875, 1819.7841796875))
 			end
         elseif Lv == 400 or Lv <= 449 or SelectMonster == "Fishman Commando [Lv. 400]" then -- Fishman Commando
+            _G.FM = true
             Ms = "Fishman Commando [Lv. 400]"
             NameQuest = "FishmanQuest"
             QuestLv = 2
@@ -298,6 +306,7 @@ function CheckLevel()
 				game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(61163.8515625, 11.6796875, 1819.7841796875))
 			end
         elseif Lv == 450 or Lv <= 474 or SelectMonster == "God's Guard [Lv. 450]" then -- God's Guard
+            _G.FM = false
             Ms = "God's Guard [Lv. 450]"
             NameQuest = "SkyExp1Quest"
             QuestLv = 1
@@ -308,6 +317,7 @@ function CheckLevel()
 				game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(-4607.82275, 872.54248, -1667.55688))
 			end
         elseif Lv == 475 or Lv <= 524 or SelectMonster == "Shanda [Lv. 475]" then -- Shanda
+            _G.FM = false
             Ms = "Shanda [Lv. 475]"
             NameQuest = "SkyExp1Quest"
             QuestLv = 2
