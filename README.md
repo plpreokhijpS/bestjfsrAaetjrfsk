@@ -1102,7 +1102,7 @@ spawn(function()
 end)
 
 spawn(function()
-    while wait(.5) do
+    while wait(2) do
         if _G.Superhuman and game.Players.LocalPlayer:FindFirstChild("WeaponAssetCache") then
             if game.Players.LocalPlayer.Backpack:FindFirstChild("Combat") or game.Players.LocalPlayer.Character:FindFirstChild("Combat") then
                 local args = {
