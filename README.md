@@ -52,6 +52,7 @@ spawn(function()
                         _G.StartMagnetAutoFarm = false
                         --pcall(function()
                         CheckLevel()
+                        game:GetService("ReplicatedStorage").Assets.GUI.DamageCounter.Enabled = false
                         if game:GetService("Workspace").Enemies:FindFirstChild(Ms) then
                             for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                                 if v.Name == Ms and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
@@ -115,8 +116,8 @@ spawn(function()
                     CameraShakerR:Stop()
                     CombatShaker.CameraShakeInstance.CameraShakeState = {FadingIn = 3,FadingOut =  2,Sustained = 0,Inactive = 1} 
                     CombatFrameworkR.activeController.attacking = false
-                    CombatFrameworkR.activeController.timeToNextAttack = -(5 * 5)
-                    CombatFrameworkR.activeController.increment = 3
+                    CombatFrameworkR.activeController.timeToNextAttack = -(20 * 20)
+                    CombatFrameworkR.activeController.increment = 0
                     CombatFrameworkR.activeController.hitboxMagnitude = 25
                     CombatFrameworkR.activeController.blocking = false
                     CombatFrameworkR.activeController.timeToNextBlock = 0
@@ -129,7 +130,7 @@ end)
 if _G.FastAttack1 == true then
     while _G.FastAttack1 do wait()
         for i, v in pairs(game.Workspace["_WorldOrigin"]:GetChildren()) do
-            if v.Name == "Sounds" then
+            if v.Name == "Sounds" or v.Name == "SlashHit" or v.Name == "Part" then
                 v:Destroy() 
             end
         end
