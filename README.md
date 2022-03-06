@@ -1,3 +1,63 @@
+-------------------------------------------------------------- Save Setting
+_G.Setting_table = {
+    Auto_Farm = false,
+    Auto_Farm_Boss = false,
+    FastAttack = false,
+    Effect_Attack = false,
+    Auto_Raid = false,
+    RandomFruit = false,
+    BringFruit = false,
+    BuyFruitSinper = false,
+    Hallow_Scryte = false,
+    Tushita = false,
+    Yama = false,
+    BuddySword = false,
+    Sharkman_Karate = false,
+    AutoFarm_Boss = false,
+    Superhuman = false,
+    Electric_Claw = false,
+    Dragon_Talon = false,
+    Death_Step = false,
+    SelectWeapon = false,
+    EP = false,
+    SelectPoint = false,
+    Fruit = false,
+    Gun = false,
+    Sword = false,
+    Defense = false,
+    Melee = false,
+    SelectBoss = false,
+    selectchip = false,
+    SelectDevil = false
+}
+
+local filename = "Bf_setting.txt"
+
+function savesetting()
+    local json
+    local HttpService = game:GetService("HttpService")
+    if (writefile) then
+        json = HttpService:JSONEncode(_G.Setting_table)
+        writefile(filename, json)
+    else
+        print("-- Sorry You Noob --")
+    end
+end
+
+function loadsetting()
+    local HttpService = game:GetService("HttpService")
+    if (readfile and isfile and isfile(filename)) then
+        _G.Setting_table = HttpService:JSONDecode(readfile(filename))
+        -- print("-- New Value --")
+        for i,v in pairs(_G.Setting_table) do
+            -- print(i,v)
+        end
+    end
+end
+
+loadsetting()
+-------------------------------------------------------------- Save Setting
+
 local tpservice= game:GetService("TeleportService")
 local plr = game.Players.LocalPlayer
 
@@ -93,14 +153,15 @@ spawn(function()
                                             }
                                             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
                                         end
+                                        _G.MonLop = true
                                         BringMon()
                                         repeat game:GetService("RunService").Heartbeat:wait(0.5)
                                                 BringMon()
-                                                if (_G.PosMon.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 100 then
-                                                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = _G.PosMon* CFrame.new(0,15,0)
-                                                else
-                                                    TP(_G.PosMon * CFrame.new(0,15,0))
-                                                end
+                                                --if (_G.PosMon.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 100 then
+                                                --    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = _G.PosMon* CFrame.new(0,15,0)
+                                                --else
+                                                TP(_G.PosMon * CFrame.new(0,15,0))
+                                                --end
                                                 game:GetService'VirtualUser':CaptureController()
                                                 game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                                         until v.Humanoid.Health <= 0 or Auto_Farm == false or game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false or game.Players.LocalPlayer.Character.Humanoid.Health <= 0
@@ -147,7 +208,7 @@ spawn(function()
                                                 TP(_G.PosMon * CFrame.new(0,25,0))
                                                 game:GetService'VirtualUser':CaptureController()
                                                 game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
-                                        until v.Humanoid.Health <= 0 or Auto_Farm == false or game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false or game.Players.LocalPlayer.Character.Humanoid.Health <= 0
+                                        until v.Humanoid.Health <= 0 or _AutoFarm_Boss == false or game.Players.LocalPlayer.Character.Humanoid.Health <= 0
                                         if v.Humanoid.Health <= 0 and _G.Hop then
                                             
                                         end
@@ -975,7 +1036,7 @@ spawn(function()
             Xd.Anchored = true
             Xd.Size = Vector3.new(15,0.5,15)
             Xd.Transparency = 1
-        else
+        elseif (game.Workspace["xd"].Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 5 then
             game.Workspace["xd"].CFrame = CFrame.new(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.X,game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.Y - 3.92,game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.Z)
         end
 else
@@ -990,7 +1051,7 @@ end
 function TP(P1)
     Distance = (P1.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
     if Distance < 100 then
-        Speed = 500
+        Speed = 1000
     elseif Distance < 300 then
         Speed = 300
     elseif Distance < 1000 then
@@ -1009,7 +1070,6 @@ function BringMon()
     for k,x in pairs(game.Workspace.Enemies:GetChildren()) do
         if x.Name == Ms and x:FindFirstChild("HumanoidRootPart") and x:FindFirstChild("Humanoid") and x.Humanoid.Health > 0 and (x.HumanoidRootPart.Position-game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 300 then
             x.HumanoidRootPart.CFrame = _G.PosMon
-            --game:GetService("Workspace").Enemies[Ms].HumanoidRootPart.CFrame = _G.PosMon
         end 
     end
 end
@@ -1041,7 +1101,7 @@ end)
 
 spawn(function()
 	while wait(.1) do
-		if Melee then
+		if _G.Setting_table.Melee then
 			game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AddPoint", "Melee", SelectPoint)
 		end
 	end
@@ -1049,7 +1109,7 @@ end)
 
 spawn(function()
 	while wait(.1) do
-		if Defense then
+		if _G.Setting_table.Defense then
 			game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AddPoint", "Defense", SelectPoint)
 		end
 	end
@@ -1057,7 +1117,7 @@ end)
 
 spawn(function()
 	while wait(.1) do
-		if Sword then
+		if _G.Setting_table.Sword then
 			game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AddPoint", "Sword", SelectPoint)
 		end
 	end
@@ -1065,7 +1125,7 @@ end)
 
 spawn(function()
 	while wait(.1) do
-		if Gun then
+		if _G.Setting_table.Gun then
 			game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AddPoint", "Gun", SelectPoint)
 		end
 	end
@@ -1073,7 +1133,7 @@ end)
 
 spawn(function()
 	while wait(.1) do
-		if Fruit then
+		if _G.Setting_table.Fruit then
 			game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AddPoint", "Demon Fruit", SelectPoint)
 		end
 	end
@@ -1518,68 +1578,6 @@ spawn(function()
         end
     end
 end)
-
--------------------------------------------------------------- Save Setting
-_G.Setting_table = {
-    Auto_Farm = false,
-    Auto_Farm_Boss = false,
-    FastAttack = false,
-    Effect_Attack = false,
-    Auto_Raid = false,
-    RandomFruit = false,
-    BringFruit = false,
-    BuyFruitSinper = false,
-    Hallow_Scryte = false,
-    Tushita = false,
-    Yama = false,
-    BuddySword = false,
-    Sharkman_Karate = false,
-    AutoFarm_Boss = false,
-    Superhuman = false,
-    Electric_Claw = false,
-    Dragon_Talon = false,
-    Death_Step = false,
-    SelectWeapon = false,
-    EP = false,
-    SelectPoint = false,
-    Fruit = false,
-    Gun = false,
-    Sword = false,
-    Defense = false,
-    Melee = false,
-    SelectBoss = false,
-    selectchip = false,
-    SelectDevil = false
-}
-
-local filename = "Bf_setting.txt"
-
-function savesetting()
-    local json
-    local HttpService = game:GetService("HttpService")
-    if (writefile) then
-        json = HttpService:JSONEncode(_G.Setting_table)
-        writefile(filename, json)
-    else
-        print("-- Sorry You Noob --")
-    end
-end
-
-function loadsetting()
-    local HttpService = game:GetService("HttpService")
-    if (readfile and isfile and isfile(filename)) then
-        _G.Setting_table = HttpService:JSONDecode(readfile(filename))
-        -- print("-- New Value --")
-        for i,v in pairs(_G.Setting_table) do
-            -- print(i,v)
-        end
-    end
-end
-
-loadsetting()
--------------------------------------------------------------- Save Setting
-
-
 -------------------------------------------------------------- Code
 
 local DiscordLib = loadstring(game:HttpGet"https://raw.githubusercontent.com/x7Swiftz/UI-V3/main/README.md")()
@@ -1591,9 +1589,9 @@ wait(1)
 game:GetService("CoreGui").Discord.MainFrame.ServersHoldFrame.ServersHold["Blox Fruit - PremiumServer"].BackgroundTransparency = 1
 local Main = serv:Channel("Main")
 local AutoStats = serv:Channel("AutoStats")
-local Melee = serv:Channel("Melee")
-local Sword = serv:Channel("Sword")
-local Fruit = serv:Channel("Fruit")
+local MeleeP = serv:Channel("Melee")
+local SwordP = serv:Channel("Sword")
+local FruitP = serv:Channel("Fruit")
 local PVP = serv:Channel("PVP")
 local Raid = serv:Channel("Raid")
 local Shop = serv:Channel("Shop")
@@ -1746,17 +1744,15 @@ AutoStats:Toggle("Devil Fruit",_G.Setting_table.Fruit,function(vu)
 end)
 local Point = AutoStats:Slider("SelectPoint", 1, 20, 1, function(t)
     SelectPoint = t
-    _G.Setting_table.SelectPoint = t
-    savesetting()
 end)
 
-Melee:Label("Melee")
-Melee:Toggle("Auto Superhuman",_G.Setting_table.Superhuman,function(vu)
+MeleeP:Label("Melee")
+MeleeP:Toggle("Auto Superhuman",_G.Setting_table.Superhuman,function(vu)
     _G.Superhuman = vu
     _G.Setting_table.Superhuman = vu
     savesetting()
 end)
-Melee:Toggle("Auto Electric Claw",_G.Setting_table.Electric_Claw,function(vu)
+MeleeP:Toggle("Auto Electric Claw",_G.Setting_table.Electric_Claw,function(vu)
     _G.Electric_Claw = vu
     _G.Setting_table.Electric_Claw = vu
     local args = {
@@ -1765,12 +1761,12 @@ Melee:Toggle("Auto Electric Claw",_G.Setting_table.Electric_Claw,function(vu)
     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
     savesetting()
 end)
-Melee:Toggle("Auto Dragon Talon",_G.Setting_table.Dragon_Talon,function(vu)
+MeleeP:Toggle("Auto Dragon Talon",_G.Setting_table.Dragon_Talon,function(vu)
     _G.Dragon_Talon = vu
     _G.Setting_table.Dragon_Talon = vu
     savesetting()
 end)
-Melee:Toggle("Auto Death Step",_G.Setting_table.Death_Step,function(vu)
+MeleeP:Toggle("Auto Death Step",_G.Setting_table.Death_Step,function(vu)
     _G.Death_Step = vu
     _G.Setting_table.Death_Step = vu
     local args = {
@@ -1779,7 +1775,7 @@ Melee:Toggle("Auto Death Step",_G.Setting_table.Death_Step,function(vu)
     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
     savesetting()
 end)
-Melee:Toggle("Auto Sharkman Karate",_G.Setting_table.Sharkman_Karate,function(vu)
+MeleeP:Toggle("Auto Sharkman Karate",_G.Setting_table.Sharkman_Karate,function(vu)
     _G.Sharkman_Karate = vu
     _G.Setting_table.Sharkman_Karate = vu
     local args = {
@@ -1789,28 +1785,28 @@ Melee:Toggle("Auto Sharkman Karate",_G.Setting_table.Sharkman_Karate,function(vu
     savesetting()
 end)
 
-Sword:Label("Sword")
-Sword:Toggle("Auto BuddySword",_G.Setting_table.BuddySword,function(vu)
+SwordP:Label("Sword")
+SwordP:Toggle("Auto BuddySword",_G.Setting_table.BuddySword,function(vu)
     _G.BuddySword = vu
     _G.Setting_table.BuddySword = vu
     savesetting()
 end)
-Sword:Toggle("Auto Yama",_G.Setting_table.Yama,function(vu)
+SwordP:Toggle("Auto Yama",_G.Setting_table.Yama,function(vu)
     _G.Yama = vu
     _G.Setting_table.Yama = vu
     savesetting()
 end)
-Sword:Toggle("Auto Tushita",_G.Setting_table.Tushita,function(vu)
+SwordP:Toggle("Auto Tushita",_G.Setting_table.Tushita,function(vu)
     _G.Tushita = vu
     _G.Setting_table.Tushita = vu
     savesetting()
 end)
-Sword:Toggle("Auto HallowScryte",_G.Setting_table.Hallow_Scryte,function(vu)
+SwordP:Toggle("Auto HallowScryte",_G.Setting_table.Hallow_Scryte,function(vu)
     _G.Hallow_Scryte = vu
     _G.Setting_table.Hallow_Scryte = vu
     savesetting()
 end)
-Sword:Toggle("Auto ???",false,function(vu)
+SwordP:Toggle("Auto ???",false,function(vu)
     
 end)
 
@@ -1818,8 +1814,8 @@ end)
 ---------------- Combat
 
 ---------------- Fruit
-Fruit:Label("Fruit")
-Fruit:Toggle("Devil Fruit Sniper",_G.Setting_table.BuyFruitSinper,function(vu)
+FruitP:Label("Fruit")
+FruitP:Toggle("Devil Fruit Sniper",_G.Setting_table.BuyFruitSinper,function(vu)
 	BuyFruitSinper = vu
 	_G.Setting_table.BuyFruitSinper = vu
 end)
@@ -1829,7 +1825,7 @@ Table_DevilFruitSniper = {}
 for i,v in next,u45 do
     table.insert(Table_DevilFruitSniper,v.Name)
 end
-Fruit:Dropdown("Select Devil Fruit",Table_DevilFruitSniper,function(ply)
+FruitP:Dropdown("Select Devil Fruit",Table_DevilFruitSniper,function(ply)
 	_G.Setting_table.SelectDevil = ply
 end)
 spawn(function()
@@ -1840,13 +1836,13 @@ spawn(function()
 		end 
 	end
 end)
-Fruit:Toggle("Bring Fruit",_G.Setting_table.BringFruit,function(vu)
+FruitP:Toggle("Bring Fruit",_G.Setting_table.BringFruit,function(vu)
     _G.BringFruit = vu
     _G.Setting_table.BringFruit = vu
     savesetting()
 end)
 
-Fruit:Toggle("Auto Buy Random Fruit",_G.Setting_table.RandomFruit, function(vu)
+FruitP:Toggle("Auto Buy Random Fruit",_G.Setting_table.RandomFruit, function(vu)
 	_G.RandomFruit = vu
 	game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Cousin","Buy")
 	_G.Setting_table.RandomFruit = vu
