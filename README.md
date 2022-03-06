@@ -77,17 +77,20 @@ spawn(function()
                                 if v.Name == Ms and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0  then
     								if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) then
                                         _G.PosMon = v.HumanoidRootPart.CFrame*CFrame.new(0,5,0)
-                                        v.HumanoidRootPart.Size = Vector3.new(5,5,5)
-                                        v.HumanoidRootPart.Transparency = 0.5
-                                        v.Humanoid.Health = v.Humanoid.Health - 1
+                                        game:GetService("Workspace").Enemies[Ms].HumanoidRootPart.Size = Vector3.new(5,5,5)
+                                        game:GetService("Workspace").Enemies[Ms].Head.Size = Vector3.new(0.5,0.5,0.5)
+                                        game:GetService("Workspace").Enemies[Ms].Head.OriginalSize.Value = Vector3.new(0.5,0.5,0.5)
+                                        game:GetService("Workspace").Enemies[Ms].HumanoidRootPart.Transparency = 1
+                                        game:GetService("Workspace").Enemies[Ms].Humanoid.Health = game:GetService("Workspace").Enemies[Ms].Humanoid.Health - 1
+                                        sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
                                         if not game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") then
                                             local args = {
                                                 [1] = "Buso"
                                             }
                                             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
                                         end
-                                        repeat game:GetService("RunService").Heartbeat:wait(0.2)
-                                                _G.Magnet = true
+                                        _G.Magnet = true
+                                        repeat game:GetService("RunService").Heartbeat:wait(0.5)
                                                 TP(_G.PosMon * CFrame.new(0,15,0))
                                                 game:GetService'VirtualUser':CaptureController()
                                                 game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
@@ -968,20 +971,17 @@ end
 spawn(function()
     while wait() do 
     pcall(function()
-    if  _G.Auto_Farm == true or Clip == true or _G.FarmMasteryFruit == true or _G.BuddySword == true or _G.AutoFarm_Boss or _G.AutoRaid then
-    local Xd = Instance.new("Part")
-    Xd.Name = "xd"
-    Xd.Parent = game.Workspace
-    Xd.Anchored = true
-    Xd.Transparency = 0
-    Xd.Color = Color3.fromRGB(255, 155, 0)
-    Xd.Size = Vector3.new(15,0.5,15)
-    Xd.Material = "Neon"
-    Xd.Transparency = 1
-
-
-    game.Workspace["xd"].CFrame = CFrame.new(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.X,game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.Y - 3.92,game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.Z)
-
+    if  _G.Auto_Farm == true or Clip == true or _G.FarmMasteryFruit == true or _G.BuddySword == true or _G.AutoFarm_Boss or _G.AutoRaid or _G.Auto_Raid then
+        if not game.Workspace:FindFirstChild("xd") then
+            local Xd = Instance.new("Part")
+            Xd.Name = "xd"
+            Xd.Parent = game.Workspace
+            Xd.Anchored = true
+            Xd.Size = Vector3.new(15,0.5,15)
+            Xd.Transparency = 1
+        else
+            game.Workspace["xd"].CFrame = CFrame.new(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.X,game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.Y - 3.92,game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.Z)
+        end
 else
     if game:GetService("Workspace").xd then
         game:GetService("Workspace").xd:Destroy()
@@ -1014,12 +1014,7 @@ spawn(function()
         if _G.Magnet then
             for k,x in pairs(game.Workspace.Enemies:GetChildren()) do
                 if x.Name == Ms and x:FindFirstChild("HumanoidRootPart") and x:FindFirstChild("Humanoid") and x.Humanoid.Health > 0 and (x.HumanoidRootPart.Position-game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 300 then
-                    x.HumanoidRootPart.CanCollide = false
                     x.HumanoidRootPart.CFrame = _G.PosMon
-                    x.HumanoidRootPart.Size = Vector3.new(5,5,5)
-                    x.HumanoidRootPart.Transparency = 0.5
-                    x.Humanoid:ChangeState(11)
-                    sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
                 end 
             end
         end
@@ -1029,7 +1024,7 @@ end)
 spawn(function()
         while game:GetService("RunService").Stepped:wait(5) do
             character = game.Players.LocalPlayer.Character 
-            if _G.NoClip or Clip then
+            if _G.NoClip or Clip or _G.Auto_Farm then
                 pcall(function()
                     for _, v in pairs(character:GetChildren()) do
                         pcall(function()
@@ -1459,13 +1454,13 @@ spawn(function()
 				if game:GetService("Players")["LocalPlayer"].PlayerGui.Main.Timer.Visible == true and game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 5") or game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 4") or game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 3") or game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 2") or game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 1") then
 					if game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 5") then
 						TP2(game:GetService("Workspace")["_WorldOrigin"].Locations["Island 5"].CFrame*CFrame.new(0,80,0))
-					elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 4") then
+					elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 4")  then
 						TP2(game:GetService("Workspace")["_WorldOrigin"].Locations["Island 4"].CFrame*CFrame.new(0,80,0))
-					elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 3") then
+					elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 3")  then
 						TP2(game:GetService("Workspace")["_WorldOrigin"].Locations["Island 3"].CFrame*CFrame.new(0,80,0))
-					elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 2") then
+					elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 2")  then
 						TP2(game:GetService("Workspace")["_WorldOrigin"].Locations["Island 2"].CFrame*CFrame.new(0,80,0))
-					elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 1") then
+					elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 1") and (game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 1").Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 1000 then
 						TP2(game:GetService("Workspace")["_WorldOrigin"].Locations["Island 1"].CFrame*CFrame.new(0,80,0))
 					end
 				end
