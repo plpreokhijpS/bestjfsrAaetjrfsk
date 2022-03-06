@@ -71,7 +71,7 @@ spawn(function()
                     elseif game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == true then
                         pcall(function()
                         CheckLevel()
-                        _G.Magnet = false
+                        --_G.Magnet = false
                         if game:GetService("Workspace").Enemies:FindFirstChild(Ms) then
                             for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                                 if v.Name == Ms and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0  then
@@ -89,13 +89,13 @@ spawn(function()
                                             }
                                             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
                                         end
-                                        _G.Magnet = true
+                                        BringMon()
                                         repeat game:GetService("RunService").Heartbeat:wait(0.5)
+                                                BringMon()
                                                 TP(_G.PosMon * CFrame.new(0,15,0))
                                                 game:GetService'VirtualUser':CaptureController()
                                                 game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                                         until v.Humanoid.Health <= 0 or _G.Auto_Farm == false or game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false or game.Players.LocalPlayer.Character.Humanoid.Health <= 0
-                                        _G.Magnet = false
                                         if v.Humanoid.Health <= 0 then
                                             v:Destroy()
                                         end
@@ -1009,17 +1009,13 @@ function TP(P1)
     ):Play()
 end
 
-spawn(function()
-    for i = 1,math.huge do game:GetService("RunService").RenderStepped:Wait()
-        if _G.Magnet then
-            for k,x in pairs(game.Workspace.Enemies:GetChildren()) do
-                if x.Name == Ms and x:FindFirstChild("HumanoidRootPart") and x:FindFirstChild("Humanoid") and x.Humanoid.Health > 0 and (x.HumanoidRootPart.Position-game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 300 then
-                    x.HumanoidRootPart.CFrame = _G.PosMon
-                end 
-            end
-        end
+function BringMon()
+    for k,x in pairs(game.Workspace.Enemies:GetChildren()) do
+        if x.Name == Ms and x:FindFirstChild("HumanoidRootPart") and x:FindFirstChild("Humanoid") and x.Humanoid.Health > 0 and (x.HumanoidRootPart.Position-game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 300 then
+            x.HumanoidRootPart.CFrame = _G.PosMon
+        end 
     end
-end)
+end
 
 spawn(function()
         while game:GetService("RunService").Stepped:wait(5) do
@@ -1607,6 +1603,9 @@ Main:Button("Refresh Boss",function()
         end
     end
 end)
+
+Main:Label(" ")
+Main:Label("Misc Farm")
 
 AutoStats:Label("AutoStats")
 AutoStats:Toggle("Melee",false,function(vu)
