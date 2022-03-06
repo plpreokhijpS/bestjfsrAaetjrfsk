@@ -205,7 +205,7 @@ spawn(function()
                                         end
                                         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
                                         repeat game:GetService("RunService").Heartbeat:wait(0.2)
-                                                TP(_G.PosMon * CFrame.new(0,25,0))
+                                                TP(v.HumanoidRootPart.CFrame * CFrame.new(0,25,0))
                                                 game:GetService'VirtualUser':CaptureController()
                                                 game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                                         until v.Humanoid.Health <= 0 or _AutoFarm_Boss == false or game.Players.LocalPlayer.Character.Humanoid.Health <= 0
