@@ -107,6 +107,19 @@ end
 
 -----------------------------Code
 spawn(function()
+    while task.wait() do
+        if  Auto_Farm == true or Clip == true or _G.FarmMasteryFruit == true or _G.BuddySword == true or AutoFarm_Boss or _G.AutoRaid or _G.Auto_Raid then 
+            if not game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyVelocity") then 
+                local L_1 = Instance.new("BodyVelocity") 
+                L_1.Parent = game.Players.LocalPlayer.Character.HumanoidRootPart 
+                L_1.MaxForce=Vector3.new(100000,100000,100000)
+                L_1.Velocity=Vector3.new(0,0,0) 
+            end 
+        end 
+    end
+end)
+
+spawn(function()
         while wait() do
             pcall(function()
                 if Auto_Farm == true then
@@ -153,15 +166,9 @@ spawn(function()
                                             }
                                             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
                                         end
-                                        _G.MonLop = true
-                                        BringMon()
                                         repeat game:GetService("RunService").Heartbeat:wait(0.5)
                                                 BringMon()
-                                                --if (_G.PosMon.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 100 then
-                                                --    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = _G.PosMon* CFrame.new(0,15,0)
-                                                --else
                                                 TP(_G.PosMon * CFrame.new(0,15,0))
-                                                --end
                                                 game:GetService'VirtualUser':CaptureController()
                                                 game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                                         until v.Humanoid.Health <= 0 or Auto_Farm == false or game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false or game.Players.LocalPlayer.Character.Humanoid.Health <= 0
@@ -1025,28 +1032,7 @@ function TP2(P1)
     Clip = false
 end
 
-spawn(function()
-    while wait() do 
-    pcall(function()
-    if  Auto_Farm == true or Clip == true or _G.FarmMasteryFruit == true or _G.BuddySword == true or AutoFarm_Boss or _G.AutoRaid or _G.Auto_Raid then
-        if not game.Workspace:FindFirstChild("xd") then
-            local Xd = Instance.new("Part")
-            Xd.Name = "xd"
-            Xd.Parent = game.Workspace
-            Xd.Anchored = true
-            Xd.Size = Vector3.new(15,0.5,15)
-            Xd.Transparency = 1
-        elseif (game.Workspace["xd"].Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 5 then
-            game.Workspace["xd"].CFrame = CFrame.new(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.X,game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.Y - 3.92,game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame.Z)
-        end
-else
-    if game:GetService("Workspace").xd then
-        game:GetService("Workspace").xd:Destroy()
-    end
-end
-    end)
-    end
-    end)
+
 
 function TP(P1)
     Distance = (P1.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
