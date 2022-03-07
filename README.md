@@ -1988,6 +1988,12 @@ end)
 Main:Toggle("AutoHop LowerServer",_G.Setting_table.HopLowerServer,function(vu)
     _G.Setting_table.HopLowerServer = vu
     syn.queue_on_teleport("getgenv().Key = ",'"',getgenv().Key'"',"\ngetgenv().id = ",'"',getgenv().id,'"',"\nloadstring(game:HttpGet('https://raw.githubusercontent.com/x7Swiftz/LastPirateVIP/main/Whitelist%20Luraph-obfuscated.lua'))()")
+    game.StarterGui:SetCore("SendNotification", {
+        Title = "Hop LowerServer", 
+        Text = "getgenv().Key = ",'"',getgenv().Key'"',"\ngetgenv().id = ",'"',getgenv().id,'"',
+        Icon = "http://www.roblox.com/asset/?id=8987392618",
+        Duration = 1.5
+    })
     PlayerDetect()
 end)
 -------------------------------------------------------------- Main
