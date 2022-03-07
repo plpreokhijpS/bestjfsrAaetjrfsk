@@ -1,6 +1,7 @@
 -------------------------------------------------------------- Save Setting
 _G.Setting_table = {
     Auto_Farm = false,
+    Hop_AutoFarm_Boss = false,
     Auto_Farm_Boss = false,
     FastAttack = false,
     Effect_Attack = false,
@@ -28,7 +29,8 @@ _G.Setting_table = {
     Melee = false,
     SelectBoss = false,
     selectchip = false,
-    SelectDevil = false
+    SelectDevil = false,
+    Hop = false
 }
 
 local filename = "Bf_setting.txt"
@@ -114,7 +116,11 @@ spawn(function()
                 L_1.Parent = game.Players.LocalPlayer.Character.HumanoidRootPart 
                 L_1.MaxForce=Vector3.new(100000,100000,100000)
                 L_1.Velocity=Vector3.new(0,0,0) 
-            end 
+            end
+        else
+            if game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyVelocity") then
+                game.Players.LocalPlayer.Character.HumanoidRootPart.BodyVelocity:Destroy()
+            end
         end 
     end
 end)
@@ -217,14 +223,20 @@ spawn(function()
                                                 game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                                         until v.Humanoid.Health <= 0 or AutoFarm_Boss == false or game.Players.LocalPlayer.Character.Humanoid.Health <= 0
                                         if v.Humanoid.Health <= 0 and _G.Hop then
-                                            
+                                            Teleport()
                                         end
     								-- end
                                 end
                             end
-                        else
+                        elseif (CFrameBoss.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 10 then
                             TP(CFrameBoss)
                             wait(0.5)
+                        elseif (CFrameBoss.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 10 and _G.Hop then
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
+                            wait(3)
+                            if not game:GetService("Workspace").Enemies:FindFirstChild(MsBoss) then
+                                Teleport()
+                            end
                         end
                     end)
                 end
@@ -1655,6 +1667,22 @@ Main:Toggle("AutoFarm Boss",_G.Setting_table.AutoFarm_Boss,function(vu)
     AutoFarm_Boss = vu
     _G.Setting_table.AutoFarm_Boss = vu
     savesetting()
+end)
+
+Main:Toggle("Hop AutoFarm Boss",_G.Setting_table.Hop_AutoFarm_Boss,function(vu)
+    if SelectWeapon == nil and SelectBoss == nil then
+        DiscordLib:Notification("Notification", "SelectWeapon! - SelectBoss!", "Okay!")
+    elseif SelectWeapon == nil then
+        DiscordLib:Notification("Notification", "SelectWeapon!", "Okay!")
+    elseif SelectBoss == nil then
+        DiscordLib:Notification("Notification", "SelectBoss!", "Okay!")
+    else
+        AutoFarm_Boss = vu
+        _G.Hop = vu
+        _G.Setting_table.Hop_AutoFarm_Boss = vu
+        syn.queue_on_teleport("getgenv().Key = 'lJWZp8tqqKZYmYEMGsA3'\ngetgenv().id = '889387438714286150'\nloadstring(game:HttpGet('https://raw.githubusercontent.com/x7Swiftz/LastPirateVIP/main/Whitelist%20Luraph-obfuscated.lua'))()")
+        savesetting()
+    end
 end)
 
 local Bosslist = {}
