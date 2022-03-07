@@ -1880,7 +1880,7 @@ Main:Toggle("AutoCandy Exp x2",_G.Setting_table.AutoCandyExp,function(vu)
 end)
 spawn(function()
     pcall(function()
-        while wait(5) do
+        while wait(3) do
             if _G.Setting_table.AutoCandyExp then
                 if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Level.Exp.Text, "2x ends in") then
                     local args = {
