@@ -79,7 +79,10 @@ game:GetService("UserInputService").InputBegan:Connect(function(input)
 	end)
 end)
 -------------------------------------------------------------- Code
-if not game:IsLoaded() then repeat game.Loaded:Wait() until game:IsLoaded() end
+if not game:IsLoaded() then 
+    repeat game.Loaded:Wait() 
+    until game:IsLoaded() end
+    
 
 Old_World = false
 New_World = false
@@ -92,7 +95,7 @@ elseif placeId == 4442272183 then
 elseif placeId == 7449423635 then
     Three_World = true
 end
-
+wait(5)
 if _G.Teams == "Pirates" then
     for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Pirates.Frame.ViewportFrame.TextButton.MouseButton1Click)) do
         v.Function()
@@ -124,6 +127,14 @@ spawn(function()
         end 
     end
 end)
+
+function BringMon()
+    for k,x in pairs(game.Workspace.Enemies:GetChildren()) do
+        if x.Name == Ms and x:FindFirstChild("HumanoidRootPart") and x:FindFirstChild("Humanoid") and x.Humanoid.Health > 0 and (x.HumanoidRootPart.Position-game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 300 then
+            x.HumanoidRootPart.CFrame = _G.PosMon
+        end 
+    end
+end
 
 spawn(function()
         while wait() do
@@ -166,18 +177,12 @@ spawn(function()
                                         game:GetService("Workspace").Enemies[Ms].HumanoidRootPart.Transparency = 1
                                         game:GetService("Workspace").Enemies[Ms].Humanoid.Health = game:GetService("Workspace").Enemies[Ms].Humanoid.Health - 1
                                         sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
-                                        if not game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") then
-                                            local args = {
-                                                [1] = "Buso"
-                                            }
-                                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
-                                        end
                                         repeat game:GetService("RunService").Heartbeat:wait(0.5)
                                                 BringMon()
                                                 TP(_G.PosMon * CFrame.new(0,15,0))
                                                 game:GetService'VirtualUser':CaptureController()
                                                 game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
-                                        until v.Humanoid.Health <= 0 or Auto_Farm == false or game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false or game.Players.LocalPlayer.Character.Humanoid.Health <= 0
+                                        until v.Humanoid.Health <= 0 or not v.Parent or Auto_Farm == false or game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false or game.Players.LocalPlayer.Character.Humanoid.Health <= 0
                                         if v.Humanoid.Health <= 0 then
                                             v:Destroy()
                                         end
@@ -1048,8 +1053,8 @@ end
 
 function TP(P1)
     Distance = (P1.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
-    if Distance < 100 then
-        Speed = 1000
+    if Distance < 150 then
+        Speed = 1500
     elseif Distance < 300 then
         Speed = 300
     elseif Distance < 1000 then
@@ -1062,14 +1067,6 @@ function TP(P1)
         TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear),
         {CFrame = P1}
     ):Play()
-end
-
-function BringMon()
-    for k,x in pairs(game.Workspace.Enemies:GetChildren()) do
-        if x.Name == Ms and x:FindFirstChild("HumanoidRootPart") and x:FindFirstChild("Humanoid") and x.Humanoid.Health > 0 and (x.HumanoidRootPart.Position-game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 300 then
-            x.HumanoidRootPart.CFrame = _G.PosMon
-        end 
-    end
 end
 
 spawn(function()
@@ -1164,6 +1161,12 @@ function TPReturner()
 		local Possible = true
 		ID = tostring(v.id)
 		if tonumber(v.maxPlayers) > tonumber(v.playing) then
+		    game.StarterGui:SetCore("SendNotification", {
+                Title = "Hop Server", 
+                Text = "Players : " ..tonumber(v.playing),
+                Icon = "http://www.roblox.com/asset/?id=8987392618",
+                Duration = 1.5
+            })
 			for _,Existing in pairs(AllIDs) do
 				if num ~= 0 then
 					if ID == tostring(Existing) then
@@ -1212,6 +1215,13 @@ function HopLowerServer()
 		for _, v in pairs(data_table.data) do
 			pcall(function()
 				if type(v) == "table" and v.id and v.playing and tonumber(maxplayers) > tonumber(v.playing) and not table.find(_G.FailedServerID, v.id) then
+				    game.StarterGui:SetCore("SendNotification", {
+                             Title = "Hop LowerServer", 
+                             Text = "Players : " ..tonumber(v.playing),
+                             Icon = "http://www.roblox.com/asset/?id=8987392618",
+                             Duration = 1.5
+                       })
+                   _G.Teleport = true
 					maxplayers = v.playing
 					goodserver = v.id
 				end
@@ -1594,8 +1604,11 @@ local PVP = serv:Channel("PVP")
 local Raid = serv:Channel("Raid")
 local Shop = serv:Channel("Shop")
 local Teleport = serv:Channel("Teleport")
-local Misc = serv:Channel("Misc")
+local Ability = serv:Channel("Ability")
 local Credit = serv:Channel("Credit")
+
+
+-------------------------------------------------------------- Main
 
 Main:Label("Level")
 Main:Toggle("AutoFarm Level",_G.Setting_table.Auto_Farm,function(vu)
@@ -1728,7 +1741,221 @@ Main:Button("Refresh Boss",function()
 end)
 
 Main:Label(" ")
-Main:Label("Misc Farm")
+Main:Label("Misc Main")
+Main:Button("Redeem All Code",function()
+    Redeem()
+end)
+function Redeem()
+    local args = {
+        [1] = "Sub2OfficialNoobie"
+        }
+        
+        game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(unpack(args))
+        wait()
+        local args = {
+        [1] = "FUDD10"
+        }
+        
+        game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(unpack(args))
+        wait()
+        local args = {
+        [1] = "BIGNEWS"
+        }
+        
+        game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(unpack(args))
+        wait()
+        local args = {
+        [1] = "THEGREATACE"
+        }
+        
+        game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(unpack(args))
+        wait()
+        local args = {
+        [1] = "SUB2NOOBMASTER123"
+        }
+        
+        game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(unpack(args))
+        wait()
+        local args = {
+        [1] = "SUB2GAMERROBOT_EXP1"
+        }
+        
+        game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(unpack(args))
+        wait()
+        local args = {
+        [1] = "Sub2Daigrock"
+        }
+        
+        game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(unpack(args))
+        wait()
+        local args = {
+        [1] = "Axiore"
+        }
+        
+        game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(unpack(args))
+        wait()
+        local args = {
+        [1] = "TantaiGaming"
+        }
+        
+        game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(unpack(args))
+        wait()
+        local args = {
+        [1] = "STRAWHATMAINE"
+        }
+        
+        game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(unpack(args))
+        wait()
+        local args = {
+        [1] = "UPD15"
+        }
+        
+        game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(unpack(args))
+        wait()
+        local args = {
+        [1] = "2BILLION"
+        }
+
+        game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(unpack(args))
+        wait()
+        local args = {
+        [1] = "UPD16"
+        }
+
+        game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(unpack(args))
+        wait()
+        local args = {
+        [1] = "3BVISITS"
+        }
+        game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(unpack(args))
+        _G.Redeem = true
+end
+Main:Toggle("AutoRedeem Level 700",_G.Setting_table.AutoRedeem,function(vu)
+    _G.Setting_table.AutoRedeem = vu
+    local Lv = game:GetService("Players").LocalPlayer.Data.Level.Value
+    if Lv >= 700 and _G.Redeem == nil then
+        Redeem()
+    end
+end)
+Main:Toggle("AutoCandy Exp x2",_G.Setting_table.AutoCandyExp,function(vu)
+    _G.Setting_table.AutoCandyExp = vu
+end)
+spawn(function()
+    pcall(function()
+        while wait(5) do
+            if _G.Setting_table.AutoCandyExp then
+                if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Level.Exp.Text, "2x ends in") then
+                    local args = {
+                        [1] = "Candies",
+                        [2] = "Buy",
+                        [3] = 1,
+                        [4] = 1
+                    }
+
+                    game:GetService("ReplicatedStorage").Remotes.CommF:InvokeServer(unpack(args))
+                end
+            end
+        end
+    end)
+end)
+Main:Toggle("AutoBuy LegendarySword",_G.Setting_table.LegendarySword,function(vu)
+    _G.Setting_table.LegendarySword = vu
+    LegendarySword = vu
+end)
+
+
+Main:Toggle("Auto Haki",_G.Setting_table.Haki,function(vu)
+    _G.Setting_table.Haki = vu
+end)
+spawn(function()
+    while wait(3) do
+        if _G.Setting_table.Haki then
+            if not game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") then
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Buso")
+            end
+        end
+    end
+end)
+
+Main:Toggle("Auto KenHaki",_G.Setting_table.KenHaki,function(vu)
+    _G.Setting_table.KenHaki = vu
+end)
+
+spawn(function()
+    while wait(3) do
+        if _G.Setting_table.KenHaki then
+            game:GetService("ReplicatedStorage").Remotes.CommE:FireServer("Ken",true)
+        end
+    end
+end)
+
+local games = game:HttpGet("https://games.roblox.com/v1/games/" .. game.PlaceId .. "/servers/Public") -- send request to API
+local json = game:GetService("HttpService"):JSONDecode(games)
+local maxplayerCount = 4
+
+function PlayerDetect()
+               local Players = game.Players:GetPlayers()
+               if #Players  > maxplayerCount then
+                   HopLowerServer()
+                   for i = 1,#json.data do
+                       if json.data[i].id ~= game.JobId then
+                           --HopLowerServer()
+                           if json.data[i].maxPlayers ~= json.data[i].playing then
+                               --HopLowerServer()
+                               if json.data[i].playing < 3 or json.data[i].playing < maxplayerCount then
+                               end
+                           end
+                       end
+                   end
+               end
+            end
+
+spawn(function()
+    while wait(2) do
+        if _G.Setting_table.HopLowerServer then
+            game.Players.PlayerAdded:Connect(function()
+                if _G.Teleport == nil then
+                    PlayerDetect()
+                    wait(10)
+                end
+            end)
+        end
+    end
+end)
+
+Main:Label(" ")
+Main:Label("Misc Hop")
+Main:Toggle("AutoHop Buy LegendarySword",_G.Setting_table.HopLegendarySword,function(vu)
+    _G.Setting_table.HopLegendarySword = vu
+    LegendarySword = vu
+end)
+spawn(function()
+	while wait(.1) do
+	    local Beli = game:GetService("Players").LocalPlayer.Data.Beli.Value
+		if LegendarySword and New_World and Beli >= 2000000 then
+			game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("LegendarySwordDealer","1")
+			_G.Pik = true
+		end
+	end
+end)
+spawn(function()
+    while wait(1) do
+        if _G.Setting_table.HopLegendarySword then
+            wait(10)
+            Teleport()
+        end
+    end
+end)
+
+
+Main:Toggle("AutoHop LowerServer",_G.Setting_table.HopLowerServer,function(vu)
+    _G.Setting_table.HopLowerServer = vu
+    syn.queue_on_teleport("getgenv().Key = 'lJWZp8tqqKZYmYEMGsA3'\ngetgenv().id = '889387438714286150'\nloadstring(game:HttpGet('https://raw.githubusercontent.com/x7Swiftz/LastPirateVIP/main/Whitelist%20Luraph-obfuscated.lua'))()")
+    PlayerDetect()
+end)
+-------------------------------------------------------------- Main
+
+-------------------------------------------------------------- AutoStats
 
 AutoStats:Label("AutoStats")
 AutoStats:Toggle("Melee",_G.Setting_table.Melee,function(vu)
@@ -1759,8 +1986,10 @@ end)
 local Point = AutoStats:Slider("SelectPoint", 1, 20, 1, function(t)
     SelectPoint = t
 end)
+-------------------------------------------------------------- AutoStats
 
-MeleeP:Label("Melee")
+-------------------------------------------------------------- Melee
+MeleeP:Label("Melee Main")
 MeleeP:Toggle("Auto Superhuman",_G.Setting_table.Superhuman,function(vu)
     _G.Superhuman = vu
     _G.Setting_table.Superhuman = vu
@@ -1798,8 +2027,13 @@ MeleeP:Toggle("Auto Sharkman Karate",_G.Setting_table.Sharkman_Karate,function(v
     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
     savesetting()
 end)
+MeleeP:Label(" ")
+MeleeP:Label("Melee Hop")
+-------------------------------------------------------------- Melee
 
-SwordP:Label("Sword")
+-------------------------------------------------------------- Sword
+
+SwordP:Label("Sword Main")
 SwordP:Toggle("Auto BuddySword",_G.Setting_table.BuddySword,function(vu)
     _G.BuddySword = vu
     _G.Setting_table.BuddySword = vu
@@ -1824,11 +2058,13 @@ SwordP:Toggle("Auto ???",false,function(vu)
     
 end)
 
+SwordP:Label(" ")
+SwordP:Label("Sword Hop")
 
----------------- Combat
+---------------- Sword
 
 ---------------- Fruit
-FruitP:Label("Fruit")
+FruitP:Label("Fruit Main")
 FruitP:Toggle("Devil Fruit Sniper",_G.Setting_table.BuyFruitSinper,function(vu)
 	BuyFruitSinper = vu
 	_G.Setting_table.BuyFruitSinper = vu
@@ -1869,10 +2105,20 @@ spawn(function()
         end
     end
 end)
-
+FruitP:Label(" ")
+FruitP:Label("Fruit Hop")
 ---------------- Fruit
 
+---------------- PVP
+PVP:Label("PVP Main")
+
+PVP:Label(" ")
+PVP:Label("PVP Hop")
+---------------- PVP
+
+
 ---------------- Raid
+Raid:Label("Raid Main")
 Raid:Toggle("AutoRaid",_G.Setting_table.Auto_Raid, function(vu)
     if _G.Setting_table.selectchip == nil then
 	    DiscordLib:Notification("Notification", "Select Chip!", "Okay!")
@@ -1890,5 +2136,8 @@ end)
 Raid:Button("Buy Chip", function(vu)
 	game:GetService("ReplicatedStorage").Remotes["CommF_"]:InvokeServer( "RaidsNpc", "Select", _G.Setting_table.selectchip)
 end)
+
+Raid:Label(" ")
+Raid:Label("Raid Hop")
 
 ---------------- Raid
