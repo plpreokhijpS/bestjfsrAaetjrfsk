@@ -1729,9 +1729,7 @@ Main:Toggle("Hop AutoFarm Boss",_G.Setting_table.Hop_AutoFarm_Boss,function(vu)
         AutoFarm_Boss = vu
         _G.Hop = vu
         _G.Setting_table.Hop_AutoFarm_Boss = vu
-        if _G.Setting_table.Hop_AutoFarm_Boss == true then
-            syn.queue_on_teleport("getgenv().Key = ",'"',getgenv().Key'"',"getgenv().id = ",'"',getgenv().id,'"',"loadstring(game:HttpGet('https://raw.githubusercontent.com/x7Swiftz/LastPirateVIP/main/Whitelist%20Luraph-obfuscated.lua'))()")
-        end
+        syn.queue_on_teleport("getgenv().Key = ",'"',getgenv().Key'"',"getgenv().id = ",'"',getgenv().id,'"',"loadstring(game:HttpGet('https://raw.githubusercontent.com/x7Swiftz/LastPirateVIP/main/Whitelist%20Luraph-obfuscated.lua'))()")
         savesetting()
     end
 end)
@@ -1989,9 +1987,7 @@ end)
 local IKai = 
 Main:Toggle("AutoHop LowerServer",_G.Setting_table.HopLowerServer,function(vu)
     _G.Setting_table.HopLowerServer = vu
-    if _G.Setting_table.HopLowerServer == true then
-        syn.queue_on_teleport("getgenv().Key = ",'"',getgenv().Key'"',"getgenv().id = ",'"',getgenv().id,'"',"loadstring(game:HttpGet('https://raw.githubusercontent.com/x7Swiftz/LastPirateVIP/main/Whitelist%20Luraph-obfuscated.lua'))()")
-    end
+    syn.queue_on_teleport("getgenv().Key = ",'"',getgenv().Key'"',"getgenv().id = ",'"',getgenv().id,'"',"loadstring(game:HttpGet('https://raw.githubusercontent.com/x7Swiftz/LastPirateVIP/main/Whitelist%20Luraph-obfuscated.lua'))()")
     PlayerDetect()
 end)
 -------------------------------------------------------------- Main
