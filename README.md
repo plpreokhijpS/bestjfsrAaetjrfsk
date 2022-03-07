@@ -128,13 +128,30 @@ spawn(function()
     end
 end)
 
-function BringMon()
-    for k,x in pairs(game.Workspace.Enemies:GetChildren()) do
-        if x.Name == Ms and x:FindFirstChild("HumanoidRootPart") and x:FindFirstChild("Humanoid") and x.Humanoid.Health > 0 and (x.HumanoidRootPart.Position-game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position).magnitude <= 300 then
-            x.HumanoidRootPart.CFrame = _G.PosMon
-        end 
-    end
-end
+spawn(function()
+    game:GetService("RunService").Heartbeat:Connect(function()
+		pcall(function()
+            local MyLevel = game.Players.LocalPlayer.Data.Level.Value
+			if StatrMagnet then
+			    if (CFrameMon.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 1000 then
+    				for y,x in pairs(game.Workspace.Enemies:GetChildren()) do
+    					if not string.find(v.Name,"Boss") and(x.HumanoidRootPart.Position-_G.PosMon.Position).magnitude <= 370 then --370
+    						x.HumanoidRootPart.CFrame = _G.PosMon
+    						x.Humanoid.JumpPower = 0
+    						x.Humanoid.WalkSpeed = 0
+                            x.HumanoidRootPart.CanCollide = false
+                            if x.Humanoid:FindFirstChild("Animator") then
+                                x.Humanoid.Animator:Destroy()
+                            end
+                            sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius",  math.huge)
+    						x.Humanoid:ChangeState(14)
+    					end
+    				end
+				end
+            end
+        end)
+    end)
+end)
 
 spawn(function()
         while wait() do
@@ -142,6 +159,7 @@ spawn(function()
                 if Auto_Farm == true then
                     if game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false then
         				CheckLevel()
+        				StatrMagnet = false
         				if _G.FM and (CFrameQ.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 1000 then
                             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(61163.8515625, 11.6796875, 1819.7841796875))
         				elseif _G.FM and (CFrameQ - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 1000 then
@@ -165,23 +183,23 @@ spawn(function()
                     elseif game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == true then
                         pcall(function()
                         CheckLevel()
-                        --_G.Magnet = false
                         if game:GetService("Workspace").Enemies:FindFirstChild(Ms) then
                             for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                                 if v.Name == Ms and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0  then
     								if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) then
-                                        _G.PosMon = v.HumanoidRootPart.CFrame*CFrame.new(0,5,0)
-                                        game:GetService("Workspace").Enemies[Ms].HumanoidRootPart.Size = Vector3.new(5,5,5)
-                                        --game:GetService("Workspace").Enemies[Ms].Head.Size = Vector3.new(0.5,0.5,0.5)
-                                        --game:GetService("Workspace").Enemies[Ms].Head.OriginalSize.Value = Vector3.new(0.5,0.5,0.5)
-                                        game:GetService("Workspace").Enemies[Ms].HumanoidRootPart.Transparency = 1
-                                        game:GetService("Workspace").Enemies[Ms].Humanoid.Health = game:GetService("Workspace").Enemies[Ms].Humanoid.Health - 1
-                                        sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", math.huge)
+                                        _G.PosMon = v.HumanoidRootPart.CFrame
+            						v.Humanoid.JumpPower = 0
+            						v.Humanoid.WalkSpeed = 0
+                                    v.HumanoidRootPart.CanCollide = false
+                                    if v.Humanoid:FindFirstChild("Animator") then
+                                        v.Humanoid.Animator:Destroy()
+                                    end
+                                    sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius",  math.huge)
+            						v.Humanoid:ChangeState(14)
+            						StatrMagnet = true
                                         repeat game:GetService("RunService").Heartbeat:wait(0.5)
-                                                BringMon()
-                                                TP(_G.PosMon * CFrame.new(0,15,0))
-                                                game:GetService'VirtualUser':CaptureController()
-                                                game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                                                TP(_G.PosMon * CFrame.new(0,20,0))
+                                                yedhee.activeController:attack()
                                         until v.Humanoid.Health <= 0 or not v.Parent or Auto_Farm == false or game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false or game.Players.LocalPlayer.Character.Humanoid.Health <= 0
                                         if v.Humanoid.Health <= 0 then
                                             v:Destroy()
@@ -250,27 +268,44 @@ spawn(function()
 end)
 
 
-local CombatShaker = require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework.CameraShaker)
-local CombatFrameworkR = require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework) 
-local CameraShakerR = require(game.ReplicatedStorage.Util.CameraShaker)
 spawn(function()
-    for i = 1,math.huge do
-        game:GetService("RunService").RenderStepped:wait()
-            if FastAttack1 then
-                pcall(function()
-                    maxincrement = i
-                    CameraShakerR:Stop()
-                    CombatShaker.CameraShakeInstance.CameraShakeState = {FadingIn = 3,FadingOut =  2,Sustained = 0,Inactive = 1} 
-                    CombatFrameworkR.activeController.attacking = false
-                    CombatFrameworkR.activeController.timeToNextAttack = -(math.huge * math.huge)
-                    CombatFrameworkR.activeController.increment = 3
-                    CombatFrameworkR.activeController.hitboxMagnitude = 25
-                    CombatFrameworkR.activeController.blocking = false
-                    CombatFrameworkR.activeController.timeToNextBlock = 0
-                end)
-            end
-        game:GetService("RunService").RenderStepped:wait()
-    end
+	game:GetService("RunService").Stepped:Connect(function()
+		pcall(function()
+			local yedkuy112 = require(game.Players.LocalPlayer.PlayerScripts.CombatFramework.CameraShaker)
+			local VirtualUser = game:GetService('VirtualUser')
+			local yedhee = require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework)
+            yedkuy112.CameraShakeInstance.CameraShakeState.Inactive = 0
+            yedhee.activeController.hitboxMagnitude = 55
+			if FastAttack1 then
+                    if game.Players.LocalPlayer.Character:FindFirstChild("Black Leg") then
+                        yedhee.activeController.timeToNextAttack = 3
+                    else
+                        yedhee.activeController.timeToNextAttack = -(math.huge^math.huge)
+                    end
+                    yedhee.activeController.attacking = false
+                    yedhee.activeController.increment = 3
+                    --if yedhee.activeController:attack() then
+                    --    yedhee.activeController:attack()
+                    --end
+                    yedhee.activeController.blocking = false
+                    yedhee.activeController.timeToNextBlock = 0
+                    game.Players.LocalPlayer.Character.Stun.Value = 0
+                    game.Players.LocalPlayer.Character.Humanoid.Sit = false
+                    --[[yedhee.activeController.timeToNextAttack = 0
+                    yedhee.activeController.attacking = false
+                    yedhee.activeController.blocking = false
+                    yedhee.activeController.timeToNextAttack = 0
+                    yedhee.activeController.timeToNextBlock = 0
+                    yedhee.activeController.increment = 3
+                    yedhee.activeController.hitboxMagnitude = 55
+                    yedhee.activeController.focusStart = 0
+                    if yedhee.activeController:attack() then
+                        yedhee.activeController:attack()
+                    end
+                    ]]
+			end
+		end)
+	end)
 end)
 
 	spawn(function()
@@ -1693,7 +1728,9 @@ Main:Toggle("Hop AutoFarm Boss",_G.Setting_table.Hop_AutoFarm_Boss,function(vu)
         AutoFarm_Boss = vu
         _G.Hop = vu
         _G.Setting_table.Hop_AutoFarm_Boss = vu
-        syn.queue_on_teleport("getgenv().Key = 'lJWZp8tqqKZYmYEMGsA3'\ngetgenv().id = '889387438714286150'\nloadstring(game:HttpGet('https://raw.githubusercontent.com/x7Swiftz/LastPirateVIP/main/Whitelist%20Luraph-obfuscated.lua'))()")
+        if _G.Setting_table.Hop_AutoFarm_Boss then
+            syn.queue_on_teleport("getgenv().Key = 'lJWZp8tqqKZYmYEMGsA3'\ngetgenv().id = '889387438714286150'\nloadstring(game:HttpGet('https://raw.githubusercontent.com/x7Swiftz/LastPirateVIP/main/Whitelist%20Luraph-obfuscated.lua'))()")
+        end
         savesetting()
     end
 end)
@@ -1896,6 +1933,7 @@ local maxplayerCount = 4
 function PlayerDetect()
                local Players = game.Players:GetPlayers()
                if #Players  > maxplayerCount then
+                   _G.Teleport = true
                    HopLowerServer()
                    for i = 1,#json.data do
                        if json.data[i].id ~= game.JobId then
@@ -1950,7 +1988,9 @@ end)
 
 Main:Toggle("AutoHop LowerServer",_G.Setting_table.HopLowerServer,function(vu)
     _G.Setting_table.HopLowerServer = vu
-    syn.queue_on_teleport("getgenv().Key = 'lJWZp8tqqKZYmYEMGsA3'\ngetgenv().id = '889387438714286150'\nloadstring(game:HttpGet('https://raw.githubusercontent.com/x7Swiftz/LastPirateVIP/main/Whitelist%20Luraph-obfuscated.lua'))()")
+    if _G.Setting_table.HopLowerServer then
+        syn.queue_on_teleport("getgenv().Key = 'lJWZp8tqqKZYmYEMGsA3'\ngetgenv().id = '889387438714286150'\nloadstring(game:HttpGet('https://raw.githubusercontent.com/x7Swiftz/LastPirateVIP/main/Whitelist%20Luraph-obfuscated.lua'))()")
+    end
     PlayerDetect()
 end)
 -------------------------------------------------------------- Main
