@@ -135,7 +135,6 @@ spawn(function()
 			if StatrMagnet then
 			    if (CFrameMon.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 1000 then
     				for y,x in pairs(game.Workspace.Enemies:GetChildren()) do
-    				    if x.Name == Ms then
         					if not string.find(x.Name,"Boss") and(x.HumanoidRootPart.Position-_G.PosMon.Position).magnitude <= 370 then --370
         						x.HumanoidRootPart.CFrame = _G.PosMon
         						x.Humanoid.JumpPower = 0
@@ -147,7 +146,6 @@ spawn(function()
                                 sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius",  math.huge)
         						x.Humanoid:ChangeState(14)
         					end
-    					end
     				end
 				end
             end
@@ -1731,7 +1729,7 @@ Main:Toggle("Hop AutoFarm Boss",_G.Setting_table.Hop_AutoFarm_Boss,function(vu)
         AutoFarm_Boss = vu
         _G.Hop = vu
         _G.Setting_table.Hop_AutoFarm_Boss = vu
-        syn.queue_on_teleport("getgenv().Key = ",'"',getgenv().Key'"',"getgenv().id = ",'"',getgenv().id,'"',"loadstring(game:HttpGet('https://raw.githubusercontent.com/x7Swiftz/LastPirateVIP/main/Whitelist%20Luraph-obfuscated.lua'))()")
+        syn.queue_on_teleport("getgenv().Key = ",'"',getgenv().Key'"',"\ngetgenv().id = ",'"',getgenv().id,'"',"\nloadstring(game:HttpGet('https://raw.githubusercontent.com/x7Swiftz/LastPirateVIP/main/Whitelist%20Luraph-obfuscated.lua'))()")
         savesetting()
     end
 end)
@@ -1992,7 +1990,7 @@ Main:Toggle("AutoHop LowerServer",_G.Setting_table.HopLowerServer,function(vu)
     syn.queue_on_teleport("getgenv().Key = ",'"',getgenv().Key'"',"\ngetgenv().id = ",'"',getgenv().id,'"',"\nloadstring(game:HttpGet('https://raw.githubusercontent.com/x7Swiftz/LastPirateVIP/main/Whitelist%20Luraph-obfuscated.lua'))()")
     game.StarterGui:SetCore("SendNotification", {
         Title = "Hop LowerServer", 
-        Text = "getgenv().Key = ",'"',getgenv().Key'"',"\ngetgenv().id = ",'"',getgenv().id,'"',
+        Text = getgenv().Key..getgenv().id,
         Icon = "http://www.roblox.com/asset/?id=8987392618",
         Duration = 1.5
     })
