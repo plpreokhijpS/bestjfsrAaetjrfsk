@@ -30,7 +30,14 @@ _G.Setting_table = {
     SelectBoss = false,
     selectchip = false,
     SelectDevil = false,
-    Hop = false
+    Hop = false,
+    HopLowerServer = false,
+    HopLegendarySword = false,
+    KenHaki = false,
+    Haki = false,
+    LegendarySword = false,
+    AutoCandyExp = false,
+    AutoRedeem = false
 }
 
 local filename = "Bf_setting.txt"
@@ -198,7 +205,7 @@ spawn(function()
             						v.Humanoid:ChangeState(14)
             						StatrMagnet = true
                                         repeat game:GetService("RunService").Heartbeat:wait(0.2)
-                                                TP(_G.PosMon * CFrame.new(0,20,0))
+                                            TP(_G.PosMon * CFrame.new(0,20,0))
                                             game:GetService'VirtualUser':CaptureController()
                                             game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                                         until v.Humanoid.Health <= 0 or not v.Parent or Auto_Farm == false or game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false or game.Players.LocalPlayer.Character.Humanoid.Health <= 0
