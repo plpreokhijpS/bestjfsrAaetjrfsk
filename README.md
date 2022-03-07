@@ -135,7 +135,7 @@ spawn(function()
 			if StatrMagnet then
 			    if (CFrameMon.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 1000 then
     				for y,x in pairs(game.Workspace.Enemies:GetChildren()) do
-    					if not string.find(v.Name,"Boss") and(x.HumanoidRootPart.Position-_G.PosMon.Position).magnitude <= 370 then --370
+    					if not string.find(x.Name,"Boss") and(x.HumanoidRootPart.Position-_G.PosMon.Position).magnitude <= 370 then --370
     						x.HumanoidRootPart.CFrame = _G.PosMon
     						x.Humanoid.JumpPower = 0
     						x.Humanoid.WalkSpeed = 0
@@ -197,9 +197,10 @@ spawn(function()
                                     sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius",  math.huge)
             						v.Humanoid:ChangeState(14)
             						StatrMagnet = true
-                                        repeat game:GetService("RunService").Heartbeat:wait(0.5)
+                                        repeat game:GetService("RunService").Heartbeat:wait(0.2)
                                                 TP(_G.PosMon * CFrame.new(0,20,0))
-                                                yedhee.activeController:attack()
+                                            game:GetService'VirtualUser':CaptureController()
+                                            game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                                         until v.Humanoid.Health <= 0 or not v.Parent or Auto_Farm == false or game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false or game.Players.LocalPlayer.Character.Humanoid.Health <= 0
                                         if v.Humanoid.Health <= 0 then
                                             v:Destroy()
@@ -1989,7 +1990,7 @@ end)
 Main:Toggle("AutoHop LowerServer",_G.Setting_table.HopLowerServer,function(vu)
     _G.Setting_table.HopLowerServer = vu
     if _G.Setting_table.HopLowerServer then
-        syn.queue_on_teleport("getgenv().Key = 'lJWZp8tqqKZYmYEMGsA3'\ngetgenv().id = '889387438714286150'\nloadstring(game:HttpGet('https://raw.githubusercontent.com/x7Swiftz/LastPirateVIP/main/Whitelist%20Luraph-obfuscated.lua'))()")
+        --syn.queue_on_teleport("getgenv().Key = 'lJWZp8tqqKZYmYEMGsA3'\ngetgenv().id = '889387438714286150'\nloadstring(game:HttpGet('https://raw.githubusercontent.com/x7Swiftz/LastPirateVIP/main/Whitelist%20Luraph-obfuscated.lua'))()")
     end
     PlayerDetect()
 end)
