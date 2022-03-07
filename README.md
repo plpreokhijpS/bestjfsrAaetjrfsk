@@ -95,7 +95,7 @@ elseif placeId == 4442272183 then
 elseif placeId == 7449423635 then
     Three_World = true
 end
-wait(5)
+wait(2)
 if _G.Teams == "Pirates" then
     for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Pirates.Frame.ViewportFrame.TextButton.MouseButton1Click)) do
         v.Function()
@@ -1984,10 +1984,10 @@ spawn(function()
     end
 end)
 
-local IKai = 
+ 
 Main:Toggle("AutoHop LowerServer",_G.Setting_table.HopLowerServer,function(vu)
     _G.Setting_table.HopLowerServer = vu
-    syn.queue_on_teleport("getgenv().Key = ",'"',getgenv().Key'"',"getgenv().id = ",'"',getgenv().id,'"',"loadstring(game:HttpGet('https://raw.githubusercontent.com/x7Swiftz/LastPirateVIP/main/Whitelist%20Luraph-obfuscated.lua'))()")
+    syn.queue_on_teleport("getgenv().Key = ",'"',getgenv().Key'"',"\ngetgenv().id = ",'"',getgenv().id,'"',"\nloadstring(game:HttpGet('https://raw.githubusercontent.com/x7Swiftz/LastPirateVIP/main/Whitelist%20Luraph-obfuscated.lua'))()")
     PlayerDetect()
 end)
 -------------------------------------------------------------- Main
