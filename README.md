@@ -1670,11 +1670,11 @@ Main:Toggle("AutoFarm Boss",_G.Setting_table.AutoFarm_Boss,function(vu)
 end)
 
 Main:Toggle("Hop AutoFarm Boss",_G.Setting_table.Hop_AutoFarm_Boss,function(vu)
-    if SelectWeapon == nil and SelectBoss == nil then
+    if _G.Setting_table.SelectWeapon == nil and _G.Setting_table.SelectBoss == nil then
         DiscordLib:Notification("Notification", "SelectWeapon! - SelectBoss!", "Okay!")
-    elseif SelectWeapon == nil then
+    elseif _G.Setting_table.SelectWeapon == nil then
         DiscordLib:Notification("Notification", "SelectWeapon!", "Okay!")
-    elseif SelectBoss == nil then
+    elseif _G.Setting_table.SelectBoss == nil then
         DiscordLib:Notification("Notification", "SelectBoss!", "Okay!")
     else
         AutoFarm_Boss = vu
