@@ -192,10 +192,10 @@ spawn(function()
                         CheckLevel()
                         if game:GetService("Workspace").Enemies:FindFirstChild(Ms) then
                             for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                                if v.Name == Ms and v:FindFirstChild("HumanoidRootPart") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0  then
+                                if v.Name == Ms and (v.HumanoidRootPart.Position-CFrameMon.Position).Magnitude < 300 then
     								if string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Container.QuestTitle.Title.Text, NameMon) then
                                         _G.PosMon = v.HumanoidRootPart.CFrame
-            						v.Humanoid.JumpPower = 0
+            						v.Humanoid.JumpPower = 0 
             						v.Humanoid.WalkSpeed = 0
                                     v.HumanoidRootPart.CanCollide = false
                                     if v.Humanoid:FindFirstChild("Animator") then
@@ -1887,14 +1887,7 @@ spawn(function()
         while wait(3) do
             if _G.Setting_table.AutoCandyExp then
                 if not string.find(game:GetService("Players").LocalPlayer.PlayerGui.Main.Level.Exp.Text, "2x ends in") then
-                    local args = {
-                        [1] = "Candies",
-                        [2] = "Buy",
-                        [3] = 1,
-                        [4] = 1
-                    }
-
-                    game:GetService("ReplicatedStorage").Remotes.CommF:InvokeServer(unpack(args))
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("Candies","Buy",1,1)
                 end
             end
         end
