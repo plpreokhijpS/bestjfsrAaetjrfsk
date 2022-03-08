@@ -199,7 +199,7 @@ spawn(function()
                                     sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius",  math.huge)
             						v.Humanoid:ChangeState(14)
             						StatrMagnet = true
-                                        repeat game:GetService("RunService").Heartbeat:wait(0.2)
+                                        repeat wait(0.2)
                                             TP(_G.PosMon * CFrame.new(0,20,0))
                                             game:GetService'VirtualUser':CaptureController()
                                             game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
@@ -1099,7 +1099,7 @@ function TP(P1)
     elseif Distance < 1000 then
         Speed = 300
     elseif Distance >= 1000 then
-        Speed = 250
+        Speed = 200
     end
     game:GetService("TweenService"):Create(
         game.Players.LocalPlayer.Character.HumanoidRootPart,
@@ -2159,6 +2159,7 @@ Raid:Toggle("AutoRaid",_G.Setting_table.Auto_Raid, function(vu)
 	    savesetting()
 	end
 end)
+
 Raid:Dropdown("Select Chip",{"Flame","Ice","Quake","Light","Dark","String","Rumble","Magma","Human: Buddha"},function(t)
 	_G.Setting_table.selectchip = t
 	savesetting()
