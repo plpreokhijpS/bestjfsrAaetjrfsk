@@ -206,7 +206,7 @@ spawn(function()
                                             end
                                         end
             						end
-                                        repeat wait(0.1)
+                                        repeat game:GetService("RunService").Stepped:wait()
                                             TP(v.HumanoidRootPart.CFrame * CFrame.new(0,20,0))
                                             game:GetService'VirtualUser':CaptureController()
                                             game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
