@@ -206,15 +206,12 @@ spawn(function()
                                             end
                                         end
             						end
-                                        repeat wait(0.2)
+                                        repeat wait(0.1)
                                             TP(v.HumanoidRootPart.CFrame * CFrame.new(0,20,0))
                                             game:GetService'VirtualUser':CaptureController()
                                             game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                                         until v.Humanoid.Health <= 0 or not v.Parent or Auto_Farm == false or game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false or game.Players.LocalPlayer.Character.Humanoid.Health <= 0
                                         CheckLevel()
-                                        if v.Humanoid.Health <= 0 then
-                                            v:Destroy()
-                                        end
                                     else
     									game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
     								end
