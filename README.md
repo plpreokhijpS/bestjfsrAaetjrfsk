@@ -167,11 +167,6 @@ spawn(function()
                     if game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false then
         				CheckLevel()
         				StatrMagnet = false
-        				if _G.FM and (CFrameQ.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 1000 then
-                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(61163.8515625, 11.6796875, 1819.7841796875))
-        				elseif _G.FM and (CFrameQ - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 1000 then
-                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("requestEntrance",Vector3.new(61163.8515625, 11.6796875, 1819.7841796875))
-        				end
                         if (CFrameQ.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 100 then 
             				TP(CFrameQ)
             			else
@@ -209,6 +204,7 @@ spawn(function()
                                             game:GetService'VirtualUser':CaptureController()
                                             game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                                         until v.Humanoid.Health <= 0 or not v.Parent or Auto_Farm == false or game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false or game.Players.LocalPlayer.Character.Humanoid.Health <= 0
+                                        CheckLevel()
                                         if v.Humanoid.Health <= 0 then
                                             v:Destroy()
                                         end
