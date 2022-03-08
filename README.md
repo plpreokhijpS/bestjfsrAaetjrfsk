@@ -142,7 +142,7 @@ spawn(function()
 			if StatrMagnet then
 			    if (CFrameMon.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 1000 then
     				for y,x in pairs(game.Workspace.Enemies:GetChildren()) do
-        					if not string.find(x.Name,"Boss") and(x.HumanoidRootPart.Position-_G.PosMon.Position).magnitude <= 370 then --370
+        					if not string.find(x.Name,"Boss") and(x.HumanoidRootPart.Position-_G.PosMon.Position).magnitude <= 300 then --370
         						x.HumanoidRootPart.CFrame = _G.PosMon
         						x.Humanoid.JumpPower = 0
         						x.Humanoid.WalkSpeed = 0
