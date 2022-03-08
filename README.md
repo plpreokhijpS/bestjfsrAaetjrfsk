@@ -207,7 +207,7 @@ spawn(function()
                                         end
             						end
                                         repeat wait(0.2)
-                                            TP(_G.PosMon * CFrame.new(0,20,0))
+                                            TP(v.HumanoidRootPart.CFrame * CFrame.new(0,20,0))
                                             game:GetService'VirtualUser':CaptureController()
                                             game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                                         until v.Humanoid.Health <= 0 or not v.Parent or Auto_Farm == false or game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false or game.Players.LocalPlayer.Character.Humanoid.Health <= 0
