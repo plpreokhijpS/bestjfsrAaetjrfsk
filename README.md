@@ -2593,7 +2593,8 @@ Raid:Toggle("AutoRaid Hop",_G.Setting_table.Auto_Raid_Hop, function(vu)
 	else
 	    for i,v in pairs(game:GetService("Workspace"):GetChildren()) do
             if v:IsA ("Tool") then
-                v.Handle.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Handle.CFrame
+                wait(1)
             end
         end
 	    _G.Auto_Raid = vu
