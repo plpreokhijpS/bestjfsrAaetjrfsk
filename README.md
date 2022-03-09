@@ -120,7 +120,7 @@ end
 -----------------------------Code
 spawn(function()
     while task.wait() do
-        if  Auto_Farm == true or Clip == true or _G.FarmMasteryFruit == true or _G.BuddySword == true or AutoFarm_Boss or _G.AutoRaid or _G.Auto_Raid or _G.Setting_table.Auto_Three then 
+        if  Auto_Farm == true or _G.Setting_table.AutoFarm_Players or Clip == true or _G.FarmMasteryFruit == true or _G.BuddySword == true or AutoFarm_Boss or _G.AutoRaid or _G.Auto_Raid or _G.Setting_table.Auto_Three then 
             if not game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyVelocity") then 
                 local L_1 = Instance.new("BodyVelocity") 
                 L_1.Parent = game.Players.LocalPlayer.Character.HumanoidRootPart 
@@ -314,6 +314,30 @@ spawn(function()
 			end
 		end)
 	end)
+end)
+
+local RigC = require(game:GetService("Players").LocalPlayer.PlayerScripts.CombatFramework)
+spawn(function()
+game:GetService("RunService").Stepped:Connect(function()
+        if _G.FastAttack2 then
+            if game.Players.LocalPlayer.Character:FindFirstChild("Electric Claw") or not game.Players.LocalPlayer.Character then
+		RigC.activeController.timeToNextAttack = -(math.huge * math.huge)
+		RigC.activeController.increment = 3
+	        RigC.activeController:attack()
+	elseif not game.Players.LocalPlayer.Character then
+	        RigC.activeController.timeToNextAttack = 1
+	        RigC.activeController.increment = 3
+	        RigC.activeController:attack()
+	else
+		RigC.activeController.timeToNextAttack = 0
+		RigC.activeController:attack()
+	end
+		RigC.activeController.attacking = false
+		RigC.activeController.blocking = false
+		RigC.activeController.timeToNextBlock = 0
+		RigC.activeController.hitboxMagnitude = 100
+	   end
+    end)
 end)
 
 	spawn(function()
@@ -1092,7 +1116,23 @@ function TP2(P1)
     Clip = false
 end
 
-
+function TP3(P1)
+    Distance = (P1.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+    if Distance < 150 then
+        Speed = 2000
+    elseif Distance < 300 then
+        Speed = 1500
+    elseif Distance < 1000 then
+        Speed = 300
+    elseif Distance >= 1000 then
+        Speed = 200
+    end
+    game:GetService("TweenService"):Create(
+        game.Players.LocalPlayer.Character.HumanoidRootPart,
+        TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear),
+        {CFrame = P1}
+    ):Play()
+end
 
 function TP(P1)
     Distance = (P1.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
@@ -1115,7 +1155,7 @@ end
 spawn(function()
         while game:GetService("RunService").Stepped:wait(5) do
             character = game.Players.LocalPlayer.Character 
-            if _G.NoClip or Clip or Auto_Farm then
+            if _G.NoClip or Clip or Auto_Farm or _G.Setting_table.AutoFarm_Players then
                 pcall(function()
                     for _, v in pairs(character:GetChildren()) do
                         pcall(function()
@@ -1640,6 +1680,7 @@ local DiscordLib = loadstring(game:HttpGet"https://raw.githubusercontent.com/x7S
 local win = DiscordLib:Window("Liver Hub - Premium")
 
 local serv = win:Server("Blox Fruit - Premium", "http://www.roblox.com/asset/?id=8987392618")
+
 wait(1)
 game:GetService("CoreGui").Discord.MainFrame.ServersHoldFrame.ServersHold["Blox Fruit - PremiumServer"].BackgroundTransparency = 1
 local Main = serv:Channel("Main")
@@ -2512,17 +2553,24 @@ spawn(function()
 				if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Dragon Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Dragon Fruit") then
 					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Dragon-Dragon")
 				end
+				if game:GetService("Players").LocalPlayer.Character:FindFirstChild("Soul Fruit") or game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Soul Fruit") then
+					game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("StoreFruit","Soul-Sou")
+				end
 			end
 		end
 	end)
 end)
 
-FruitP:Label(" ")
-FruitP:Label("Fruit Hop")
 ---------------- Fruit
 
 ---------------- PVP
 PVP:Label("PVP Main")
+
+
+PVP:Toggle("AutoFarm Players",_G.Setting_table.AutoFarm_Players,function(vu)
+    _G.Setting_table.AutoFarm_Players = vu
+end)
+
 
 PVP:Label(" ")
 PVP:Label("PVP Hop")
