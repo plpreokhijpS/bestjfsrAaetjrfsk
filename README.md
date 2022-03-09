@@ -1625,18 +1625,20 @@ spawn(function()
 	pcall(function()
 		while game:GetService("RunService").Heartbeat:wait() do
 			if NextIsland or RaidSuperhuman or _G.AutoRaid or _G.Auto_Raid then
-				if game:GetService("Players")["LocalPlayer"].PlayerGui.Main.Timer.Visible == true and game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 5") or game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 4") or game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 3") or game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 2") or game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 1") then
-					if game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 5") then
-						TP2(game:GetService("Workspace")["_WorldOrigin"].Locations["Island 5"].CFrame*CFrame.new(0,80,0))
-					elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 4")  then
-						TP2(game:GetService("Workspace")["_WorldOrigin"].Locations["Island 4"].CFrame*CFrame.new(0,80,0))
-					elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 3")  then
-						TP2(game:GetService("Workspace")["_WorldOrigin"].Locations["Island 3"].CFrame*CFrame.new(0,80,0))
-					elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 2")  then
-						TP2(game:GetService("Workspace")["_WorldOrigin"].Locations["Island 2"].CFrame*CFrame.new(0,80,0))
-					elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 1") and (game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 1").Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 1000 then
-						TP2(game:GetService("Workspace")["_WorldOrigin"].Locations["Island 1"].CFrame*CFrame.new(0,80,0))
-					end
+				if game:GetService("Players")["LocalPlayer"].PlayerGui.Main.Timer.Visible == true then
+				    if game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 5") or game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 4") or game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 3") or game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 2") or game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 1") then
+    					if game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 5") then
+    						TP2(game:GetService("Workspace")["_WorldOrigin"].Locations["Island 5"].CFrame*CFrame.new(0,80,0))
+    					elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 4")  then
+    						TP2(game:GetService("Workspace")["_WorldOrigin"].Locations["Island 4"].CFrame*CFrame.new(0,80,0))
+    					elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 3")  then
+    						TP2(game:GetService("Workspace")["_WorldOrigin"].Locations["Island 3"].CFrame*CFrame.new(0,80,0))
+    					elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 2")  then
+    						TP2(game:GetService("Workspace")["_WorldOrigin"].Locations["Island 2"].CFrame*CFrame.new(0,80,0))
+    					elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 1") and (game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 1").Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 1000 then
+    						TP2(game:GetService("Workspace")["_WorldOrigin"].Locations["Island 1"].CFrame*CFrame.new(0,80,0))
+    					end
+    				end
 				end
 			end
 		end
@@ -2333,7 +2335,7 @@ end)
 -------------------------------------------------------------- AutoStats
 
 -------------------------------------------------------------- Melee
-MeleeP:Label("Melee Main")
+MeleeP:Label("Main")
 MeleeP:Toggle("Auto Superhuman",_G.Setting_table.Superhuman,function(vu)
     _G.Superhuman = vu
     _G.Setting_table.Superhuman = vu
@@ -2372,12 +2374,12 @@ MeleeP:Toggle("Auto Sharkman Karate",_G.Setting_table.Sharkman_Karate,function(v
     savesetting()
 end)
 MeleeP:Label(" ")
-MeleeP:Label("Melee Hop")
+MeleeP:Label("Hop")
 -------------------------------------------------------------- Melee
 
 -------------------------------------------------------------- Sword
 
-SwordP:Label("Sword Main")
+SwordP:Label("Main")
 SwordP:Toggle("Auto BuddySword",_G.Setting_table.BuddySword,function(vu)
     _G.BuddySword = vu
     _G.Setting_table.BuddySword = vu
@@ -2403,12 +2405,12 @@ SwordP:Toggle("Auto ???",false,function(vu)
 end)
 
 SwordP:Label(" ")
-SwordP:Label("Sword Hop")
+SwordP:Label("Hop")
 
 ---------------- Sword
 
 ---------------- Fruit
-FruitP:Label("Fruit Main")
+FruitP:Label("Main")
 FruitP:Toggle("Devil Fruit Sniper",_G.Setting_table.BuyFruitSinper,function(vu)
 	BuyFruitSinper = vu
 	_G.Setting_table.BuyFruitSinper = vu
@@ -2564,21 +2566,18 @@ end)
 ---------------- Fruit
 
 ---------------- PVP
-PVP:Label("PVP Main")
+PVP:Label("Main")
 
 
 PVP:Toggle("AutoFarm Players",_G.Setting_table.AutoFarm_Players,function(vu)
     _G.Setting_table.AutoFarm_Players = vu
 end)
 
-
-PVP:Label(" ")
-PVP:Label("PVP Hop")
 ---------------- PVP
 
 
 ---------------- Raid
-Raid:Label("Raid Main")
+Raid:Label("Main")
 Raid:Toggle("AutoRaid",_G.Setting_table.Auto_Raid, function(vu)
     if _G.Setting_table.selectchip == nil then
 	    DiscordLib:Notification("Notification", "Select Chip!", "Okay!")
@@ -2588,6 +2587,22 @@ Raid:Toggle("AutoRaid",_G.Setting_table.Auto_Raid, function(vu)
 	    savesetting()
 	end
 end)
+Raid:Toggle("AutoRaid Hop",_G.Setting_table.Auto_Raid_Hop, function(vu)
+    if _G.Setting_table.selectchip == nil then
+	    DiscordLib:Notification("Notification", "Select Chip!", "Okay!")
+	else
+	    for i,v in pairs(game:GetService("Workspace"):GetChildren()) do
+            if v:IsA ("Tool") then
+                v.Handle.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+            end
+        end
+	    _G.Auto_Raid = vu
+	    _G.Hop = vu
+	    _G.Setting_table.Auto_Raid_Hop = vu
+	    savesetting()
+	end
+end)
+
 
 Raid:Dropdown("Select Chip",{"Flame","Ice","Quake","Light","Dark","String","Rumble","Magma","Human: Buddha"},function(t)
 	_G.Setting_table.selectchip = t
@@ -2597,9 +2612,6 @@ end)
 Raid:Button("Buy Chip", function(vu)
 	game:GetService("ReplicatedStorage").Remotes["CommF_"]:InvokeServer( "RaidsNpc", "Select", _G.Setting_table.selectchip)
 end)
-
-Raid:Label(" ")
-Raid:Label("Raid Hop")
 
 ---------------- Raid
 
