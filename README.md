@@ -103,24 +103,25 @@ elseif placeId == 7449423635 then
     Three_World = true
 end
 wait(2)
-if _G.Teams == "Pirates" then
-    for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Pirates.Frame.ViewportFrame.TextButton.MouseButton1Click)) do
-        v.Function()
+repeat wait(1)
+    if _G.Teams == "Pirates" then
+        for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Pirates.Frame.ViewportFrame.TextButton.MouseButton1Click)) do
+            v.Function()
+        end
+    elseif _G.Teams == "Marines" then
+        for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Marines.Frame.ViewportFrame.TextButton.MouseButton1Click)) do
+            v.Function()
+        end
+    else
+        for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Pirates.Frame.ViewportFrame.TextButton.MouseButton1Click)) do
+            v.Function()
+        end
     end
-elseif _G.Teams == "Marines" then
-    for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Marines.Frame.ViewportFrame.TextButton.MouseButton1Click)) do
-        v.Function()
-    end
-else
-    for i,v in pairs(getconnections(game:GetService("Players").LocalPlayer.PlayerGui.Main.ChooseTeam.Container.Pirates.Frame.ViewportFrame.TextButton.MouseButton1Click)) do
-        v.Function()
-    end
-end
-
+until game.Players.localPlayer.Neutral == false
 -----------------------------Code
 spawn(function()
     while task.wait() do
-        if  Auto_Farm == true or _G.Setting_table.AutoFarm_Players or Clip == true or _G.FarmMasteryFruit == true or _G.BuddySword == true or AutoFarm_Boss or _G.AutoRaid or _G.Auto_Raid or _G.Setting_table.Auto_Three then 
+        if  Auto_Farm == true or _G.Setting_table.AutoFarm_Players or Clip == true or _G.FarmMasteryFruit == true or _G.BuddySword == true or AutoFarm_Boss or _G.Auto_Raid or _G.Setting_table.Auto_Three then 
             if not game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyVelocity") then 
                 local L_1 = Instance.new("BodyVelocity") 
                 L_1.Parent = game.Players.LocalPlayer.Character.HumanoidRootPart 
@@ -1587,63 +1588,68 @@ spawn(function()
                             v.HumanoidRootPart.CanCollide = false
                             v.HumanoidRootPart.Size = Vector3.new(50,50,50)
                             v.HumanoidRootPart.Transparency = 0.5
-                        until not Killaura or not _G.AutoRaid or not RaidSuperhuman or not v.Parent or v.Humanoid.Health <= 0
+                        until not Killaura or not _G.Auto_Raid or not RaidSuperhuman or not v.Parent or v.Humanoid.Health <= 0
                     end)
                 end
             end
         end
     end
 end)
-
 spawn(function()
-    while wait() do
+                                    while wait() do
+                                        if _G.Auto_Raid then
+                                            wait(3)
+                                            if game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Special Microchip") or game:GetService("Players").LocalPlayer.Character:FindFirstChild("Special Microchip") then
+                                                if game:GetService("Players")["LocalPlayer"].PlayerGui.Main.Timer.Visible == false then
+                                                    if New_World then
+                            							fireclickdetector(game:GetService("Workspace").Map.CircleIsland.RaidSummon2.Button.Main.ClickDetector)
+                            							wait(15)
+                            						elseif Three_World then
+                            							fireclickdetector(game:GetService("Workspace").Map["Boat Castle"].RaidSummon2.Button.Main.ClickDetector)
+                            							wait(15)
+                            						end
+                                                end
+                        					elseif _G.Hop and not game:GetService("Players").LocalPlayer.Backpack:FindFirstChild("Special Microchip") and not game:GetService("Players").LocalPlayer.Character:FindFirstChild("Special Microchip") then
+                                                wait(15)
+                                                if game:GetService("Players")["LocalPlayer"].PlayerGui.Main.Timer.Visible == false then
+                                                    Teleport()
+                                                end
+                                            end
+                                        end
+                                    end
+end)
+                            
+spawn(function()
+    while wait(.2) do
         if _G.Auto_Raid then
-			game:GetService("ReplicatedStorage").Remotes["CommF_"]:InvokeServer( "RaidsNpc", "Select", _G.Setting_table.selectchip)
-				if game.Players.LocalPlayer.Backpack:FindFirstChild("Special Microchip") or  game.Players.LocalPlayer.Character:FindFirstChild("Special Microchip")  then
-    				if New_World then
-    					fireclickdetector(game:GetService("Workspace").Map.CircleIsland.RaidSummon2.Button.Main.ClickDetector)
-    				elseif Three_World then
-    					fireclickdetector(game:GetService("Workspace").Map["Boat Castle"].RaidSummon2.Button.Main.ClickDetector)
-    				end
-    			else
-    				wait(10)
-    				if game:GetService("Players")["LocalPlayer"].PlayerGui.Main.Timer.Visible == false and not game.Players.LocalPlayer.Backpack:FindFirstChild("Special Microchip") and not game.Players.LocalPlayer.Character:FindFirstChild("Special Microchip") then
-    				    if _G.Hop then
-    				        Teleport()
-    				    end
-    			    else
-    			        repeat wait(1)
-    			        until game:GetService("Players")["LocalPlayer"].PlayerGui.Main.Timer.Visible == false
-    			        wait(2)
-    				end
-				end
+            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("RaidsNpc", "Select", _G.Setting_table.selectchip)
         end
     end
 end)
 
-spawn(function()
-	pcall(function()
-		while game:GetService("RunService").Heartbeat:wait() do
-			if NextIsland or RaidSuperhuman or _G.AutoRaid or _G.Auto_Raid then
-				if game:GetService("Players")["LocalPlayer"].PlayerGui.Main.Timer.Visible == true then
-				    if game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 5") or game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 4") or game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 3") or game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 2") or game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 1") then
-    					if game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 5") then
-    						TP2(game:GetService("Workspace")["_WorldOrigin"].Locations["Island 5"].CFrame*CFrame.new(0,80,0))
-    					elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 4")  then
-    						TP2(game:GetService("Workspace")["_WorldOrigin"].Locations["Island 4"].CFrame*CFrame.new(0,80,0))
-    					elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 3")  then
-    						TP2(game:GetService("Workspace")["_WorldOrigin"].Locations["Island 3"].CFrame*CFrame.new(0,80,0))
-    					elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 2")  then
-    						TP2(game:GetService("Workspace")["_WorldOrigin"].Locations["Island 2"].CFrame*CFrame.new(0,80,0))
-    					elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 1") and (game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 1").Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 1000 then
-    						TP2(game:GetService("Workspace")["_WorldOrigin"].Locations["Island 1"].CFrame*CFrame.new(0,80,0))
-    					end
-    				end
-				end
-			end
-		end
-	end)
-end)
+                            
+                                spawn(function()
+                                    while wait(.1) do
+                                        if NextIsland or _G.Auto_Raid then
+                                            game:GetService("Players").LocalPlayer.Character.Humanoid:ChangeState(11)
+                                            if game:GetService("Players")["LocalPlayer"].PlayerGui.Main.Timer.Visible == true then
+                                                if game:GetService("Players")["LocalPlayer"].PlayerGui.Main.Timer.Visible == true and game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 5") or game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 4") or game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 3") or game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 2") or game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 1") then
+                                					if game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 5") then
+                                						TP2(game:GetService("Workspace")["_WorldOrigin"].Locations["Island 5"].CFrame*CFrame.new(0,80,0))
+                                					elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 4") then
+                                						TP2(game:GetService("Workspace")["_WorldOrigin"].Locations["Island 4"].CFrame*CFrame.new(0,80,0))
+                                					elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 3") then
+                                						TP2(game:GetService("Workspace")["_WorldOrigin"].Locations["Island 3"].CFrame*CFrame.new(0,80,0))
+                                					elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 2") then
+                                						TP2(game:GetService("Workspace")["_WorldOrigin"].Locations["Island 2"].CFrame*CFrame.new(0,80,0))
+                                					elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 1") then
+                                						TP2(game:GetService("Workspace")["_WorldOrigin"].Locations["Island 1"].CFrame*CFrame.new(0,80,0))
+                                					end
+                                                end
+                                            end
+                                        end
+                                    end
+                                end)
 
 spawn(function()
 	pcall(function()
@@ -1669,7 +1675,7 @@ spawn(function()
         if _G.BringFruit then
             for i,v in pairs(game:GetService("Workspace"):GetChildren()) do
                 if v:IsA ("Tool") then
-                    v.Handle.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Handle.CFrame
                 end
             end
         end
@@ -2568,11 +2574,6 @@ end)
 ---------------- PVP
 PVP:Label("Main")
 
-
-PVP:Toggle("AutoFarm Players",_G.Setting_table.AutoFarm_Players,function(vu)
-    _G.Setting_table.AutoFarm_Players = vu
-end)
-
 ---------------- PVP
 
 
@@ -2596,12 +2597,30 @@ Raid:Toggle("AutoRaid Hop",_G.Setting_table.Auto_Raid_Hop, function(vu)
                 game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Handle.CFrame
                 wait(1)
             end
-        end
+	    end
+    for i,v in pairs(game:GetService("Workspace")["_WorldOrigin"].Locations:GetChildren()) do
+                                                    if v.Name == "Island 5" then
+                                                        v:Destroy()
+                                                    elseif v.Name == "Island 4" then
+                                                        v:Destroy()
+                                                    elseif v.Name == "Island 3" then
+                                                        v:Destroy()
+                                                    elseif v.Name == "Island 2" then
+                                                        v:Destroy()
+                                                    elseif v.Name == "Island 1" then
+                                                        v:Destroy()
+                                                    end
+                                                end
 	    _G.Auto_Raid = vu
 	    _G.Hop = vu
 	    _G.Setting_table.Auto_Raid_Hop = vu
 	    savesetting()
 	end
+end)
+Raid:Toggle("Auto Awakener",_G.Setting_table.Auto_Awaken, function(vu)
+    _G.Setting_table.Auto_Awaken = vu
+    _G.AutoAwakener = vu
+    savesetting()
 end)
 
 
