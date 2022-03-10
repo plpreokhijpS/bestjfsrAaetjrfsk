@@ -1390,13 +1390,12 @@ spawn(function()
                 local FG = game:GetService("Players").LocalPlayer.Data.Fragments.Value
                 if FG < 1500 then
                     if Auto_Farm then
-                        _G.PO = true
                         Auto_Farm = false
                     end
+                    _G.Auto_Raid = true
                 else
-                    if _G.PO == true then
+                    if _G.Setting_table.Auto_Farm then
                         Auto_Farm = true
-                        _G.PO = nil
                     end
                     local args = {
                         [1] = "BlackbeardReward",
@@ -1410,13 +1409,13 @@ spawn(function()
                 local FG = game:GetService("Players").LocalPlayer.Data.Fragments.Value
                 if FG < 1500 then
                     if Auto_Farm then
-                        _G.PO = true
                         Auto_Farm = false
                     end
+                    _G.Auto_Raid = true
                 else
-                    if _G.PO == true then
+                    _G.Auto_Raid = false
+                    if _G.Setting_table.Auto_Farm then
                         Auto_Farm = true
-                        _G.PO = nil
                     end
                     local args = {
                         [1] = "BlackbeardReward",
@@ -1448,6 +1447,24 @@ spawn(function()
                 _G.Setting_table.SelectWeapon = "Death Step"
             end  
             if game.Players.LocalPlayer.Character:FindFirstChild("Black Leg") and game.Players.LocalPlayer.Character:FindFirstChild("Black Leg").Level.Value >= 400 then
+                local FG = game:GetService("Players").LocalPlayer.Data.Fragments.Value
+                if FG < 5000 and _G.Hop then
+                    if Auto_Farm then
+                        Auto_Farm = false
+                    end
+                    _G.Setting_table.Auto_Raid = true
+                    _G.Auto_Raid = true
+                    _G.Hop = true
+                    savesetting()
+                elseif FG >= 5000 then
+                    _G.Setting_table.Auto_Raid = false
+                    _G.Auto_Raid = false
+                    _G.Hop = false
+                    savesetting()
+                    if _G.Setting_table.Auto_Farm then
+                        Auto_Farm = true
+                    end
+                end
                 local args = {
                     [1] = "BuyDeathStep"
                 }
@@ -1469,29 +1486,47 @@ spawn(function()
 
             if game.Players.LocalPlayer.Character:FindFirstChild("Dragon Claw") and game.Players.LocalPlayer.Character:FindFirstChild("Dragon Claw").Level.Value >= 400 and game.Players.LocalPlayer.Character.Humanoid.Health > 0 then
                 _G.Setting_table.SelectWeapon = "Dragon Claw"
-                if game.ReplicatedStorage.Remotes.CommF_:InvokeServer("BuyDragonTalon", true) == 3 then
-                    local string_1 = "Bones";
-                    local string_2 = "Buy";
-                    local number_1 = 1;
-                    local number_2 = 1;
-                    local Target = game:GetService("ReplicatedStorage").Remotes["CommF_"];
-                    Target:InvokeServer(string_1, string_2, number_1, number_2);
-
-                    local string_1 = "BuyDragonTalon";
-                    local bool_1 = true;
-                    local Target = game:GetService("ReplicatedStorage").Remotes["CommF_"];
-                    Target:InvokeServer(string_1, bool_1);
-                elseif game.ReplicatedStorage.Remotes.CommF_:InvokeServer("BuyDragonTalon", true) == 1 then
-                    game.ReplicatedStorage.Remotes.CommF_:InvokeServer("BuyDragonTalon")
-                else
-                    local string_1 = "BuyDragonTalon";
-                    local bool_1 = true;
-                    local Target = game:GetService("ReplicatedStorage").Remotes["CommF_"];
-                    Target:InvokeServer(string_1, bool_1);
-                    local string_1 = "BuyDragonTalon";
-                    local Target = game:GetService("ReplicatedStorage").Remotes["CommF_"];
-                    Target:InvokeServer(string_1);
-                end 
+                local FG = game:GetService("Players").LocalPlayer.Data.Fragments.Value
+                if FG < 5000 and _G.Hop then
+                    if Auto_Farm then
+                        Auto_Farm = false
+                    end
+                    _G.Setting_table.Auto_Raid = true
+                    _G.Auto_Raid = true
+                    _G.Hop = true
+                    savesetting()
+                elseif FG >= 5000 then
+                    _G.Setting_table.Auto_Raid = false
+                    _G.Auto_Raid = false
+                    _G.Hop = false
+                    savesetting()
+                    if _G.Setting_table.Auto_Farm then
+                        Auto_Farm = true
+                    end
+                end
+                    if game.ReplicatedStorage.Remotes.CommF_:InvokeServer("BuyDragonTalon", true) == 3 then
+                        local string_1 = "Bones";
+                        local string_2 = "Buy";
+                        local number_1 = 1;
+                        local number_2 = 1;
+                        local Target = game:GetService("ReplicatedStorage").Remotes["CommF_"];
+                        Target:InvokeServer(string_1, string_2, number_1, number_2);
+    
+                        local string_1 = "BuyDragonTalon";
+                        local bool_1 = true;
+                        local Target = game:GetService("ReplicatedStorage").Remotes["CommF_"];
+                        Target:InvokeServer(string_1, bool_1);
+                    elseif game.ReplicatedStorage.Remotes.CommF_:InvokeServer("BuyDragonTalon", true) == 1 then
+                        game.ReplicatedStorage.Remotes.CommF_:InvokeServer("BuyDragonTalon")
+                    else
+                        local string_1 = "BuyDragonTalon";
+                        local bool_1 = true;
+                        local Target = game:GetService("ReplicatedStorage").Remotes["CommF_"];
+                        Target:InvokeServer(string_1, bool_1);
+                        local string_1 = "BuyDragonTalon";
+                        local Target = game:GetService("ReplicatedStorage").Remotes["CommF_"];
+                        Target:InvokeServer(string_1);
+                    end
             end
         end
         if _G.Electric_Claw and game.Players.LocalPlayer:FindFirstChild("WeaponAssetCache") then
@@ -1502,6 +1537,24 @@ spawn(function()
                 _G.Setting_table.SelectWeapon = "Electro"
             end  
             if game.Players.LocalPlayer.Backpack:FindFirstChild("Electro") and game.Players.LocalPlayer.Backpack:FindFirstChild("Electro").Level.Value >= 400 then
+                local FG = game:GetService("Players").LocalPlayer.Data.Fragments.Value
+                if FG < 5000 and _G.Hop then
+                    if Auto_Farm then
+                        Auto_Farm = false
+                    end
+                    _G.Setting_table.Auto_Raid = true
+                    _G.Auto_Raid = true
+                    _G.Hop = true
+                    savesetting()
+                elseif FG >= 5000 then
+                    _G.Setting_table.Auto_Raid = false
+                    _G.Auto_Raid = false
+                    _G.Hop = false
+                    savesetting()
+                    if _G.Setting_table.Auto_Farm then
+                        Auto_Farm = true
+                    end
+                end
                 local v175 = game.ReplicatedStorage.Remotes.CommF_:InvokeServer("BuyElectricClaw", true);
                 if v175 == 4 then
                     local v176 = game.ReplicatedStorage.Remotes.CommF_:InvokeServer("BuyElectricClaw", "Start");
@@ -1515,40 +1568,24 @@ spawn(function()
                 end
             end
             if game.Players.LocalPlayer.Character:FindFirstChild("Electro") and game.Players.LocalPlayer.Character:FindFirstChild("Electro").Level.Value >= 400 then
-                local v175 = game.ReplicatedStorage.Remotes.CommF_:InvokeServer("BuyElectricClaw", true);
-                if v175 == 4 then
-                    local v176 = game.ReplicatedStorage.Remotes.CommF_:InvokeServer("BuyElectricClaw", "Start");
-                    if v176 == nil then
-                        TP2(CFrame.new(-12548, 337, -7481))
+                local FG = game:GetService("Players").LocalPlayer.Data.Fragments.Value
+                if FG < 5000 and _G.Hop then
+                    if Auto_Farm then
+                        Auto_Farm = false
                     end
-                else
-                    local string_1 = "BuyElectricClaw";
-                    local Target = game:GetService("ReplicatedStorage").Remotes["CommF_"];
-                    Target:InvokeServer(string_1);
-                end
-            end
-        end
-        if _G.Sharkman_Karate and game.Players.LocalPlayer:FindFirstChild("WeaponAssetCache") then
-            if game.Players.LocalPlayer.Backpack:FindFirstChild("Electro") and game.Players.LocalPlayer.Backpack:FindFirstChild("Electro").Level.Value < 400 then
-                _G.Setting_table.SelectWeapon = "Electro"
-            end  
-            if game.Players.LocalPlayer.Character:FindFirstChild("Electro") and game.Players.LocalPlayer.Character:FindFirstChild("Electro").Level.Value < 400 then
-                _G.Setting_table.SelectWeapon = "Electro"
-            end  
-            if game.Players.LocalPlayer.Backpack:FindFirstChild("Electro") and game.Players.LocalPlayer.Backpack:FindFirstChild("Electro").Level.Value >= 400 then
-                local v175 = game.ReplicatedStorage.Remotes.CommF_:InvokeServer("BuyElectricClaw", true);
-                if v175 == 4 then
-                    local v176 = game.ReplicatedStorage.Remotes.CommF_:InvokeServer("BuyElectricClaw", "Start");
-                    if v176 == nil then
-                        TP2(CFrame.new(-12548, 337, -7481))
+                    _G.Setting_table.Auto_Raid = true
+                    _G.Auto_Raid = true
+                    _G.Hop = true
+                    savesetting()
+                elseif FG >= 5000 then
+                    _G.Setting_table.Auto_Raid = false
+                    _G.Auto_Raid = false
+                    _G.Hop = false
+                    savesetting()
+                    if _G.Setting_table.Auto_Farm then
+                        Auto_Farm = true
                     end
-                else
-                    local string_1 = "BuyElectricClaw";
-                    local Target = game:GetService("ReplicatedStorage").Remotes["CommF_"];
-                    Target:InvokeServer(string_1);
                 end
-            end
-            if game.Players.LocalPlayer.Character:FindFirstChild("Electro") and game.Players.LocalPlayer.Character:FindFirstChild("Electro").Level.Value >= 400 then
                 local v175 = game.ReplicatedStorage.Remotes.CommF_:InvokeServer("BuyElectricClaw", true);
                 if v175 == 4 then
                     local v176 = game.ReplicatedStorage.Remotes.CommF_:InvokeServer("BuyElectricClaw", "Start");
@@ -1634,15 +1671,15 @@ end)
                                             game:GetService("Players").LocalPlayer.Character.Humanoid:ChangeState(11)
                                             if game:GetService("Players")["LocalPlayer"].PlayerGui.Main.Timer.Visible == true then
                                                 if game:GetService("Players")["LocalPlayer"].PlayerGui.Main.Timer.Visible == true and game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 5") or game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 4") or game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 3") or game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 2") or game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 1") then
-                                					if game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 5") then
+                                					if game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 5") and (game:GetService("Workspace")["_WorldOrigin"].Locations["Island 5"].Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 2500 then
                                 						TP2(game:GetService("Workspace")["_WorldOrigin"].Locations["Island 5"].CFrame*CFrame.new(0,80,0))
-                                					elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 4") then
+                                					elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 4") and (game:GetService("Workspace")["_WorldOrigin"].Locations["Island 4"].Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 2500 then
                                 						TP2(game:GetService("Workspace")["_WorldOrigin"].Locations["Island 4"].CFrame*CFrame.new(0,80,0))
-                                					elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 3") then
+                                					elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 3") and (game:GetService("Workspace")["_WorldOrigin"].Locations["Island 3"].Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 2500 then
                                 						TP2(game:GetService("Workspace")["_WorldOrigin"].Locations["Island 3"].CFrame*CFrame.new(0,80,0))
-                                					elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 2") then
+                                					elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 2") and (game:GetService("Workspace")["_WorldOrigin"].Locations["Island 2"].Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 2500 then
                                 						TP2(game:GetService("Workspace")["_WorldOrigin"].Locations["Island 2"].CFrame*CFrame.new(0,80,0))
-                                					elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 1") then
+                                					elseif game:GetService("Workspace")["_WorldOrigin"].Locations:FindFirstChild("Island 1") and (game:GetService("Workspace")["_WorldOrigin"].Locations["Island 1"].Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 2500 then
                                 						TP2(game:GetService("Workspace")["_WorldOrigin"].Locations["Island 1"].CFrame*CFrame.new(0,80,0))
                                 					end
                                                 end
