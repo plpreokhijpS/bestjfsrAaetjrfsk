@@ -359,7 +359,223 @@ end)
         end
     end
 	
-
+function CheckQuestBoss()
+    -- Old World
+    if _G.SelectBoss == "Saber Expert [Lv. 200] [Boss]" then
+        MsBoss = "Saber Expert [Lv. 200] [Boss]"
+        NameBoss = "Saber Expert"
+        CFrameBoss = CFrame.new(-1458.89502, 29.8870335, -50.633564, 0.858821094, 1.13848939e-08, 0.512275636, -4.85649254e-09, 1, -1.40823326e-08, -0.512275636, 9.6063415e-09, 0.858821094)
+    elseif _G.SelectBoss == "The Saw [Lv. 100] [Boss]" then
+        MsBoss = "The Saw [Lv. 100] [Boss]"
+        NameBoss = "The Saw"
+        CFrameBoss = CFrame.new(-683.519897, 13.8534927, 1610.87854, -0.290192783, 6.88365773e-08, 0.956968188, 6.98413629e-08, 1, -5.07531119e-08, -0.956968188, 5.21077759e-08, -0.290192783)
+    elseif _G.SelectBoss == "Greybeard [Lv. 750] [Raid Boss]" then
+        MsBoss = "Greybeard [Lv. 750] [Raid Boss]"
+        NameBoss = "Greybeard"
+        CFrameBoss = CFrame.new(-4955.72949, 80.8163834, 4305.82666, -0.433646321, -1.03394289e-08, 0.901083171, -3.0443168e-08, 1, -3.17633075e-09, -0.901083171, -2.88092288e-08, -0.433646321)
+    elseif _G.SelectBoss == "The Gorilla King [Lv. 25] [Boss]" then
+        MsBoss = "The Gorilla King [Lv. 25] [Boss]"
+        NameBoss = "The Gorilla King"
+        NameQuestBoss = "JungleQuest"
+        LevelQuestBoss = 3
+        CFrameQuestBoss = CFrame.new(-1604.12012, 36.8521118, 154.23732, 0.0648873374, -4.70858913e-06, -0.997892559, 1.41431883e-07, 1, -4.70933674e-06, 0.997892559, 1.64442184e-07, 0.0648873374)
+        CFrameBoss = CFrame.new(-1223.52808, 6.27936459, -502.292664, 0.310949147, -5.66602516e-08, 0.950426519, -3.37275488e-08, 1, 7.06501808e-08, -0.950426519, -5.40241736e-08, 0.310949147)
+    elseif _G.SelectBoss == "Bobby [Lv. 55] [Boss]" then
+        MsBoss = "Bobby [Lv. 55] [Boss]"
+        NameBoss = "Bobby"
+        NameQuestBoss = "BuggyQuest1"
+        LevelQuestBoss = 3
+        CFrameQuestBoss = CFrame.new(-1139.59717, 4.75205183, 3825.16211, -0.959730506, -7.5857054e-09, 0.280922383, -4.06310328e-08, 1, -1.11807175e-07, -0.280922383, -1.18718916e-07, -0.959730506)
+        CFrameBoss = CFrame.new(-1147.65173, 32.5966301, 4156.02588, 0.956680477, -1.77109952e-10, -0.29113996, 5.16530874e-10, 1, 1.08897802e-09, 0.29113996, -1.19218679e-09, 0.956680477)
+    elseif _G.SelectBoss == "Yeti [Lv. 110] [Boss]" then
+        MsBoss = "Yeti [Lv. 110] [Boss]"
+        NameBoss = "Yeti"
+        NameQuestBoss = "SnowQuest"
+        LevelQuestBoss = 3
+        CFrameQuestBoss = CFrame.new(1384.90247, 87.3078308, -1296.6825, 0.280209213, 2.72035177e-08, -0.959938943, -6.75690828e-08, 1, 8.6151708e-09, 0.959938943, 6.24481444e-08, 0.280209213)
+        CFrameBoss = CFrame.new(1221.7356, 138.046906, -1488.84082, 0.349343032, -9.49245944e-08, 0.936994851, 6.29478194e-08, 1, 7.7838429e-08, -0.936994851, 3.17894653e-08, 0.349343032)
+    elseif _G.SelectBoss == "Mob Leader [Lv. 120] [Boss]" then
+        MsBoss = "Mob Leader [Lv. 120] [Boss]"
+        NameBoss = "Mob Leader"
+        CFrameBoss = CFrame.new(-2848.59399, 7.4272871, 5342.44043, -0.928248107, -8.7248246e-08, 0.371961564, -7.61816636e-08, 1, 4.44474857e-08, -0.371961564, 1.29216433e-08, -0.92824)
+    elseif _G.SelectBoss == "Vice Admiral [Lv. 130] [Boss]" then
+        MsBoss = "Vice Admiral [Lv. 130] [Boss]"
+        NameBoss = "Vice Admiral"
+        NameQuestBoss = "MarineQuest2"
+        LevelQuestBoss = 2
+        CFrameQuestBoss = CFrame.new(-5035.42285, 28.6520386, 4324.50293, -0.0611100644, -8.08395768e-08, 0.998130739, -1.57416586e-08, 1, 8.00271849e-08, -0.998130739, -1.08217701e-08, -0.0611100644)
+        CFrameBoss = CFrame.new(-5078.45898, 99.6520691, 4402.1665, -0.555574954, -9.88630566e-11, 0.831466436, -6.35508286e-08, 1, -4.23449258e-08, -0.831466436, -7.63661632e-08, -0.555574954)
+    elseif _G.SelectBoss == "Warden [Lv. 175] [Boss]" then
+        MsBoss = "Warden [Lv. 175] [Boss]"
+        NameBoss = "Warden"
+        NameQuestBoss = "ImpelQuest"
+        LevelQuestBoss = 1
+        CFrameQuestBoss = CFrame.new(4851.35059, 5.68744135, 743.251282, -0.538484037, -6.68303741e-08, -0.842635691, 1.38001752e-08, 1, -8.81300792e-08, 0.842635691, -5.90851599e-08, -0.538484037)
+        CFrameBoss = CFrame.new(5232.5625, 5.26856995, 747.506897, 0.943829298, -4.5439414e-08, 0.330433697, 3.47818627e-08, 1, 3.81658154e-08, -0.330433697, -2.45289105e-08, 0.943829298)
+    elseif _G.SelectBoss == "Chief Warden [Lv. 200] [Boss]" then
+        MsBoss = "Chief Warden [Lv. 200] [Boss]"
+        NameBoss = "Chief Warden"
+        NameQuestBoss = "ImpelQuest"
+        LevelQuestBoss = 2
+        CFrameQuestBoss = CFrame.new(4851.35059, 5.68744135, 743.251282, -0.538484037, -6.68303741e-08, -0.842635691, 1.38001752e-08, 1, -8.81300792e-08, 0.842635691, -5.90851599e-08, -0.538484037)
+        CFrameBoss = CFrame.new(5232.5625, 5.26856995, 747.506897, 0.943829298, -4.5439414e-08, 0.330433697, 3.47818627e-08, 1, 3.81658154e-08, -0.330433697, -2.45289105e-08, 0.943829298)
+    elseif _G.SelectBoss == "Swan [Lv. 225] [Boss]" then
+        MsBoss = "Swan [Lv. 225] [Boss]"
+        NameBoss = "Swan"
+        NameQuestBoss = "ImpelQuest"
+        LevelQuestBoss = 3
+        CFrameQuestBoss = CFrame.new(4851.35059, 5.68744135, 743.251282, -0.538484037, -6.68303741e-08, -0.842635691, 1.38001752e-08, 1, -8.81300792e-08, 0.842635691, -5.90851599e-08, -0.538484037)
+        CFrameBoss = CFrame.new(5232.5625, 5.26856995, 747.506897, 0.943829298, -4.5439414e-08, 0.330433697, 3.47818627e-08, 1, 3.81658154e-08, -0.330433697, -2.45289105e-08, 0.943829298)
+    elseif _G.SelectBoss == "Magma Admiral [Lv. 350] [Boss]" then
+        MsBoss = "Magma Admiral [Lv. 350] [Boss]"
+        NameBoss = "Magma Admiral"
+        NameQuestBoss = "MagmaQuest"
+        LevelQuestBoss = 3
+        CFrameQuestBoss = CFrame.new(-5317.07666, 12.2721891, 8517.41699, 0.51175487, -2.65508806e-08, -0.859131515, -3.91131572e-08, 1, -5.42026761e-08, 0.859131515, 6.13418294e-08, 0.51175487)
+        CFrameBoss = CFrame.new(-5530.12646, 22.8769703, 8859.91309, 0.857838571, 2.23414389e-08, 0.513919294, 1.53689133e-08, 1, -6.91265853e-08, -0.513919294, 6.71978384e-08, 0.857838571)
+    elseif _G.SelectBoss == "Fishman Lord [Lv. 425] [Boss]" then
+        MsBoss = "Fishman Lord [Lv. 425] [Boss]"
+        NameBoss = "Fishman Lord"
+        NameQuestBoss = "FishmanQuest"
+        LevelQuestBoss = 3
+        CFrameQuestBoss = CFrame.new(61123.0859, 18.5066795, 1570.18018, 0.927145958, 1.0624845e-07, 0.374700129, -6.98219367e-08, 1, -1.10790765e-07, -0.374700129, 7.65569368e-08, 0.927145958)
+        CFrameBoss = CFrame.new(61351.7773, 31.0306778, 1113.31409, 0.999974668, 0, -0.00714713801, 0, 1.00000012, 0, 0.00714714266, 0, 0.999974549)
+    elseif _G.SelectBoss == "Wysper [Lv. 500] [Boss]" then
+        MsBoss = "Wysper [Lv. 500] [Boss]"
+        NameBoss = "Wysper"
+        NameQuestBoss = "SkyExp1Quest"
+        LevelQuestBoss = 3
+        CFrameQuestBoss = CFrame.new(-7862.94629, 5545.52832, -379.833954, 0.462944925, 1.45838088e-08, -0.886386991, 1.0534996e-08, 1, 2.19553424e-08, 0.886386991, -1.95022007e-08, 0.462944925)
+        CFrameBoss = CFrame.new(-7925.48389, 5550.76074, -636.178345, 0.716468513, -1.22915289e-09, 0.697619379, 3.37381434e-09, 1, -1.70304748e-09, -0.697619379, 3.57381835e-09, 0.716468513)
+    elseif _G.SelectBoss == "Thunder God [Lv. 575] [Boss]" then
+        MsBoss = "Thunder God [Lv. 575] [Boss]"
+        NameBoss = "Thunder God"
+        NameQuestBoss = "SkyExp2Quest"
+        LevelQuestBoss = 3
+        CFrameQuestBoss = CFrame.new(-7902.78613, 5635.99902, -1411.98706, -0.0361216255, -1.16895912e-07, 0.999347389, 1.44533963e-09, 1, 1.17024491e-07, -0.999347389, 5.6715117e-09, -0.0361216255)
+        CFrameBoss = CFrame.new(-7917.53613, 5616.61377, -2277.78564, 0.965189934, 4.80563429e-08, -0.261550069, -6.73089886e-08, 1, -6.46515304e-08, 0.261550069, 8.00056768e-08, 0.965189934)
+    elseif _G.SelectBoss == "Cyborg [Lv. 675] [Boss]" then
+        MsBoss = "Cyborg [Lv. 675] [Boss]"
+        NameBoss = "Cyborg"
+        NameQuestBoss = "FountainQuest"
+        LevelQuestBoss = 3
+        CFrameQuestBoss = CFrame.new(5253.54834, 38.5361786, 4050.45166, -0.0112687312, -9.93677887e-08, -0.999936521, 2.55291371e-10, 1, -9.93769547e-08, 0.999936521, -1.37512213e-09, -0.0112687312)
+        CFrameBoss = CFrame.new(6041.82813, 52.7112198, 3907.45142, -0.563162148, 1.73805248e-09, -0.826346457, -5.94632716e-08, 1, 4.26280238e-08, 0.826346457, 7.31437524e-08, -0.563162148)
+    -- New World
+    elseif _G.SelectBoss == "Diamond [Lv. 750] [Boss]" then
+        MsBoss = "Diamond [Lv. 750] [Boss]"
+        NameBoss = "Diamond"
+        NameQuestBoss = "Area1Quest"
+        LevelQuestBoss = 3
+        CFrameQuestBoss = CFrame.new(-424.080078, 73.0055847, 1836.91589, 0.253544956, -1.42165932e-08, 0.967323601, -6.00147771e-08, 1, 3.04272909e-08, -0.967323601, -6.5768397e-08, 0.253544956)
+        CFrameBoss = CFrame.new(-1736.26587, 198.627731, -236.412857, -0.997808516, 0, -0.0661673471, 0, 1, 0, 0.0661673471, 0, -0.997808516)
+    elseif _G.SelectBoss == "Jeremy [Lv. 850] [Boss]" then
+        MsBoss = "Jeremy [Lv. 850] [Boss]"
+        NameBoss = "Jeremy"
+        NameQuestBoss = "Area2Quest"
+        LevelQuestBoss = 3
+        CFrameQuestBoss = CFrame.new(632.698608, 73.1055908, 918.666321, -0.0319722369, 8.96074881e-10, -0.999488771, 1.36326533e-10, 1, 8.92172336e-10, 0.999488771, -1.07732087e-10, -0.0319722369)
+        CFrameBoss = CFrame.new(2203.76953, 448.966034, 752.731079, -0.0217453763, 0, -0.999763548, 0, 1, 0, 0.999763548, 0, -0.0217453763)
+    elseif _G.SelectBoss == "Fajita [Lv. 925] [Boss]" then
+        MsBoss = "Fajita [Lv. 925] [Boss]"
+        NameBoss = "Fajita"
+        NameQuestBoss = "MarineQuest3"
+        LevelQuestBoss = 3
+        CFrameQuestBoss = CFrame.new(-2442.65015, 73.0511475, -3219.11523, -0.873540044, 4.2329841e-08, -0.486752301, 5.64383384e-08, 1, -1.43220786e-08, 0.486752301, -3.99823996e-08, -0.873540044)
+        CFrameBoss = CFrame.new(-2297.40332, 115.449463, -3946.53833, 0.961227536, -1.46645796e-09, -0.275756449, -2.3212845e-09, 1, -1.34094433e-08, 0.275756449, 1.35296352e-08, 0.961227536)
+    elseif _G.SelectBoss == "Don Swan [Lv. 1000] [Boss]" then
+        MsBoss = "Don Swan [Lv. 1000] [Boss]"
+        NameBoss = "Don Swan"
+        CFrameBoss = CFrame.new(2288.802, 15.1870775, 863.034607, 0.99974072, -8.41247214e-08, -0.0227668174, 8.4774733e-08, 1, 2.75850098e-08, 0.0227668174, -2.95079072e-08, 0.99974072)
+    elseif _G.SelectBoss == "Smoke Admiral [Lv. 1150] [Boss]" then
+        MsBoss = "Smoke Admiral [Lv. 1150] [Boss]"
+        NameBoss = "Smoke Admiral"
+        NameQuestBoss = "IceSideQuest"
+        LevelQuestBoss = 3
+        CFrameQuestBoss = CFrame.new(-6059.96191, 15.9868021, -4904.7373, -0.444992423, -3.0874483e-09, 0.895534337, -3.64098796e-08, 1, -1.4644522e-08, -0.895534337, -3.91229982e-08, -0.444992423)
+        CFrameBoss = CFrame.new(-5115.72754, 23.7664986, -5338.2207, 0.251453817, 1.48345061e-08, -0.967869282, 4.02796978e-08, 1, 2.57916977e-08, 0.967869282, -4.54708946e-08, 0.251453817)
+    elseif _G.SelectBoss == "Cursed Captain [Lv. 1325] [Raid Boss]" then
+        MsBoss = "Cursed Captain [Lv. 1325] [Raid Boss]"
+        NameBoss = "Cursed Captain"
+        CFrameBoss = CFrame.new(916.928589, 181.092773, 33422, -0.999505103, 9.26310495e-09, 0.0314563364, 8.42916226e-09, 1, -2.6643713e-08, -0.0314563364, -2.63653774e-08, -0.999505103)
+    elseif _G.SelectBoss == "Darkbeard [Lv. 1000] [Raid Boss]" then
+        MsBoss = "Darkbeard [Lv. 1000] [Raid Boss]"
+        NameBoss = "Darkbeard"
+        CFrameBoss = CFrame.new(3876.00366, 24.6882591, -3820.21777, -0.976951957, 4.97356325e-08, 0.213458836, 4.57335361e-08, 1, -2.36868622e-08, -0.213458836, -1.33787044e-08, -0.976951957)
+    elseif _G.SelectBoss == "Order [Lv. 1250] [Raid Boss]" then
+        MsBoss = "Order [Lv. 1250] [Raid Boss]"
+        NameBoss = "Order"
+        CFrameBoss = CFrame.new(-6221.15039, 16.2351036, -5045.23584, -0.380726993, 7.41463495e-08, 0.924687505, 5.85604774e-08, 1, -5.60738549e-08, -0.924687505, 3.28013137e-08, -0.380726993)
+    elseif _G.SelectBoss == "Awakened Ice Admiral [Lv. 1400] [Boss]" then
+        MsBoss = "Awakened Ice Admiral [Lv. 1400] [Boss]"
+        NameBoss = "Awakened Ice Admiral"
+        NameQuestBoss = "FrostQuest"
+        LevelQuestBoss = 3
+        CFrameQuestBoss = CFrame.new(5669.33203, 28.2118053, -6481.55908, 0.921275556, -1.25320829e-08, 0.388910472, 4.72230788e-08, 1, -7.96414241e-08, -0.388910472, 9.17372489e-08, 0.921275556)
+        CFrameBoss = CFrame.new(6407.33936, 340.223785, -6892.521, 0.49051559, -5.25310213e-08, -0.871432424, -2.76146022e-08, 1, -7.58250565e-08, 0.871432424, 6.12576301e-08, 0.49051559)
+    elseif _G.SelectBoss == "Tide Keeper [Lv. 1475] [Boss]" then
+        MsBoss = "Tide Keeper [Lv. 1475] [Boss]"
+         NameBoss = "Tide Keeper"
+        NameQuestBoss = "ForgottenQuest"             
+        LevelQuestBoss = 3
+        CFrameQuestBoss = CFrame.new(-3053.89648, 236.881363, -10148.2324, -0.985987961, -3.58504737e-09, 0.16681771, -3.07832915e-09, 1, 3.29612559e-09, -0.16681771, 2.73641976e-09, -0.985987961)
+        CFrameBoss = CFrame.new(-3570.18652, 123.328949, -11555.9072, 0.465199202, -1.3857326e-08, 0.885206044, 4.0332897e-09, 1, 1.35347511e-08, -0.885206044, -2.72606271e-09, 0.465199202)
+    -- Thire World
+    elseif _G.SelectBoss == "Stone [Lv. 1550] [Boss]" then
+        MsBoss = "Stone [Lv. 1550] [Boss]"
+        NameBoss = "Stone"
+        NameQuestBoss = "PiratePortQuest"             
+        LevelQuestBoss = 3
+        CFrameQuestBoss = CFrame.new(-290, 44, 5577)
+        CFrameBoss = CFrame.new(-1085, 40, 6779)
+    elseif _G.SelectBoss == "Island Empress [Lv. 1675] [Boss]" then
+        MsBoss = "Island Empress [Lv. 1675] [Boss]"
+         NameBoss = "Island Empress"
+        NameQuestBoss = "AmazonQuest2"             
+        LevelQuestBoss = 3
+        CFrameQuestBoss = CFrame.new(5443, 602, 752)
+        CFrameBoss = CFrame.new(5659, 602, 244)
+    elseif _G.SelectBoss == "Kilo Admiral [Lv. 1750] [Boss]" then
+        MsBoss = "Kilo Admiral [Lv. 1750] [Boss]"
+        NameBoss = "Kilo Admiral"
+        NameQuestBoss = "MarineTreeIsland"             
+        LevelQuestBoss = 3
+        CFrameQuestBoss = CFrame.new(2178, 29, -6737)
+        CFrameBoss =CFrame.new(2846, 433, -7100)
+    elseif _G.SelectBoss == "Captain Elephant [Lv. 1875] [Boss]" then
+        MsBoss = "Captain Elephant [Lv. 1875] [Boss]"
+        NameBoss = "Captain Elephant"
+        NameQuestBoss = "DeepForestIsland"             
+        LevelQuestBoss = 3
+        CFrameQuestBoss = CFrame.new(-13232, 333, -7631)
+        CFrameBoss = CFrame.new(-13221, 325, -8405)
+    elseif _G.SelectBoss == "Beautiful Pirate [Lv. 1950] [Boss]" then
+        MsBoss = "Beautiful Pirate [Lv. 1950] [Boss]"
+        NameBoss = "Beautiful Pirate"
+        NameQuestBoss = "DeepForestIsland2"             
+        LevelQuestBoss = 3
+        CFrameQuestBoss = CFrame.new(-12686, 391, -9902)
+        CFrameBoss = CFrame.new(5182, 23, -20)
+    elseif SelectBoss == "Cake Queen [Lv. 2175] [Boss]" then
+        MsBoss = "Cake Queen [Lv. 2175] [Boss]"
+        NameQuestBoss = "IceCreamIslandQuest"             
+        LevelQuestBoss = 3
+        CFrameQuestBoss = CFrame.new(-716, 382, -11010)
+        CFrameBoss = CFrame.new(-821, 66, -10965)
+    elseif _G.SelectBoss == "rip_indra True Form [Lv. 5000] [Raid Boss]" then
+        MsBoss = "rip_indra True Form [Lv. 5000] [Raid Boss]"
+        NameBoss = "rip_indra True Form"
+        CFrameBoss = CFrame.new(-5359, 424, -2735)
+    elseif _G.SelectBoss == "Longma [Lv. 2000] [Boss]" then
+        MsBoss = "Longma [Lv. 2000] [Boss]"
+        NameBoss = "Longma"
+        CFrameBoss = CFrame.new(-10248.3936, 353.79129, -9306.34473)
+    elseif _G.SelectBoss == "Soul Reaper [Lv. 2100] [Raid Boss]" then
+        MsBoss = "Soul Reaper [Lv. 2100] [Raid Boss]"
+        NameBoss = "Soul Reaper"
+        CFrameBoss = CFrame.new(-9515.62109, 315.925537, 6691.12012)
+    end
+end
 	
 function CheckLevel()
     local Lv = game:GetService("Players").LocalPlayer.Data.Level.Value
@@ -881,224 +1097,7 @@ function CheckLevel()
 	end
 end
 
-function CheckQuestBoss()
-    -- Old World
-    if _G.Setting_table.SelectBoss == "Saber Expert [Lv. 200] [Boss]" then
-        MsBoss = "Saber Expert [Lv. 200] [Boss]"
-        NameBoss = "Saber Expert"
-        CFrameBoss = CFrame.new(-1458.89502, 29.8870335, -50.633564, 0.858821094, 1.13848939e-08, 0.512275636, -4.85649254e-09, 1, -1.40823326e-08, -0.512275636, 9.6063415e-09, 0.858821094)
-    elseif _G.Setting_table.SelectBoss == "The Saw [Lv. 100] [Boss]" then
-        MsBoss = "The Saw [Lv. 100] [Boss]"
-        NameBoss = "The Saw"
-        CFrameBoss = CFrame.new(-683.519897, 13.8534927, 1610.87854, -0.290192783, 6.88365773e-08, 0.956968188, 6.98413629e-08, 1, -5.07531119e-08, -0.956968188, 5.21077759e-08, -0.290192783)
-    elseif _G.Setting_table.SelectBoss == "Greybeard [Lv. 750] [Raid Boss]" then
-        MsBoss = "Greybeard [Lv. 750] [Raid Boss]"
-        NameBoss = "Greybeard"
-        CFrameBoss = CFrame.new(-4955.72949, 80.8163834, 4305.82666, -0.433646321, -1.03394289e-08, 0.901083171, -3.0443168e-08, 1, -3.17633075e-09, -0.901083171, -2.88092288e-08, -0.433646321)
-    elseif _G.Setting_table.SelectBoss == "The Gorilla King [Lv. 25] [Boss]" then
-        MsBoss = "The Gorilla King [Lv. 25] [Boss]"
-        NameBoss = "The Gorilla King"
-        NameQuestBoss = "JungleQuest"
-        LevelQuestBoss = 3
-        CFrameQuestBoss = CFrame.new(-1604.12012, 36.8521118, 154.23732, 0.0648873374, -4.70858913e-06, -0.997892559, 1.41431883e-07, 1, -4.70933674e-06, 0.997892559, 1.64442184e-07, 0.0648873374)
-        CFrameBoss = CFrame.new(-1223.52808, 6.27936459, -502.292664, 0.310949147, -5.66602516e-08, 0.950426519, -3.37275488e-08, 1, 7.06501808e-08, -0.950426519, -5.40241736e-08, 0.310949147)
-    elseif _G.Setting_table.SelectBoss == "Bobby [Lv. 55] [Boss]" then
-        MsBoss = "Bobby [Lv. 55] [Boss]"
-        NameBoss = "Bobby"
-        NameQuestBoss = "BuggyQuest1"
-        LevelQuestBoss = 3
-        CFrameQuestBoss = CFrame.new(-1139.59717, 4.75205183, 3825.16211, -0.959730506, -7.5857054e-09, 0.280922383, -4.06310328e-08, 1, -1.11807175e-07, -0.280922383, -1.18718916e-07, -0.959730506)
-        CFrameBoss = CFrame.new(-1147.65173, 32.5966301, 4156.02588, 0.956680477, -1.77109952e-10, -0.29113996, 5.16530874e-10, 1, 1.08897802e-09, 0.29113996, -1.19218679e-09, 0.956680477)
-    elseif _G.Setting_table.SelectBoss == "Yeti [Lv. 110] [Boss]" then
-        MsBoss = "Yeti [Lv. 110] [Boss]"
-        NameBoss = "Yeti"
-        NameQuestBoss = "SnowQuest"
-        LevelQuestBoss = 3
-        CFrameQuestBoss = CFrame.new(1384.90247, 87.3078308, -1296.6825, 0.280209213, 2.72035177e-08, -0.959938943, -6.75690828e-08, 1, 8.6151708e-09, 0.959938943, 6.24481444e-08, 0.280209213)
-        CFrameBoss = CFrame.new(1221.7356, 138.046906, -1488.84082, 0.349343032, -9.49245944e-08, 0.936994851, 6.29478194e-08, 1, 7.7838429e-08, -0.936994851, 3.17894653e-08, 0.349343032)
-    elseif _G.Setting_table.SelectBoss == "Mob Leader [Lv. 120] [Boss]" then
-        MsBoss = "Mob Leader [Lv. 120] [Boss]"
-        NameBoss = "Mob Leader"
-        CFrameBoss = CFrame.new(-2848.59399, 7.4272871, 5342.44043, -0.928248107, -8.7248246e-08, 0.371961564, -7.61816636e-08, 1, 4.44474857e-08, -0.371961564, 1.29216433e-08, -0.92824)
-    elseif _G.Setting_table.SelectBoss == "Vice Admiral [Lv. 130] [Boss]" then
-        MsBoss = "Vice Admiral [Lv. 130] [Boss]"
-        NameBoss = "Vice Admiral"
-        NameQuestBoss = "MarineQuest2"
-        LevelQuestBoss = 2
-        CFrameQuestBoss = CFrame.new(-5035.42285, 28.6520386, 4324.50293, -0.0611100644, -8.08395768e-08, 0.998130739, -1.57416586e-08, 1, 8.00271849e-08, -0.998130739, -1.08217701e-08, -0.0611100644)
-        CFrameBoss = CFrame.new(-5078.45898, 99.6520691, 4402.1665, -0.555574954, -9.88630566e-11, 0.831466436, -6.35508286e-08, 1, -4.23449258e-08, -0.831466436, -7.63661632e-08, -0.555574954)
-    elseif _G.Setting_table.SelectBoss == "Warden [Lv. 175] [Boss]" then
-        MsBoss = "Warden [Lv. 175] [Boss]"
-        NameBoss = "Warden"
-        NameQuestBoss = "ImpelQuest"
-        LevelQuestBoss = 1
-        CFrameQuestBoss = CFrame.new(4851.35059, 5.68744135, 743.251282, -0.538484037, -6.68303741e-08, -0.842635691, 1.38001752e-08, 1, -8.81300792e-08, 0.842635691, -5.90851599e-08, -0.538484037)
-        CFrameBoss = CFrame.new(5232.5625, 5.26856995, 747.506897, 0.943829298, -4.5439414e-08, 0.330433697, 3.47818627e-08, 1, 3.81658154e-08, -0.330433697, -2.45289105e-08, 0.943829298)
-    elseif _G.Setting_table.SelectBoss == "Chief Warden [Lv. 200] [Boss]" then
-        MsBoss = "Chief Warden [Lv. 200] [Boss]"
-        NameBoss = "Chief Warden"
-        NameQuestBoss = "ImpelQuest"
-        LevelQuestBoss = 2
-        CFrameQuestBoss = CFrame.new(4851.35059, 5.68744135, 743.251282, -0.538484037, -6.68303741e-08, -0.842635691, 1.38001752e-08, 1, -8.81300792e-08, 0.842635691, -5.90851599e-08, -0.538484037)
-        CFrameBoss = CFrame.new(5232.5625, 5.26856995, 747.506897, 0.943829298, -4.5439414e-08, 0.330433697, 3.47818627e-08, 1, 3.81658154e-08, -0.330433697, -2.45289105e-08, 0.943829298)
-    elseif _G.Setting_table.SelectBoss == "Swan [Lv. 225] [Boss]" then
-        MsBoss = "Swan [Lv. 225] [Boss]"
-        NameBoss = "Swan"
-        NameQuestBoss = "ImpelQuest"
-        LevelQuestBoss = 3
-        CFrameQuestBoss = CFrame.new(4851.35059, 5.68744135, 743.251282, -0.538484037, -6.68303741e-08, -0.842635691, 1.38001752e-08, 1, -8.81300792e-08, 0.842635691, -5.90851599e-08, -0.538484037)
-        CFrameBoss = CFrame.new(5232.5625, 5.26856995, 747.506897, 0.943829298, -4.5439414e-08, 0.330433697, 3.47818627e-08, 1, 3.81658154e-08, -0.330433697, -2.45289105e-08, 0.943829298)
-    elseif _G.Setting_table.SelectBoss == "Magma Admiral [Lv. 350] [Boss]" then
-        MsBoss = "Magma Admiral [Lv. 350] [Boss]"
-        NameBoss = "Magma Admiral"
-        NameQuestBoss = "MagmaQuest"
-        LevelQuestBoss = 3
-        CFrameQuestBoss = CFrame.new(-5317.07666, 12.2721891, 8517.41699, 0.51175487, -2.65508806e-08, -0.859131515, -3.91131572e-08, 1, -5.42026761e-08, 0.859131515, 6.13418294e-08, 0.51175487)
-        CFrameBoss = CFrame.new(-5530.12646, 22.8769703, 8859.91309, 0.857838571, 2.23414389e-08, 0.513919294, 1.53689133e-08, 1, -6.91265853e-08, -0.513919294, 6.71978384e-08, 0.857838571)
-    elseif _G.Setting_table.SelectBoss == "Fishman Lord [Lv. 425] [Boss]" then
-        MsBoss = "Fishman Lord [Lv. 425] [Boss]"
-        NameBoss = "Fishman Lord"
-        NameQuestBoss = "FishmanQuest"
-        LevelQuestBoss = 3
-        CFrameQuestBoss = CFrame.new(61123.0859, 18.5066795, 1570.18018, 0.927145958, 1.0624845e-07, 0.374700129, -6.98219367e-08, 1, -1.10790765e-07, -0.374700129, 7.65569368e-08, 0.927145958)
-        CFrameBoss = CFrame.new(61351.7773, 31.0306778, 1113.31409, 0.999974668, 0, -0.00714713801, 0, 1.00000012, 0, 0.00714714266, 0, 0.999974549)
-    elseif _G.Setting_table.SelectBoss == "Wysper [Lv. 500] [Boss]" then
-        MsBoss = "Wysper [Lv. 500] [Boss]"
-        NameBoss = "Wysper"
-        NameQuestBoss = "SkyExp1Quest"
-        LevelQuestBoss = 3
-        CFrameQuestBoss = CFrame.new(-7862.94629, 5545.52832, -379.833954, 0.462944925, 1.45838088e-08, -0.886386991, 1.0534996e-08, 1, 2.19553424e-08, 0.886386991, -1.95022007e-08, 0.462944925)
-        CFrameBoss = CFrame.new(-7925.48389, 5550.76074, -636.178345, 0.716468513, -1.22915289e-09, 0.697619379, 3.37381434e-09, 1, -1.70304748e-09, -0.697619379, 3.57381835e-09, 0.716468513)
-    elseif _G.Setting_table.SelectBoss == "Thunder God [Lv. 575] [Boss]" then
-        MsBoss = "Thunder God [Lv. 575] [Boss]"
-        NameBoss = "Thunder God"
-        NameQuestBoss = "SkyExp2Quest"
-        LevelQuestBoss = 3
-        CFrameQuestBoss = CFrame.new(-7902.78613, 5635.99902, -1411.98706, -0.0361216255, -1.16895912e-07, 0.999347389, 1.44533963e-09, 1, 1.17024491e-07, -0.999347389, 5.6715117e-09, -0.0361216255)
-        CFrameBoss = CFrame.new(-7917.53613, 5616.61377, -2277.78564, 0.965189934, 4.80563429e-08, -0.261550069, -6.73089886e-08, 1, -6.46515304e-08, 0.261550069, 8.00056768e-08, 0.965189934)
-    elseif _G.Setting_table.SelectBoss == "Cyborg [Lv. 675] [Boss]" then
-        MsBoss = "Cyborg [Lv. 675] [Boss]"
-        NameBoss = "Cyborg"
-        NameQuestBoss = "FountainQuest"
-        LevelQuestBoss = 3
-        CFrameQuestBoss = CFrame.new(5253.54834, 38.5361786, 4050.45166, -0.0112687312, -9.93677887e-08, -0.999936521, 2.55291371e-10, 1, -9.93769547e-08, 0.999936521, -1.37512213e-09, -0.0112687312)
-        CFrameBoss = CFrame.new(6041.82813, 52.7112198, 3907.45142, -0.563162148, 1.73805248e-09, -0.826346457, -5.94632716e-08, 1, 4.26280238e-08, 0.826346457, 7.31437524e-08, -0.563162148)
-    -- New World
-    elseif _G.Setting_table.SelectBoss == "Diamond [Lv. 750] [Boss]" then
-        MsBoss = "Diamond [Lv. 750] [Boss]"
-        NameBoss = "Diamond"
-        NameQuestBoss = "Area1Quest"
-        LevelQuestBoss = 3
-        CFrameQuestBoss = CFrame.new(-424.080078, 73.0055847, 1836.91589, 0.253544956, -1.42165932e-08, 0.967323601, -6.00147771e-08, 1, 3.04272909e-08, -0.967323601, -6.5768397e-08, 0.253544956)
-        CFrameBoss = CFrame.new(-1736.26587, 198.627731, -236.412857, -0.997808516, 0, -0.0661673471, 0, 1, 0, 0.0661673471, 0, -0.997808516)
-    elseif _G.Setting_table.SelectBoss == "Jeremy [Lv. 850] [Boss]" then
-        MsBoss = "Jeremy [Lv. 850] [Boss]"
-        NameBoss = "Jeremy"
-        NameQuestBoss = "Area2Quest"
-        LevelQuestBoss = 3
-        CFrameQuestBoss = CFrame.new(632.698608, 73.1055908, 918.666321, -0.0319722369, 8.96074881e-10, -0.999488771, 1.36326533e-10, 1, 8.92172336e-10, 0.999488771, -1.07732087e-10, -0.0319722369)
-        CFrameBoss = CFrame.new(2203.76953, 448.966034, 752.731079, -0.0217453763, 0, -0.999763548, 0, 1, 0, 0.999763548, 0, -0.0217453763)
-    elseif _G.Setting_table.SelectBoss == "Fajita [Lv. 925] [Boss]" then
-        MsBoss = "Fajita [Lv. 925] [Boss]"
-        NameBoss = "Fajita"
-        NameQuestBoss = "MarineQuest3"
-        LevelQuestBoss = 3
-        CFrameQuestBoss = CFrame.new(-2442.65015, 73.0511475, -3219.11523, -0.873540044, 4.2329841e-08, -0.486752301, 5.64383384e-08, 1, -1.43220786e-08, 0.486752301, -3.99823996e-08, -0.873540044)
-        CFrameBoss = CFrame.new(-2297.40332, 115.449463, -3946.53833, 0.961227536, -1.46645796e-09, -0.275756449, -2.3212845e-09, 1, -1.34094433e-08, 0.275756449, 1.35296352e-08, 0.961227536)
-    elseif _G.Setting_table.SelectBoss == "Don Swan [Lv. 1000] [Boss]" then
-        MsBoss = "Don Swan [Lv. 1000] [Boss]"
-        NameBoss = "Don Swan"
-        CFrameBoss = CFrame.new(2288.802, 15.1870775, 863.034607, 0.99974072, -8.41247214e-08, -0.0227668174, 8.4774733e-08, 1, 2.75850098e-08, 0.0227668174, -2.95079072e-08, 0.99974072)
-    elseif _G.Setting_table.SelectBoss == "Smoke Admiral [Lv. 1150] [Boss]" then
-        MsBoss = "Smoke Admiral [Lv. 1150] [Boss]"
-        NameBoss = "Smoke Admiral"
-        NameQuestBoss = "IceSideQuest"
-        LevelQuestBoss = 3
-        CFrameQuestBoss = CFrame.new(-6059.96191, 15.9868021, -4904.7373, -0.444992423, -3.0874483e-09, 0.895534337, -3.64098796e-08, 1, -1.4644522e-08, -0.895534337, -3.91229982e-08, -0.444992423)
-        CFrameBoss = CFrame.new(-5115.72754, 23.7664986, -5338.2207, 0.251453817, 1.48345061e-08, -0.967869282, 4.02796978e-08, 1, 2.57916977e-08, 0.967869282, -4.54708946e-08, 0.251453817)
-    elseif _G.Setting_table.SelectBoss == "Cursed Captain [Lv. 1325] [Raid Boss]" then
-        MsBoss = "Cursed Captain [Lv. 1325] [Raid Boss]"
-        NameBoss = "Cursed Captain"
-        CFrameBoss = CFrame.new(916.928589, 181.092773, 33422, -0.999505103, 9.26310495e-09, 0.0314563364, 8.42916226e-09, 1, -2.6643713e-08, -0.0314563364, -2.63653774e-08, -0.999505103)
-    elseif _G.Setting_table.SelectBoss == "Darkbeard [Lv. 1000] [Raid Boss]" then
-        MsBoss = "Darkbeard [Lv. 1000] [Raid Boss]"
-        NameBoss = "Darkbeard"
-        CFrameBoss = CFrame.new(3876.00366, 24.6882591, -3820.21777, -0.976951957, 4.97356325e-08, 0.213458836, 4.57335361e-08, 1, -2.36868622e-08, -0.213458836, -1.33787044e-08, -0.976951957)
-    elseif _G.Setting_table.SelectBoss == "Order [Lv. 1250] [Raid Boss]" then
-        MsBoss = "Order [Lv. 1250] [Raid Boss]"
-        NameBoss = "Order"
-        CFrameBoss = CFrame.new(-6221.15039, 16.2351036, -5045.23584, -0.380726993, 7.41463495e-08, 0.924687505, 5.85604774e-08, 1, -5.60738549e-08, -0.924687505, 3.28013137e-08, -0.380726993)
-    elseif _G.Setting_table.SelectBoss == "Awakened Ice Admiral [Lv. 1400] [Boss]" then
-        MsBoss = "Awakened Ice Admiral [Lv. 1400] [Boss]"
-        NameBoss = "Awakened Ice Admiral"
-        NameQuestBoss = "FrostQuest"
-        LevelQuestBoss = 3
-        CFrameQuestBoss = CFrame.new(5669.33203, 28.2118053, -6481.55908, 0.921275556, -1.25320829e-08, 0.388910472, 4.72230788e-08, 1, -7.96414241e-08, -0.388910472, 9.17372489e-08, 0.921275556)
-        CFrameBoss = CFrame.new(6407.33936, 340.223785, -6892.521, 0.49051559, -5.25310213e-08, -0.871432424, -2.76146022e-08, 1, -7.58250565e-08, 0.871432424, 6.12576301e-08, 0.49051559)
-    elseif _G.Setting_table.SelectBoss == "Tide Keeper [Lv. 1475] [Boss]" then
-        MsBoss = "Tide Keeper [Lv. 1475] [Boss]"
-         NameBoss = "Tide Keeper"
-        NameQuestBoss = "ForgottenQuest"             
-        LevelQuestBoss = 3
-        CFrameQuestBoss = CFrame.new(-3053.89648, 236.881363, -10148.2324, -0.985987961, -3.58504737e-09, 0.16681771, -3.07832915e-09, 1, 3.29612559e-09, -0.16681771, 2.73641976e-09, -0.985987961)
-        CFrameBoss = CFrame.new(-3570.18652, 123.328949, -11555.9072, 0.465199202, -1.3857326e-08, 0.885206044, 4.0332897e-09, 1, 1.35347511e-08, -0.885206044, -2.72606271e-09, 0.465199202)
-    -- Thire World
-    elseif _G.Setting_table.SelectBoss == "Stone [Lv. 1550] [Boss]" then
-        MsBoss = "Stone [Lv. 1550] [Boss]"
-        NameBoss = "Stone"
-        NameQuestBoss = "PiratePortQuest"             
-        LevelQuestBoss = 3
-        CFrameQuestBoss = CFrame.new(-290, 44, 5577)
-        CFrameBoss = CFrame.new(-1085, 40, 6779)
-    elseif _G.Setting_table.SelectBoss == "Island Empress [Lv. 1675] [Boss]" then
-        MsBoss = "Island Empress [Lv. 1675] [Boss]"
-         NameBoss = "Island Empress"
-        NameQuestBoss = "AmazonQuest2"             
-        LevelQuestBoss = 3
-        CFrameQuestBoss = CFrame.new(5443, 602, 752)
-        CFrameBoss = CFrame.new(5659, 602, 244)
-    elseif _G.Setting_table.SelectBoss == "Kilo Admiral [Lv. 1750] [Boss]" then
-        MsBoss = "Kilo Admiral [Lv. 1750] [Boss]"
-        NameBoss = "Kilo Admiral"
-        NameQuestBoss = "MarineTreeIsland"             
-        LevelQuestBoss = 3
-        CFrameQuestBoss = CFrame.new(2178, 29, -6737)
-        CFrameBoss =CFrame.new(2846, 433, -7100)
-    elseif _G.Setting_table.SelectBoss == "Captain Elephant [Lv. 1875] [Boss]" then
-        MsBoss = "Captain Elephant [Lv. 1875] [Boss]"
-        NameBoss = "Captain Elephant"
-        NameQuestBoss = "DeepForestIsland"             
-        LevelQuestBoss = 3
-        CFrameQuestBoss = CFrame.new(-13232, 333, -7631)
-        CFrameBoss = CFrame.new(-13221, 325, -8405)
-    elseif _G.Setting_table.SelectBoss == "Beautiful Pirate [Lv. 1950] [Boss]" then
-        MsBoss = "Beautiful Pirate [Lv. 1950] [Boss]"
-        NameBoss = "Beautiful Pirate"
-        NameQuestBoss = "DeepForestIsland2"             
-        LevelQuestBoss = 3
-        CFrameQuestBoss = CFrame.new(-12686, 391, -9902)
-        CFrameBoss = CFrame.new(5182, 23, -20)
-    elseif _G.Setting_table.SelectBoss == "rip_indra True Form [Lv. 5000] [Raid Boss]" then
-        MsBoss = "rip_indra True Form [Lv. 5000] [Raid Boss]"
-        NameBoss = "rip_indra True Form"
-        CFrameBoss = CFrame.new(-5359, 424, -2735)
-    elseif _G.Setting_table.SelectBoss == "Longma [Lv. 2000] [Boss]" then
-        MsBoss = "Longma [Lv. 2000] [Boss]"
-        NameBoss = "Longma"
-        CFrameBoss = CFrame.new(-10248.3936, 353.79129, -9306.34473)
-    elseif _G.Setting_table.SelectBoss == "Soul Reaper [Lv. 2100] [Raid Boss]" then
-        MsBoss = "Soul Reaper [Lv. 2100] [Raid Boss]"
-        NameBoss = "Soul Reaper"
-        CFrameBoss = CFrame.new(-9515.62109, 315.925537, 6691.12012)
-    elseif _G.Setting_table.SelectBoss == "Cake Queen [Lv. 2175] [Boss]" then
-        MsBoss = "Cake Queen [Lv. 2175] [Boss]"
-        NameBoss = "Cake Queen"
-        NameQuestBoss = "IceCreamIslandQuest"             
-        LevelQuestBoss = 3
-        CFrameQuestBoss = CFrame.new(-821.267456, 65.9448776, -10964.3994, 0.814093888, -3.67296735e-08, -0.58073324, 3.30765637e-08, 1, -1.6879099e-08, 0.58073324, -5.46748513e-09, 0.814093888)
-        CFrameBoss = CFrame.new(-715.467102, 381.69104, -11019.8896, 0.955998719, -1.07319993e-08, -0.293370903, 5.00311881e-09, 1, -2.02781667e-08, 0.293370903, 1.7918131e-08, 0.955998719)
-    end
-end
+
 
 function TP2(P1)
 	Distance = (P1.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
@@ -1713,6 +1712,7 @@ spawn(function()
             for i,v in pairs(game:GetService("Workspace"):GetChildren()) do
                 if v:IsA ("Tool") then
                     game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = v.Handle.CFrame
+                    wait(1)
                 end
             end
         end
@@ -1733,11 +1733,12 @@ local AutoStats = serv:Channel("AutoStats")
 local MeleeP = serv:Channel("Melee")
 local SwordP = serv:Channel("Sword")
 local FruitP = serv:Channel("Fruit")
+local Accesory = serv:Channel("Accesory")
+local Ability = serv:Channel("Ability")
 local PVP = serv:Channel("PVP")
 local Raid = serv:Channel("Raid")
 local Shop = serv:Channel("Shop")
 local Teleport = serv:Channel("Teleport")
-local Ability = serv:Channel("Ability")
 local Credit = serv:Channel("Credit")
 
 
@@ -1749,7 +1750,7 @@ Main:Toggle("AutoFarm Level",_G.Setting_table.Auto_Farm,function(vu)
     _G.Setting_table.Auto_Farm = vu
     savesetting()
 end)
-Main:Toggle("AutoFarm New World",_G.Setting_table.Auto_New,function(vu)
+Main:Toggle("Auto New World",_G.Setting_table.Auto_New,function(vu)
     _G.Setting_table.Auto_New = vu
 end)
 
@@ -1802,7 +1803,7 @@ spawn(function()
     end
 end)
 
-Main:Toggle("AutoFarm Three World",_G.Setting_table.Auto_Three,function(vu)
+Main:Toggle("Auto Three World",_G.Setting_table.Auto_Three,function(vu)
     _G.Setting_table.Auto_Three = vu
     savesetting()
 end)
@@ -2226,16 +2227,6 @@ function Redeem()
         game:GetService("ReplicatedStorage").Remotes.Redeem:InvokeServer(unpack(args))
         _G.Redeem = true
 end
-Main:Toggle("AutoRedeem Level 400",_G.Setting_table.AutoRedeem,function(vu)
-    _G.Setting_table.AutoRedeem = vu
-    local Lv = game:GetService("Players").LocalPlayer.Data.Level.Value
-    if Lv >= 400 and _G.Redeem == nil then
-        Redeem()
-    end
-end)
-Main:Toggle("AutoCandy Exp x2",_G.Setting_table.AutoCandyExp,function(vu)
-    _G.Setting_table.AutoCandyExp = vu
-end)
 spawn(function()
     pcall(function()
         while wait(3) do
@@ -2278,41 +2269,6 @@ spawn(function()
     end
 end)
 
-local games = game:HttpGet("https://games.roblox.com/v1/games/" .. game.PlaceId .. "/servers/Public") -- send request to API
-local json = game:GetService("HttpService"):JSONDecode(games)
-local maxplayerCount = 4
-
-function PlayerDetect()
-               local Players = game.Players:GetPlayers()
-               if #Players  > maxplayerCount then
-                   _G.Teleport = true
-                   HopLowerServer()
-                   for i = 1,#json.data do
-                       if json.data[i].id ~= game.JobId then
-                           --HopLowerServer()
-                           if json.data[i].maxPlayers ~= json.data[i].playing then
-                               --HopLowerServer()
-                               if json.data[i].playing < 3 or json.data[i].playing < maxplayerCount then
-                               end
-                           end
-                       end
-                   end
-               end
-            end
-
-spawn(function()
-    while wait(2) do
-        if _G.Setting_table.HopLowerServer then
-            game.Players.PlayerAdded:Connect(function()
-                if _G.Teleport == nil then
-                    PlayerDetect()
-                    wait(10)
-                end
-            end)
-        end
-    end
-end)
-
 Main:Label(" ")
 Main:Label("Misc Hop")
 Main:Toggle("AutoHop Buy LegendarySword",_G.Setting_table.HopLegendarySword,function(vu)
@@ -2340,13 +2296,16 @@ end)
  
 Main:Toggle("AutoHop LowerServer",_G.Setting_table.HopLowerServer,function(vu)
     _G.Setting_table.HopLowerServer = vu
-    PlayerDetect()
+    if _G.Hop then
+    else
+        PlayerDetect()
+    end
 end)
 -------------------------------------------------------------- Main
 
 -------------------------------------------------------------- AutoStats
 
-AutoStats:Label("AutoStats")
+AutoStats:Label("MarineFord")
 AutoStats:Toggle("Melee",_G.Setting_table.Melee,function(vu)
     Melee = vu
     _G.Setting_table.Melee = vu
@@ -2382,11 +2341,13 @@ MeleeP:Label("Main")
 MeleeP:Toggle("Auto Superhuman",_G.Setting_table.Superhuman,function(vu)
     _G.Superhuman = vu
     _G.Setting_table.Superhuman = vu
+    _G.Setting_table.EP = vu
     savesetting()
 end)
 MeleeP:Toggle("Auto Electric Claw",_G.Setting_table.Electric_Claw,function(vu)
     _G.Electric_Claw = vu
     _G.Setting_table.Electric_Claw = vu
+    _G.Setting_table.EP = vu
     local args = {
         [1] = "BuyElectro"
     }
@@ -2394,6 +2355,19 @@ MeleeP:Toggle("Auto Electric Claw",_G.Setting_table.Electric_Claw,function(vu)
     savesetting()
 end)
 MeleeP:Toggle("Auto Dragon Talon",_G.Setting_table.Dragon_Talon,function(vu)
+    local args = {
+                        [1] = "BlackbeardReward",
+                        [2] = "DragonClaw",
+                        [3] = "1"
+                    }
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                    local args = {
+                        [1] = "BlackbeardReward",
+                        [2] = "DragonClaw",
+                        [3] = "2"
+                    }
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+                    _G.Setting_table.EP = vu
     _G.Dragon_Talon = vu
     _G.Setting_table.Dragon_Talon = vu
     savesetting()
@@ -2401,6 +2375,7 @@ end)
 MeleeP:Toggle("Auto Death Step",_G.Setting_table.Death_Step,function(vu)
     _G.Death_Step = vu
     _G.Setting_table.Death_Step = vu
+    _G.Setting_table.EP = vu
     local args = {
         [1] = "BuyBlackLeg"
     }
@@ -2410,14 +2385,13 @@ end)
 MeleeP:Toggle("Auto Sharkman Karate",_G.Setting_table.Sharkman_Karate,function(vu)
     _G.Sharkman_Karate = vu
     _G.Setting_table.Sharkman_Karate = vu
+    _G.Setting_table.EP = vu
     local args = {
         [1] = "BuyFishmanKarate"
     }
     game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
     savesetting()
 end)
-MeleeP:Label(" ")
-MeleeP:Label("Hop")
 -------------------------------------------------------------- Melee
 
 -------------------------------------------------------------- Sword
@@ -2443,13 +2417,15 @@ SwordP:Toggle("Auto HallowScryte",_G.Setting_table.Hallow_Scryte,function(vu)
     _G.Setting_table.Hallow_Scryte = vu
     savesetting()
 end)
-SwordP:Toggle("Auto ???",false,function(vu)
-    
-end)
 
 SwordP:Label(" ")
 SwordP:Label("Hop")
-
+SwordP:Toggle("AutoHop BuddySword",_G.Setting_table.BuddySword_Hop,function(vu)
+    _G.BuddySword = vu
+    _G.Hop = vu
+    _G.Setting_table.BuddySword_Hop = vu
+    savesetting()
+end)
 ---------------- Sword
 
 ---------------- Fruit
@@ -2673,7 +2649,266 @@ end)
 ---------------- Raid
 
 ---------------- Shop
-Shop:Label("Shop Main")
+Shop:Label("Main")
+Shop:Button("Buy SkyJump",function()
+    local args = {
+        [1] = "BuyHaki",
+        [2] = "Geppo"
+    }
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+end)
+Shop:Button("Buy Soru",function()
+    local args = {
+        [1] = "BuyHaki",
+        [2] = "Soru"
+    }
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+end)
+Shop:Button("Buy Haki",function()
+    local args = {
+        [1] = "BuyHaki",
+        [2] = "Buso"
+    }
+
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))    
+end)
+Shop:Button("Buy KenHaki",function()
+    local args = {
+        [1] = "KenTalk",
+        [2] = "Buy"
+    }
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+end)
+
+
+Shop:Label(" ")
+Shop:Label("Melee")
+Shop:Button("Buy Electro",function()
+    local args = {
+        [1] = "BuyElectro"
+    }
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+end)
+Shop:Button("Buy Black Leg",function()
+    local args = {
+        [1] = "BuyBlackLeg"
+    }
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+end)
+Shop:Button("Buy Fishman Karate",function()
+    local args = {
+        [1] = "BuyFishmanKarate"
+    }
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+end)
+
+Shop:Button("Buy Dragon Claw",function()
+    local args = {
+        [1] = "BlackbeardReward",
+        [2] = "DragonClaw",
+        [3] = "1"
+    }
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+    local args = {
+        [1] = "BlackbeardReward",
+        [2] = "DragonClaw",
+        [3] = "2"
+    }
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+end)
+Shop:Label(" ")
+Shop:Button("Buy Superhuman",function()
+    local args = {
+        [1] = "BuySuperhuman"
+    }
+
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+end)
+
+Shop:Button("Buy Death Step",function()
+    local args = {
+        [1] = "BuyDeathStep"
+    }
+
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+end)
+
+Shop:Button("Buy Shakman Karate",function()
+    local args = {
+        [1] = "BuySharkmanKarate",
+        [2] = true
+    }
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+    local args = {
+        [1] = "BuySharkmanKarate"
+    }
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+end)
+Shop:Button("Buy ElectricClaw",function()
+    local args = {
+        [1] = "BuyElectricClaw"
+        }
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+end)
+Shop:Button("Buy Dragon Talon",function()
+    local args = {
+        [1] = "BuyDragonTalon",
+        [2] = true
+        }
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+    local args = {
+        [1] = "BuyDragonTalon"
+        }
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+end)
+
+Shop:Label(" ")
+Shop:Label("Sword")
+Shop:Button("Buy Katana",function()
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Katana")
+end)
+Shop:Button("Buy Cutlass",function()
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Cutlass")
+end)
+Shop:Button("Buy Duel Katana",function()
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Duel Katana")
+end)
+Shop:Button("Buy Iron Mace",function()
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Iron Mace")
+end)
+Shop:Button("Buy Pipe",function()
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Pipe")
+end)
+Shop:Button("Triple Katana",function()
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Triple Katana")
+end)
+Shop:Button("Dual-Headed Blade",function()
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Dual-Headed Blade")
+end)
+Shop:Button("Bisento",function()
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Bisento")
+end)
+Shop:Button("Soul Cane",function()
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Soul Cane")
+end)
+
+Shop:Label(" ")
+Shop:Label("Gun")
+Shop:Button("Buy Slingshot",function()
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Slingshot")
+end)
+Shop:Button("Buy Musket",function()
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Musket")
+end)
+Shop:Button("Buy Fintlock",function()
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Flintlock")
+end)
+Shop:Button("Buy Refined Flintlock",function()
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Refined Flintlock")
+end)
+Shop:Button("Buy Cannon",function()
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyItem","Cannon")
+end)
+Shop:Button("Buy Kabucha",function()
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","Slingshot","1")
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","Slingshot","2")
+end)
+Shop:Label(" ")
+Shop:Label("Candy")
+Shop:Button("Buy Fragments 300",function()
+    local args = {
+        [1] = "Candies",
+        [2] = "Buy",
+        [3] = 2,
+        [4] = 1
+    }
+    
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+end)
+Shop:Button("Buy Fragments 700",function()
+    local args = {
+        [1] = "Candies",
+        [2] = "Buy",
+        [3] = 2,
+        [4] = 2
+    }
+    
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+end)
+Shop:Toggle("AutoBuy Exp x2",_G.Setting_table.AutoCandyExp,function(vu)
+    _G.Setting_table.AutoCandyExp = vu
+end)
+Shop:Button("Buy Exp x2",function()
+    local args = {
+        [1] = "Candies",
+        [2] = "Buy",
+        [3] = 1,
+        [4] = 1
+    }
+    
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+end)
+Shop:Button("Buy Refund Stat",function()
+    local args = {
+        [1] = "Candies",
+        [2] = "Buy",
+        [3] = 1,
+        [4] = 2
+    }
+    
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+end)
+Shop:Button("Buy Random Ability",function()
+    local args = {
+        [1] = "Candies",
+        [2] = "Buy",
+        [3] = 1,
+        [4] = 3
+    }
+    
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+end)
+
+Shop:Label(" ")
+Shop:Label("Fragments")
+Shop:Button("Buy Refund Stat",function()
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","Refund","1")
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BlackbeardReward","Refund","2")
+end)
+Shop:Button("Buy Random Ability",function()
+    local args = {
+        [1] = "BlackbeardReward",
+        [2] = "Reroll",
+        [3] = "2"
+    }
+    
+    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+end)
+
+Shop:Label(" ")
+Shop:Label("Bone")
+Shop:Button("Buy Random Surprise",function()
+-- Script generated by SimpleSpy - credits to exx#9394
+
+local args = {
+    [1] = "Bones",
+    [2] = "Check"
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+-- Script generated by SimpleSpy - credits to exx#9394
+
+local args = {
+    [1] = "Bones",
+    [2] = "Buy",
+    [3] = 1,
+    [4] = 1
+}
+
+game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
+
+end)
+
 ---------------- Shop
 
 ---------------- Teleport
@@ -2843,3 +3078,144 @@ if Three_World then
 		end)
 end
 ---------------- Teleport
+local PlaceID = game.PlaceId
+local AllIDs = {}
+local foundAnything = ""
+local actualHour = os.date("!*t").hour
+local Deleted = false
+local File = pcall(function()
+	AllIDs = game:GetService('HttpService'):JSONDecode(readfile("NotSameServers.json"))
+end)
+if not File then
+	table.insert(AllIDs, actualHour)
+	writefile("NotSameServers.json", game:GetService('HttpService'):JSONEncode(AllIDs))
+end
+function TPReturner()
+	local Site;
+	if foundAnything == "" then
+		Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100'))
+	else
+		Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100&cursor=' .. foundAnything))
+	end
+	local ID = ""
+	if Site.nextPageCursor and Site.nextPageCursor ~= "null" and Site.nextPageCursor ~= nil then
+		foundAnything = Site.nextPageCursor
+	end
+	local num = 0;
+	for i,v in pairs(Site.data) do
+		local Possible = true
+		ID = tostring(v.id)
+		if tonumber(v.maxPlayers) > tonumber(v.playing) then
+		    game.StarterGui:SetCore("SendNotification", {
+                Title = "Hop Server", 
+                Text = "Players : " ..tonumber(v.playing),
+                Icon = "http://www.roblox.com/asset/?id=8987392618",
+                Duration = 1.5
+            })
+			for _,Existing in pairs(AllIDs) do
+				if num ~= 0 then
+					if ID == tostring(Existing) then
+						Possible = false
+					end
+				else
+				if tonumber(actualHour) ~= tonumber(Existing) then
+					local delFile = pcall(function()
+						--delfile("NotSameServers.json")
+						AllIDs = {}
+						table.insert(AllIDs, actualHour)
+					end)
+				end
+			end
+			num = num + 1
+		end
+		if Possible == true then
+			table.insert(AllIDs, ID)
+			wait(0.2)
+			pcall(function()
+				--writefile("NotSameServers.json", game:GetService('HttpService'):JSONEncode(AllIDs))
+				wait(0.2)
+				game:GetService("TeleportService"):TeleportToPlaceInstance(PlaceID, ID, game.Players.LocalPlayer)
+			end)
+			end
+		end
+	end
+end
+
+function Teleport()
+	while wait(0.2) do
+		pcall(function()
+			TPReturner()
+			if foundAnything ~= "" then
+				TPReturner()
+			end
+		end)
+	end
+end
+---------------- Sword
+spawn(function()
+    while wait() do
+        if _G.BuddySword then
+            if game:GetService("Workspace").Enemies:FindFirstChild("Cake Queen [Lv. 2175] [Boss]") or game.ReplicatedStorage:FindFirstChild("Cake Queen [Lv. 2175] [Boss]") then
+                repeat game:GetService("RunService").Stepped:wait()
+                    TP(game:GetService("Workspace").Enemies:FindFirstChild("Cake Queen [Lv. 2175] [Boss]").CFrame*CFrame.new(0,25,0))
+                    game:GetService'VirtualUser':CaptureController()
+                    game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                until game:GetService("Workspace").Enemies:FindFirstChild("Cake Queen [Lv. 2175] [Boss]").Humanoid.Health <= 0 or not game:GetService("Workspace").Enemies:FindFirstChild("Cake Queen [Lv. 2175] [Boss]") or _G.BuddySword == false
+            else
+                if (Vector3.new(-821, 66, -10965)-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude > 10 then
+                    repeat wait(1)
+                        TP2(CFrame.new(-821, 66, -10965))
+                    until (Vector3.new(-821, 66, -10965)-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 10
+                    game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
+                end
+                wait(5)
+                if not game:GetService("Workspace").Enemies:FindFirstChild("Cake Queen [Lv. 2175] [Boss]") and _G.Hop == true and not game.ReplicatedStorage:FindFirstChild("Cake Queen [Lv. 2175] [Boss]") then
+                    game.StarterGui:SetCore("SendNotification", {
+                        Title = "Liver Hub", 
+                        Text = "ไม่เจอบอส",
+                        Icon = "http://www.roblox.com/asset/?id=8987392618",
+                        Duration = 3
+                    })
+                    wait(1)
+                    Teleport()
+                end
+            end
+        end
+    end
+end)
+
+---------------- Sword
+local games = game:HttpGet("https://games.roblox.com/v1/games/" .. game.PlaceId .. "/servers/Public") -- send request to API
+local json = game:GetService("HttpService"):JSONDecode(games)
+local maxplayerCount = 4
+
+function PlayerDetect()
+               local Players = game.Players:GetPlayers()
+               if #Players  > maxplayerCount then
+                   _G.Teleport = true
+                   HopLowerServer()
+                   for i = 1,#json.data do
+                       if json.data[i].id ~= game.JobId then
+                           --HopLowerServer()
+                           if json.data[i].maxPlayers ~= json.data[i].playing then
+                               --HopLowerServer()
+                               if json.data[i].playing < 3 or json.data[i].playing < maxplayerCount then
+                               end
+                           end
+                       end
+                   end
+               end
+            end
+
+spawn(function()
+    while wait(2) do
+        if _G.Setting_table.HopLowerServer then
+            game.Players.PlayerAdded:Connect(function()
+                if _G.Teleport == nil then
+                    PlayerDetect()
+                    wait(10)
+                end
+            end)
+        end
+    end
+end)
