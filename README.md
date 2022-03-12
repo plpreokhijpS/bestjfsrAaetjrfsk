@@ -296,7 +296,7 @@ spawn(function()
                     if Lp == nil or Lp <= 0 then
                         repeat wait()
                             TP2(CFrame.new(-2131.716552734375, 69.04109191894531, -12400.9306640625))
-                        until game:GetService("Workspace").Enemies:FindFirstChild("Cake Prince [Lv. 2300] [Raid Boss]") or game:GetService("Workspace").Map.CakeLoaf.BigMirror.Main.Color == Color3.fromRGB(202, 203, 209)
+                        until game:GetService("Workspace").Enemies:FindFirstChild("Cake Prince [Lv. 2300] [Raid Boss]")
                             for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                                 if v.Name == "Cake Prince [Lv. 2300] [Raid Boss]" then
                                     v.HumanoidRootPart.Size = Vector3.new(50,50,50)
@@ -1877,10 +1877,24 @@ end)
 spawn(function()
     while wait() do
         if Awake_Phoenix then
-            if game.Players.LocalPlayer.Character["Bird-Bird: Phoenix"].Level.Value >= 500 then
+            EquipWeapon(game.Players.LocalPlayer.Data.DevilFruit.Value)
+            wait(1)
+            if game.Players.LocalPlayer.Character:FindFirstChild("Bird-Bird: Phoenix") and game.Players.LocalPlayer.Character["Bird-Bird: Phoenix"].Level.Value >= 500 then
                 Auto_Farm_Fruit = false
-            elseif game.Players.LocalPlayer.Character["Bird-Bird: Phoenix"].Level.Value < 500 then
+                wait(1)
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SickScientist","Check")
+                game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SickScientist","Heal")
+                _G.Setting_table.selectchip = "Bird: Phoenix"
+                _G.Auto_Raid = true
+            elseif game.Players.LocalPlayer.Character:FindFirstChild("Bird-Bird: Phoenix") and game.Players.LocalPlayer.Character["Bird-Bird: Phoenix"].Level.Value < 500 then
                 Auto_Farm_Fruit = true
+            else
+                game.StarterGui:SetCore("SendNotification", {
+                    Title = "Liver Hub", 
+                    Text = "คุณไม่มีผลฟีนิก",
+                    Icon = "http://www.roblox.com/asset/?id=8987392618",
+                    Duration = 3
+                })
             end
         end
     end
@@ -1907,7 +1921,7 @@ spawn(function()
                 if Lp == nil or Lp == 0 then
                     repeat wait()
                         TP2(CFrame.new(-2131.716552734375, 69.04109191894531, -12400.9306640625))
-                    until game:GetService("Workspace").Enemies:FindFirstChild("Cake Prince [Lv. 2300] [Raid Boss]") or game:GetService("Workspace").Map.CakeLoaf.BigMirror.Main.Color == Color3.fromRGB(202, 203, 209)
+                    until game:GetService("Workspace").Enemies:FindFirstChild("Cake Prince [Lv. 2300] [Raid Boss]")
                                 for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                                     if v.Name == "Cake Prince [Lv. 2300] [Raid Boss]" then
                                         v.HumanoidRootPart.Size = Vector3.new(50,50,50)
@@ -1927,7 +1941,7 @@ spawn(function()
                                         until v.Humanoid.Health <= 0 or not v.Parent or Katakuri == false or game.Players.LocalPlayer.Character.Humanoid.Health <= 0
                                     end
                                 end
-                elseif game:GetService("Workspace").Map.CakeLoaf.BigMirror.Main.Color == Color3.fromRGB(202, 203, 209) and _G.Hop then
+                elseif Lp > 0 and _G.Hop then
                     Teleport()
                 end
             else
@@ -2909,7 +2923,7 @@ Raid:Toggle("Auto Awakener",_G.Setting_table.Auto_Awaken, function(vu)
 end)
 
 
-Raid:Dropdown("Select Chip",{"Flame","Ice","Quake","Light","Dark","String","Rumble","Magma","Human: Buddha"},function(t)
+Raid:Dropdown("Select Chip",{"Flame","Ice","Quake","Light","Dark","String","Rumble","Magma","Human: Buddha","Sand","Bird: Phoenix"},function(t)
 	_G.Setting_table.selectchip = t
 	savesetting()
 end)
