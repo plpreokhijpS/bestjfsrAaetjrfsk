@@ -1919,12 +1919,11 @@ spawn(function()
     while wait() do
         if Hop_Katakuri then
             local OP = game.ReplicatedStorage.Remotes.CommF_:InvokeServer("CakePrinceSpawner")
-            local Lp = tostring(string.match(tostring(OP), "%d+"))
+            local Lp = tonumber(string.match(tostring(OP), "%d+"))
             if (Vector3.new(-2131.716552734375, 69.04109191894531, -12400.9306640625)-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 10 then
                 if Lp == nil or Lp == 0 then
-                    repeat wait()
-                        TP2(CFrame.new(-2131.716552734375, 69.04109191894531, -12400.9306640625))
-                    until game:GetService("Workspace").Enemies:FindFirstChild("Cake Prince [Lv. 2300] [Raid Boss]")
+                    TP2(CFrame.new(-2131.716552734375, 69.04109191894531, -12400.9306640625))
+                    wait(2)
                     if game:GetService("Workspace").Enemies:FindFirstChild("Cake Prince [Lv. 2300] [Raid Boss]") then
                             for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                                 if v.Name == "Cake Prince [Lv. 2300] [Raid Boss]" then
@@ -1946,7 +1945,7 @@ spawn(function()
                                 end
                             end
                         end
-                elseif Lp > 0 and _G.Hop then
+                elseif Lp > 0 then
                     Teleport()
                 end
             else
