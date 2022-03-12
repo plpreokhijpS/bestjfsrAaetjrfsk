@@ -1163,29 +1163,29 @@ function CheckLevel()
 			NameQuest = "HauntedQuest1"
 			QuestLv = 1
 			NameMon = "Reborn Skeleton"
-			CFrameQ = CFrame.new(-9480.80762, 142.130661, 5566.37305, -0.00655503059, 4.52954225e-08, -0.999978542, 2.04920472e-08, 1, 4.51620679e-08, 0.999978542, -2.01955679e-08, -0.00655503059)
-			CFrameMon = CFrame.new(-8761.77148, 183.431747, 6168.33301, 0.978073597, -1.3950732e-05, -0.208259016, -1.08073925e-06, 1, -7.20630269e-05, 0.208259016, 7.07080399e-05, 0.978073597)
+			CFrameQ = CFrame.new(-9480.80762, 142.130661, 5566.37305)
+			CFrameMon = CFrame.new(-8761.77148, 183.431747, 6168.33301)
 		elseif Lv >= 2000 and Lv <= 2024 or SelectMonster == "Living Zombie [Lv. 2000]" then -- Living Zombie
 			Ms = "Living Zombie [Lv. 2000]"
 			NameQuest = "HauntedQuest1"
 			QuestLv = 2
 			NameMon = "Living Zombie"
-			CFrameQ = CFrame.new(-9480.80762, 142.130661, 5566.37305, -0.00655503059, 4.52954225e-08, -0.999978542, 2.04920472e-08, 1, 4.51620679e-08, 0.999978542, -2.01955679e-08, -0.00655503059)
-			CFrameMon = CFrame.new(-10103.7529, 238.565979, 6179.75977, 0.999474227, 2.77547141e-08, 0.0324240364, -2.58006327e-08, 1, -6.06848474e-08, -0.0324240364, 5.98163865e-08, 0.999474227)
+			CFrameQ = CFrame.new(-9480.80762, 142.130661, 5566.37305)
+			CFrameMon = CFrame.new(-10103.7529, 238.565979, 6179.75977)
 		elseif Lv >= 2025 and Lv <= 2049 or SelectMonster == "Demonic Soul [Lv. 2025]" then -- Demonic Soul
 			Ms = "Demonic Soul [Lv. 2025]"
 			NameQuest = "HauntedQuest1"
 			QuestLv = 1
 			NameMon = "Demonic Soul"
-			CFrameQ = CFrame.new(-9515.39551, 172.266037, 6078.89746, 0.0121199936, -9.78649624e-08, 0.999926567, 2.30358754e-08, 1, 9.75929382e-08, -0.999926567, 2.18513581e-08, 0.0121199936)
-			CFrameMon = CFrame.new(-9709.30762, 204.695892, 6044.04688, -0.845798075, -3.4587876e-07, -0.533503294, -4.46235369e-08, 1, -5.77571257e-07, 0.533503294, -4.64701827e-07, -0.845798075)
+			CFrameQ = CFrame.new(-9515.39551, 172.266037, 6078.89746)
+			CFrameMon = CFrame.new(-9709.30762, 204.695892, 6044.04688)
 		elseif Lv >= 2050 and Lv <= 2074 or SelectMonster == "Posessed Mummy [Lv. 2050]" then -- Posessed Mummy
 			Ms = "Posessed Mummy [Lv. 2050]"
 			NameQuest = "HauntedQuest2"
 			QuestLv = 2
 			NameMon = "Posessed Mummy"
-			CFrameQ = CFrame.new(-9515.39551, 172.266037, 6078.89746, 0.0121199936, -9.78649624e-08, 0.999926567, 2.30358754e-08, 1, 9.75929382e-08, -0.999926567, 2.18513581e-08, 0.0121199936)
-			CFrameMon = CFrame.new(-9554.11035, 65.6141663, 6041.73584, -0.877069294, 5.33355795e-08, -0.480364174, 2.06420765e-08, 1, 7.33423562e-08, 0.480364174, 5.44105987e-08, -0.877069294)
+			CFrameQ = CFrame.new(-9515.39551, 172.266037, 6078.89746)
+			CFrameMon = CFrame.new(-9554.11035, 65.6141663, 6041.73584)
 		elseif Lv >= 2075 and Lv <= 2099 or SelectMonster == "Peanut Scout [Lv. 2075]" then -- Peanut Scout
 			Ms = "Peanut Scout [Lv. 2075]"
 			NameQuest = "PeanutQuest1"
