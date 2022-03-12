@@ -297,6 +297,8 @@ spawn(function()
                         repeat wait()
                             TP2(CFrame.new(-2131.716552734375, 69.04109191894531, -12400.9306640625))
                         until game:GetService("Workspace").Enemies:FindFirstChild("Cake Prince [Lv. 2300] [Raid Boss]")
+                        wait(1)
+                        if game:GetService("Workspace").Enemies:FindFirstChild("Cake Prince [Lv. 2300] [Raid Boss]") then
                             for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                                 if v.Name == "Cake Prince [Lv. 2300] [Raid Boss]" then
                                     v.HumanoidRootPart.Size = Vector3.new(50,50,50)
@@ -316,6 +318,7 @@ spawn(function()
                                     until v.Humanoid.Health <= 0 or not v.Parent or Katakuri == false or game.Players.LocalPlayer.Character.Humanoid.Health <= 0
                                 end
                             end
+                        end
                     else
                         if game:GetService("Workspace").Enemies:FindFirstChild("Cookie Crafter [Lv. 2200]") then
                             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
@@ -1141,35 +1144,35 @@ function CheckLevel()
 			NameMon = "Mythological Pirate"
 			CFrameQ = CFrame.new(-13232.662109375, 332.40396118164, -7626.4819335938)
 			CFrameMon = CFrame.new(-13508.616210938, 582.46228027344, -6985.3037109375)
-		elseif Lv == 1900 or Lv <= 1924 or SelectMonster == "Jungle Pirate [Lv. 1900]" then -- Jungle Pirate
+		elseif Lv >= 1900 and Lv <= 1924 or SelectMonster == "Jungle Pirate [Lv. 1900]" then -- Jungle Pirate
 			Ms = "Jungle Pirate [Lv. 1900]"
 			NameQuest = "DeepForestIsland2"
 			QuestLv = 1
 			NameMon = "Jungle Pirate"
 			CFrameQ = CFrame.new(-12682.096679688, 390.88653564453, -9902.1240234375)
 			CFrameMon = CFrame.new(-12267.103515625, 459.75262451172, -10277.200195313)
-		elseif Lv == 1925 or Lv <= 1974 or SelectMonster == "Musketeer Pirate [Lv. 1925]" then -- Musketeer Pirate
+		elseif Lv >= 1925 and Lv <= 1974 or SelectMonster == "Musketeer Pirate [Lv. 1925]" then -- Musketeer Pirate
 			Ms = "Musketeer Pirate [Lv. 1925]"
 			NameQuest = "DeepForestIsland2"
 			QuestLv = 2
 			NameMon = "Musketeer Pirate"
 			CFrameQ = CFrame.new(-12682.096679688, 390.88653564453, -9902.1240234375)
 			CFrameMon = CFrame.new(-13291.5078125, 520.47338867188, -9904.638671875)
-		elseif Lv == 1975 or Lv <= 1999 or SelectMonster == "Reborn Skeleton [Lv. 1975]" then -- Reborn Skeleton
+		elseif Lv >= 1975 and Lv <= 1999 or SelectMonster == "Reborn Skeleton [Lv. 1975]" then -- Reborn Skeleton
 			Ms = "Reborn Skeleton [Lv. 1975]"
 			NameQuest = "HauntedQuest1"
 			QuestLv = 1
 			NameMon = "Reborn Skeleton"
 			CFrameQ = CFrame.new(-9480.80762, 142.130661, 5566.37305, -0.00655503059, 4.52954225e-08, -0.999978542, 2.04920472e-08, 1, 4.51620679e-08, 0.999978542, -2.01955679e-08, -0.00655503059)
 			CFrameMon = CFrame.new(-8761.77148, 183.431747, 6168.33301, 0.978073597, -1.3950732e-05, -0.208259016, -1.08073925e-06, 1, -7.20630269e-05, 0.208259016, 7.07080399e-05, 0.978073597)
-		elseif Lv == 2000 or Lv <= 2024 or SelectMonster == "Living Zombie [Lv. 2000]" then -- Living Zombie
+		elseif Lv >= 2000 and Lv <= 2024 or SelectMonster == "Living Zombie [Lv. 2000]" then -- Living Zombie
 			Ms = "Living Zombie [Lv. 2000]"
 			NameQuest = "HauntedQuest1"
 			QuestLv = 2
 			NameMon = "Living Zombie"
 			CFrameQ = CFrame.new(-9480.80762, 142.130661, 5566.37305, -0.00655503059, 4.52954225e-08, -0.999978542, 2.04920472e-08, 1, 4.51620679e-08, 0.999978542, -2.01955679e-08, -0.00655503059)
 			CFrameMon = CFrame.new(-10103.7529, 238.565979, 6179.75977, 0.999474227, 2.77547141e-08, 0.0324240364, -2.58006327e-08, 1, -6.06848474e-08, -0.0324240364, 5.98163865e-08, 0.999474227)
-		elseif Lv == 2025 or Lv <= 2049 or SelectMonster == "Demonic Soul [Lv. 2025]" then -- Demonic Soul
+		elseif Lv >= 2025 and Lv <= 2049 or SelectMonster == "Demonic Soul [Lv. 2025]" then -- Demonic Soul
 			Ms = "Demonic Soul [Lv. 2025]"
 			NameQuest = "HauntedQuest1"
 			QuestLv = 1
@@ -1922,25 +1925,27 @@ spawn(function()
                     repeat wait()
                         TP2(CFrame.new(-2131.716552734375, 69.04109191894531, -12400.9306640625))
                     until game:GetService("Workspace").Enemies:FindFirstChild("Cake Prince [Lv. 2300] [Raid Boss]")
-                                for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                                    if v.Name == "Cake Prince [Lv. 2300] [Raid Boss]" then
-                                        v.HumanoidRootPart.Size = Vector3.new(50,50,50)
-                                        --CFrameMon = CFrame.new(-2359.9638671875, 36.85615539550781, -12115.5615234375)
-                                        --_G.PosMon = v.HumanoidRootPart.CFrame
-                                        --StatrMagnet = true
-                                        for x,y in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
-                                            if tostring(y.ToolTip) == "Melee" then
-                                                _G.Melee = y.Name
-                                            end
+                    if game:GetService("Workspace").Enemies:FindFirstChild("Cake Prince [Lv. 2300] [Raid Boss]") then
+                            for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                                if v.Name == "Cake Prince [Lv. 2300] [Raid Boss]" then
+                                    v.HumanoidRootPart.Size = Vector3.new(50,50,50)
+                                    --CFrameMon = CFrame.new(-2359.9638671875, 36.85615539550781, -12115.5615234375)
+                                    --_G.PosMon = v.HumanoidRootPart.CFrame
+                                    --StatrMagnet = true
+                                    for x,y in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
+                                        if tostring(y.ToolTip) == "Melee" then
+                                            _G.Melee = y.Name
                                         end
-                                        repeat wait(.1)
-                                            EquipWeapon(_G.Melee)
-                                            TP(v.HumanoidRootPart.CFrame*CFrame.new(0,25,0))
-                                            game:GetService'VirtualUser':CaptureController()
-                                            game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
-                                        until v.Humanoid.Health <= 0 or not v.Parent or Katakuri == false or game.Players.LocalPlayer.Character.Humanoid.Health <= 0
                                     end
+                                    repeat wait(.1)
+                                        EquipWeapon(_G.Melee)
+                                        TP(v.HumanoidRootPart.CFrame*CFrame.new(0,25,0))
+                                        game:GetService'VirtualUser':CaptureController()
+                                        game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                                    until v.Humanoid.Health <= 0 or not v.Parent or Katakuri == false or game.Players.LocalPlayer.Character.Humanoid.Health <= 0
                                 end
+                            end
+                        end
                 elseif Lp > 0 and _G.Hop then
                     Teleport()
                 end
