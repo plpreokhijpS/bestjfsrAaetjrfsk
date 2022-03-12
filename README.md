@@ -1159,12 +1159,12 @@ function CheckLevel()
 			CFrameQ = CFrame.new(-12682.096679688, 390.88653564453, -9902.1240234375)
 			CFrameMon = CFrame.new(-13291.5078125, 520.47338867188, -9904.638671875)
 		elseif Lv >= 1975 and Lv <= 1999 or SelectMonster == "Reborn Skeleton [Lv. 1975]" then -- Reborn Skeleton
-			Ms = "Reborn Skeleton [Lv. 1975]"
-			NameQuest = "HauntedQuest1"
-			QuestLv = 1
-			NameMon = "Reborn Skeleton"
-			CFrameQ = CFrame.new(-9480.80762, 142.130661, 5566.37305)
-			CFrameMon = CFrame.new(-8761.77148, 183.431747, 6168.33301)
+			Ms = "Musketeer Pirate [Lv. 1925]"
+			NameQuest = "DeepForestIsland2"
+			QuestLv = 2
+			NameMon = "Musketeer Pirate"
+			CFrameQ = CFrame.new(-12682.096679688, 390.88653564453, -9902.1240234375)
+			CFrameMon = CFrame.new(-13291.5078125, 520.47338867188, -9904.638671875)
 		elseif Lv >= 2000 and Lv <= 2024 or SelectMonster == "Living Zombie [Lv. 2000]" then -- Living Zombie
 			Ms = "Living Zombie [Lv. 2000]"
 			NameQuest = "HauntedQuest1"
