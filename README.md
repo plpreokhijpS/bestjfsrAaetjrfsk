@@ -293,11 +293,11 @@ spawn(function()
                     local Lv = game:GetService("Players").LocalPlayer.Data.Level.Value
                     local OP = game.ReplicatedStorage.Remotes.CommF_:InvokeServer("CakePrinceSpawner")
                     local Lp = tonumber(string.match(tostring(OP), "%d+"))
-                    if game:GetService("Workspace").Map.CakeLoaf.BigMirror.Main.Color ~= Color3.fromRGB(202, 203, 209) then
+                    if Lp == nil or Lp <= 0 then
                         repeat wait()
                             TP2(CFrame.new(-2131.716552734375, 69.04109191894531, -12400.9306640625))
                         until game:GetService("Workspace").Enemies:FindFirstChild("Cake Prince [Lv. 2300] [Raid Boss]") or game:GetService("Workspace").Map.CakeLoaf.BigMirror.Main.Color == Color3.fromRGB(202, 203, 209)
-                        for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                            for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                                 if v.Name == "Cake Prince [Lv. 2300] [Raid Boss]" then
                                     v.HumanoidRootPart.Size = Vector3.new(50,50,50)
                                     --CFrameMon = CFrame.new(-2359.9638671875, 36.85615539550781, -12115.5615234375)
@@ -1890,6 +1890,53 @@ New:Toggle("Auto Katakuri",_G.Setting_table.Katakuri,function(vu)
     _G.Setting_table.Katakuri = vu
     savesetting()
 end)
+New:Label(" ")
+New:Label("Hop")
+New:Toggle("Auto Hop Katakuri",_G.Setting_table.Hop_Katakuri,function(vu)
+    Hop_Katakuri = vu
+    _G.Setting_table.Hop_Katakuri = vu
+    _G.Hop = true
+    savesetting()
+end)
+spawn(function()
+    while wait() do
+        if Hop_Katakuri then
+            local OP = game.ReplicatedStorage.Remotes.CommF_:InvokeServer("CakePrinceSpawner")
+            local Lp = tostring(string.match(tostring(OP), "%d+"))
+            if (Vector3.new(-2131.716552734375, 69.04109191894531, -12400.9306640625)-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 10 then
+                if Lp == nil or Lp == 0 then
+                    repeat wait()
+                        TP2(CFrame.new(-2131.716552734375, 69.04109191894531, -12400.9306640625))
+                    until game:GetService("Workspace").Enemies:FindFirstChild("Cake Prince [Lv. 2300] [Raid Boss]") or game:GetService("Workspace").Map.CakeLoaf.BigMirror.Main.Color == Color3.fromRGB(202, 203, 209)
+                                for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                                    if v.Name == "Cake Prince [Lv. 2300] [Raid Boss]" then
+                                        v.HumanoidRootPart.Size = Vector3.new(50,50,50)
+                                        --CFrameMon = CFrame.new(-2359.9638671875, 36.85615539550781, -12115.5615234375)
+                                        --_G.PosMon = v.HumanoidRootPart.CFrame
+                                        --StatrMagnet = true
+                                        for x,y in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
+                                            if tostring(y.ToolTip) == "Melee" then
+                                                _G.Melee = y.Name
+                                            end
+                                        end
+                                        repeat wait(.1)
+                                            EquipWeapon(_G.Melee)
+                                            TP(v.HumanoidRootPart.CFrame*CFrame.new(0,25,0))
+                                            game:GetService'VirtualUser':CaptureController()
+                                            game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                                        until v.Humanoid.Health <= 0 or not v.Parent or Katakuri == false or game.Players.LocalPlayer.Character.Humanoid.Health <= 0
+                                    end
+                                end
+                elseif game:GetService("Workspace").Map.CakeLoaf.BigMirror.Main.Color == Color3.fromRGB(202, 203, 209) and _G.Hop then
+                    Teleport()
+                end
+            else
+                TP2(CFrame.new(-2131.716552734375, 69.04109191894531, -12400.9306640625))
+            end
+        end
+    end
+end)
+
 spawn(function()
     while wait(3) do
         if Katakuri then
