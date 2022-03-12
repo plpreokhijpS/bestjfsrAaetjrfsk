@@ -121,7 +121,7 @@ until game.Players.localPlayer.Neutral == false
 -----------------------------Code
 spawn(function()
     while task.wait() do
-        if  Auto_Farm == true or _G.Setting_table.AutoFarm_Players or Clip == true or Auto_Farm_Fruit or _G.FarmMasteryFruit == true or BuddySword == true or AutoFarm_Boss or _G.Auto_Raid or Auto_Three then 
+        if  Auto_Farm == true or Katakuri or _G.Setting_table.AutoFarm_Players or Clip == true or Auto_Farm_Fruit or _G.FarmMasteryFruit == true or BuddySword == true or AutoFarm_Boss or _G.Auto_Raid or Auto_Three then 
             if not game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("BodyVelocity") then 
                 local L_1 = Instance.new("BodyVelocity") 
                 L_1.Parent = game.Players.LocalPlayer.Character.HumanoidRootPart 
@@ -143,7 +143,7 @@ spawn(function()
 			if StatrMagnet then
 			    if (CFrameMon.Position-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 1000 then
     				for y,x in pairs(game.Workspace.Enemies:GetChildren()) do
-        					if not string.find(x.Name,"Boss") and(x.HumanoidRootPart.Position-_G.PosMon.Position).magnitude <= 300 then --370
+        					if not string.find(x.Name,"Boss") and(x.HumanoidRootPart.Position-_G.PosMon.Position).Magnitude <= 300 then --370
         						x.HumanoidRootPart.CFrame = _G.PosMon
         						x.Humanoid.JumpPower = 0
         						x.Humanoid.WalkSpeed = 0
@@ -209,7 +209,7 @@ spawn(function()
                                             end
                                         end
             						end
-                                        repeat wait()
+                                        repeat wait(.1)
                                             TP(v.HumanoidRootPart.CFrame * CFrame.new(0,20,0))
                                             game:GetService'VirtualUser':CaptureController()
                                             game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
@@ -230,37 +230,118 @@ spawn(function()
             end)
         end
 end)
---Auto_Farm_Fruit = true
+local vim = game:service("VirtualInputManager")
+local function hold(keyCode, time)
+    vim:SendKeyEvent(true, keyCode, false, game)
+    task.wait(time)
+    vim:SendKeyEvent(false, keyCode, false, game)
+end
+
 spawn(function()
         while wait() do
             pcall(function()
                 if Auto_Farm_Fruit then
-                    CheckLevel()
-                    if game:GetService("Workspace").Enemies:FindFirstChild(Ms) then
+                    --CheckLevel()
+                    if game:GetService("Workspace").Enemies:FindFirstChild("Living Zombie [Lv. 2000]") then
+                        game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
                         for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
-                            if v.Name == Ms then
+                            if v.Name == "Living Zombie [Lv. 2000]" then
                                 Persen = 20
+                                CFrameMon = CFrame.new(-10103.7529, 238.565979, 6179.75977, 0.999474227, 2.77547141e-08, 0.0324240364, -2.58006327e-08, 1, -6.06848474e-08, -0.0324240364, 5.98163865e-08, 0.999474227)
                                 _G.PosMon = v.HumanoidRootPart.CFrame
                                 HealthMin = v.Humanoid.MaxHealth*Persen/100
+                                v.HumanoidRootPart.Size = Vector3.new(50,50,50)
                                 StatrMagnet = true
-                                repeat wait(.5)
-                                    if v.Humanoid.Health > HealthMin then
+                                _G.Fruit = game.Players.LocalPlayer.Data.DevilFruit.Value
+                                for x,y in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
+                                    if tostring(y.ToolTip) == "Melee" then
+                                        _G.Melee = y.Name
+                                    end
+                                end
+                                game.Workspace.CurrentCamera.CameraSubject = v.Humanoid
+                                repeat wait(.2)
+                                    if v.Humanoid.Health <= HealthMin then
+                                        TP(v.HumanoidRootPart.CFrame*CFrame.new(0,1,12))
+                                        EquipWeapon(_G.Fruit)
+                                        wait(0.5)
+                                        hold(Enum.KeyCode.Z, 0.5)
+                                    elseif v.Humanoid.Health > HealthMin then
+                                        EquipWeapon(_G.Melee)
                                         TP(v.HumanoidRootPart.CFrame*CFrame.new(0,25,0))
                                         game:GetService'VirtualUser':CaptureController()
                                         game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
-                                    elseif v.Humanoid.Health <= HealthMin then
-                                        TP(v.HumanoidRootPart.CFrame*CFrame.new(0,1,15))
-                                        game:GetService("Players").LocalPlayer.Character.Humanoid:FindFirstChild(""):InvokeServer("Z")
-                                        game:GetService("Players").LocalPlayer.Character.Humanoid:FindFirstChild(""):InvokeServer("X")
-                                        game:GetService("Players").LocalPlayer.Character.Humanoid:FindFirstChild(""):InvokeServer("C")
-                                        game:GetService("Players").LocalPlayer.Character.Humanoid:FindFirstChild(""):InvokeServer("V")
                                     end
-                                until v.Humanoid.Health <= 0 or not v.Parent or Auto_Farm_Fruit == false
+                                until v.Humanoid.Health <= 0 or not v.Parent or Auto_Farm_Fruit == false or game.Players.LocalPlayer.Character.Humanoid.Health <= 0
+                                game.Workspace.CurrentCamera.CameraSubject = game.Players.LocalPlayer.Character.Humanoid
                             end
                         end
                     else
+                        game.Workspace.CurrentCamera.CameraSubject = game.Players.LocalPlayer.Character.Humanoid
                         StatrMagnet = false
-                        TP2(CFrameMon)
+                        TP2(CFrame.new(-10103.7529, 238.565979, 6179.75977, 0.999474227, 2.77547141e-08, 0.0324240364, -2.58006327e-08, 1, -6.06848474e-08, -0.0324240364, 5.98163865e-08, 0.999474227))
+                    end
+                else
+                    game.Workspace.CurrentCamera.CameraSubject = game.Players.LocalPlayer.Character.Humanoid
+                end
+            end)
+        end
+end)
+spawn(function()
+        while wait() do
+            pcall(function()
+                if Katakuri then
+                    local Lv = game:GetService("Players").LocalPlayer.Data.Level.Value
+                    local OP = game.ReplicatedStorage.Remotes.CommF_:InvokeServer("CakePrinceSpawner")
+                    local Lp = tonumber(string.match(tostring(OP), "%d+"))
+                    if game:GetService("Workspace").Map.CakeLoaf.BigMirror.Main.Color ~= Color3.fromRGB(202, 203, 209) then
+                        repeat wait()
+                            TP2(CFrame.new(-2131.716552734375, 69.04109191894531, -12400.9306640625))
+                        until game:GetService("Workspace").Enemies:FindFirstChild("Cake Prince [Lv. 2300] [Raid Boss]") or game:GetService("Workspace").Map.CakeLoaf.BigMirror.Main.Color == Color3.fromRGB(202, 203, 209)
+                        for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                                if v.Name == "Cake Prince [Lv. 2300] [Raid Boss]" then
+                                    v.HumanoidRootPart.Size = Vector3.new(50,50,50)
+                                    --CFrameMon = CFrame.new(-2359.9638671875, 36.85615539550781, -12115.5615234375)
+                                    --_G.PosMon = v.HumanoidRootPart.CFrame
+                                    --StatrMagnet = true
+                                    for x,y in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
+                                        if tostring(y.ToolTip) == "Melee" then
+                                            _G.Melee = y.Name
+                                        end
+                                    end
+                                    repeat wait(.1)
+                                        EquipWeapon(_G.Melee)
+                                        TP(v.HumanoidRootPart.CFrame*CFrame.new(0,25,0))
+                                        game:GetService'VirtualUser':CaptureController()
+                                        game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                                    until v.Humanoid.Health <= 0 or not v.Parent or Katakuri == false or game.Players.LocalPlayer.Character.Humanoid.Health <= 0
+                                end
+                            end
+                    else
+                        if game:GetService("Workspace").Enemies:FindFirstChild("Cookie Crafter [Lv. 2200]") then
+                            game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
+                            for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
+                                if v.Name == "Cookie Crafter [Lv. 2200]" then
+                                    v.HumanoidRootPart.Size = Vector3.new(50,50,50)
+                                    CFrameMon = CFrame.new(-2359.9638671875, 36.85615539550781, -12115.5615234375)
+                                    _G.PosMon = v.HumanoidRootPart.CFrame
+                                    StatrMagnet = true
+                                    for x,y in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
+                                        if tostring(y.ToolTip) == "Melee" then
+                                            _G.Melee = y.Name
+                                        end
+                                    end
+                                    repeat wait(.1)
+                                        EquipWeapon(_G.Melee)
+                                        TP(v.HumanoidRootPart.CFrame*CFrame.new(0,25,0))
+                                        game:GetService'VirtualUser':CaptureController()
+                                        game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                                    until v.Humanoid.Health <= 0 or not v.Parent or Katakuri == false or game.Players.LocalPlayer.Character.Humanoid.Health <= 0
+                                end
+                            end
+                        else
+                            StatrMagnet = false
+                            TP2(CFrame.new(-2359.9638671875, 36.85615539550781, -12115.5615234375))
+                        end
                     end
                 end
             end)
@@ -1146,7 +1227,7 @@ function TP2(P1)
 	if Distance < 1000 then
 		Speed = 500
 	elseif Distance >= 1000 then
-		Speed = 350
+		Speed = 200
 	end
     game:GetService("TweenService"):Create(
         game.Players.LocalPlayer.Character.HumanoidRootPart,
@@ -1787,6 +1868,7 @@ local Shop = serv:Channel("Shop")
 local Teleport = serv:Channel("Teleport")
 local Credit = serv:Channel("Credit")
 -------------------------------------------------------------- New
+New:Label("Main")
 New:Toggle("Awake Phoenix",_G.Setting_table.Awake_Phoenix,function(vu)
     Awake_Phoenix = vu
     _G.Setting_table.Awake_Phoenix = vu
@@ -1796,13 +1878,34 @@ spawn(function()
     while wait() do
         if Awake_Phoenix then
             if game.Players.LocalPlayer.Character["Bird-Bird: Phoenix"].Level.Value >= 500 then
-                
+                Auto_Farm_Fruit = false
             elseif game.Players.LocalPlayer.Character["Bird-Bird: Phoenix"].Level.Value < 500 then
-                
+                Auto_Farm_Fruit = true
             end
         end
     end
 end)
+New:Toggle("Auto Katakuri",_G.Setting_table.Katakuri,function(vu)
+    Katakuri = vu
+    _G.Setting_table.Katakuri = vu
+    savesetting()
+end)
+spawn(function()
+    while wait(3) do
+        if Katakuri then
+            local OP = game.ReplicatedStorage.Remotes.CommF_:InvokeServer("CakePrinceSpawner")
+            local Lp = tostring(string.match(tostring(OP), "%d+"))
+            game.StarterGui:SetCore("SendNotification", {
+                Title = "Liver Hub", 
+                Text = "Monster : "..Lp,
+                Icon = "http://www.roblox.com/asset/?id=8987392618",
+                Duration = 3
+            })
+        end
+    end
+end)
+
+    
 
 -------------------------------------------------------------- New
 
