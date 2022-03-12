@@ -320,7 +320,6 @@ spawn(function()
                             end
                         end
                     else
-                        if game:GetService("Workspace").Enemies:FindFirstChild("Cookie Crafter [Lv. 2200]") then
                             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
                             for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                                 if v.Name == "Cookie Crafter [Lv. 2200]" then
@@ -340,10 +339,6 @@ spawn(function()
                                         game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                                     until v.Humanoid.Health <= 0 or not v.Parent or Katakuri == false or game.Players.LocalPlayer.Character.Humanoid.Health <= 0
                                 end
-                            end
-                        else
-                            StatrMagnet = false
-                            TP2(CFrame.new(-2359.9638671875, 36.85615539550781, -12115.5615234375))
                         end
                     end
                 end
