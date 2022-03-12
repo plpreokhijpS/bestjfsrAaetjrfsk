@@ -293,18 +293,13 @@ spawn(function()
                     local Lv = game:GetService("Players").LocalPlayer.Data.Level.Value
                     local OP = game.ReplicatedStorage.Remotes.CommF_:InvokeServer("CakePrinceSpawner")
                     local Lp = tonumber(string.match(tostring(OP), "%d+"))
-                    if Lp == nil or Lp <= 0 then
-                        repeat wait()
-                            TP2(CFrame.new(-2131.716552734375, 69.04109191894531, -12400.9306640625))
-                        until game:GetService("Workspace").Enemies:FindFirstChild("Cake Prince [Lv. 2300] [Raid Boss]")
-                        wait(1)
+                    if Lp == nil  then
+                        TP2(CFrame.new(-2131.716552734375, 69.04109191894531, -12400.9306640625))
+                        wait(3)
                         if game:GetService("Workspace").Enemies:FindFirstChild("Cake Prince [Lv. 2300] [Raid Boss]") then
                             for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                                 if v.Name == "Cake Prince [Lv. 2300] [Raid Boss]" then
                                     v.HumanoidRootPart.Size = Vector3.new(50,50,50)
-                                    --CFrameMon = CFrame.new(-2359.9638671875, 36.85615539550781, -12115.5615234375)
-                                    --_G.PosMon = v.HumanoidRootPart.CFrame
-                                    --StatrMagnet = true
                                     for x,y in pairs(game:GetService("Players").LocalPlayer.Backpack:GetChildren()) do
                                         if tostring(y.ToolTip) == "Melee" then
                                             _G.Melee = y.Name
@@ -320,6 +315,7 @@ spawn(function()
                             end
                         end
                     else
+                        if game:GetService("Workspace").Enemies:FindFirstChild("Cookie Crafter [Lv. 2200]") then
                             game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("SetSpawnPoint")
                             for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                                 if v.Name == "Cookie Crafter [Lv. 2200]" then
@@ -339,6 +335,9 @@ spawn(function()
                                         game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                                     until v.Humanoid.Health <= 0 or not v.Parent or Katakuri == false or game.Players.LocalPlayer.Character.Humanoid.Health <= 0
                                 end
+                            end
+                        else
+                            TP2(CFrame.new(-2359.9638671875, 36.85615539550781, -12115.5615234375))
                         end
                     end
                 end
@@ -1918,7 +1917,7 @@ spawn(function()
             if (Vector3.new(-2131.716552734375, 69.04109191894531, -12400.9306640625)-game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude < 10 then
                 if Lp == nil or Lp == 0 then
                     TP2(CFrame.new(-2131.716552734375, 69.04109191894531, -12400.9306640625))
-                    wait(2)
+                    wait(3)
                     if game:GetService("Workspace").Enemies:FindFirstChild("Cake Prince [Lv. 2300] [Raid Boss]") then
                             for i,v in pairs(game:GetService("Workspace").Enemies:GetChildren()) do
                                 if v.Name == "Cake Prince [Lv. 2300] [Raid Boss]" then
