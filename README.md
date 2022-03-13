@@ -194,6 +194,11 @@ spawn(function()
             						    end
                                         Fruit_E = game:GetService("Players").LocalPlayer.Data.DevilFruit.Value
                                         if Auto_Farm_Fruit then
+                                            for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do  
+                                                if tostring(v.ToolTip) == "Melee" then
+                                                    Melee_E = v.Name
+                                                end
+                                            end
                                             health = v.Humanoid.Health
                                             maxhealth = v.Humanoid.MaxHealth
                                             percent = (health / maxhealth) * 100 --percentage
@@ -215,6 +220,7 @@ spawn(function()
                                                         hold(Enum.KeyCode.V, 0.5)
                                                     end
                                                 elseif percent > MinHealth then
+                                                    EquipWeapon(Melee_E)
                                                     TP(v.HumanoidRootPart.CFrame * CFrame.new(0,20,0))
                                                     game:GetService'VirtualUser':CaptureController()
                                                     game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
