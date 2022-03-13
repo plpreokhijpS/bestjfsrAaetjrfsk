@@ -194,9 +194,9 @@ spawn(function()
             						    end
                                         Fruit_E = game:GetService("Players").LocalPlayer.Data.DevilFruit.Value
                                         if Auto_Farm_Fruit then
-                                            for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do  
-                                                if tostring(v.ToolTip) == "Melee" then
-                                                    Melee_E = v.Name
+                                            for i2,v2 in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do  
+                                                if tostring(v2.ToolTip) == "Melee" then
+                                                    Melee_E = v2.Name
                                                 end
                                             end
                                             health = v.Humanoid.Health
