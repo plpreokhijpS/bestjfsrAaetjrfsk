@@ -185,6 +185,9 @@ spawn(function()
                                     end
                                     sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius",  math.huge)
             						v.Humanoid:ChangeState(14)
+                                            health = v.Humanoid.Health
+                                            maxhealth = v.Humanoid.MaxHealth
+                                            percent = (health / maxhealth) * 100 --percentage
             						StatrMagnet = true
             						    if not game.Players.LocalPlayer.Character:FindFirstChild("HasBuso") then
                                             local args = {
@@ -199,10 +202,7 @@ spawn(function()
                                                     Melee_E = v2.Name
                                                 end
                                             end
-                                            health = v.Humanoid.Health
-                                            maxhealth = v.Humanoid.MaxHealth
-                                            percent = (health / maxhealth) * 100 --percentage
-                                            repeat wait(.2)
+                                            repeat wait(.3)
                                                 if percent <= MinHealth then
                                                     EquipWeapon(Fruit_E)
                                                     TP(v.HumanoidRootPart.CFrame * CFrame.new(0,0,12))
@@ -1135,12 +1135,12 @@ end)
 Main6:CreateToggle("AutoFarm Gun",false,function()
     
 end)
-
+MinHealth = 25
 local HPmin = Main6:CreateSlider("Health %", 1,100,nil,true, function(Value)
-	print(Value)
+	MinHealth = Value
 end)
 HPmin:AddToolTip("Health Monser")
-HPmin:SetValue(20)
+HPmin:SetValue(25)
 
 local vim = game:service("VirtualInputManager")
 local function hold(keyCode, time)
