@@ -202,7 +202,13 @@ spawn(function()
                                                     Melee_E = v2.Name
                                                 end
                                             end
-                                            repeat wait(.3)
+                                            local vim = game:service("VirtualInputManager")
+                                            local function hold(keyCode, time)
+                                                vim:SendKeyEvent(true, keyCode, false, game)
+                                                task.wait(time)
+                                                vim:SendKeyEvent(false, keyCode, false, game)
+                                            end
+                                            repeat wait(.2)
                                                 if percent <= MinHealth then
                                                     EquipWeapon(Fruit_E)
                                                     TP(v.HumanoidRootPart.CFrame * CFrame.new(0,0,12))
@@ -220,10 +226,13 @@ spawn(function()
                                                         hold(Enum.KeyCode.V, 0.5)
                                                     end
                                                 elseif percent > MinHealth then
-                                                    EquipWeapon(Melee_E)
-                                                    TP(v.HumanoidRootPart.CFrame * CFrame.new(0,20,0))
-                                                    game:GetService'VirtualUser':CaptureController()
-                                                    game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                                                    wait(0.2)
+                                                    if percent > MinHealth then
+                                                        EquipWeapon(Melee_E)
+                                                        TP(v.HumanoidRootPart.CFrame * CFrame.new(0,20,0))
+                                                        game:GetService'VirtualUser':CaptureController()
+                                                        game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
+                                                    end
                                                 end
                                             until v.Humanoid.Health <= 0 or not v.Parent or Auto_Farm == false or game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false or game.Players.LocalPlayer.Character.Humanoid.Health <= 0
                                         else
@@ -1141,13 +1150,6 @@ local HPmin = Main6:CreateSlider("Health %", 1,100,nil,true, function(Value)
 end)
 HPmin:AddToolTip("Health Monser")
 HPmin:SetValue(25)
-
-local vim = game:service("VirtualInputManager")
-local function hold(keyCode, time)
-    vim:SendKeyEvent(true, keyCode, false, game)
-    task.wait(time)
-    vim:SendKeyEvent(false, keyCode, false, game)
-end
 
 Main6:CreateToggle("Auto Skill Z",true,function(vu)
     Auto_Skill_Z = vu
