@@ -209,6 +209,9 @@ spawn(function()
                                                 vim:SendKeyEvent(false, keyCode, false, game)
                                             end
                                             repeat wait(.2)
+                                            health = v.Humanoid.Health
+                                            maxhealth = v.Humanoid.MaxHealth
+                                            percent = (health / maxhealth) * 100 --percentage
                                                 if percent <= MinHealth then
                                                     EquipWeapon(Fruit_E)
                                                     TP(v.HumanoidRootPart.CFrame * CFrame.new(0,0,12))
