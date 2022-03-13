@@ -208,28 +208,32 @@ spawn(function()
                                                 task.wait(time)
                                                 vim:SendKeyEvent(false, keyCode, false, game)
                                             end
-                                            repeat wait(.2)
+                                            repeat wait(.1)
                                             health = v.Humanoid.Health
                                             maxhealth = v.Humanoid.MaxHealth
                                             percent = (health / maxhealth) * 100 --percentage
                                                 if percent <= MinHealth then
                                                     EquipWeapon(Fruit_E)
-                                                    TP(v.HumanoidRootPart.CFrame * CFrame.new(0,0,12))
+                                                    TP(v.HumanoidRootPart.CFrame * CFrame.new(0,0,15))
                                                     wait(0.3)
+                                                    game.Workspace.CurrentCamera.CoordinateFrame = CFrame.new(game.Workspace.CurrentCamera.CoordinateFrame.p,v.HumanoidRootPart.CFrame.p)
                                                     if Auto_Skill_Z then
-                                                        hold(Enum.KeyCode.Z, 0.5)
+                                                        game.Workspace.CurrentCamera.CoordinateFrame = CFrame.new(game.Workspace.CurrentCamera.CoordinateFrame.p,v.HumanoidRootPart.CFrame.p)
+                                                        hold(Enum.KeyCode.Z, 0.1)
                                                     end
                                                     if Auto_Skill_X then
-                                                        hold(Enum.KeyCode.X, 0.5)
+                                                        game.Workspace.CurrentCamera.CoordinateFrame = CFrame.new(game.Workspace.CurrentCamera.CoordinateFrame.p,v.HumanoidRootPart.CFrame.p)
+                                                        hold(Enum.KeyCode.X, 0.1)
                                                     end
                                                     if Auto_Skill_C then
-                                                        hold(Enum.KeyCode.C, 0.5)
+                                                        game.Workspace.CurrentCamera.CoordinateFrame = CFrame.new(game.Workspace.CurrentCamera.CoordinateFrame.p,v.HumanoidRootPart.CFrame.p)
+                                                        hold(Enum.KeyCode.C, 0.1)
                                                     end
                                                     if Auto_Skill_V then
-                                                        hold(Enum.KeyCode.V, 0.5)
+                                                        game.Workspace.CurrentCamera.CoordinateFrame = CFrame.new(game.Workspace.CurrentCamera.CoordinateFrame.p,v.HumanoidRootPart.CFrame.p)
+                                                        hold(Enum.KeyCode.V, 0.1)
                                                     end
                                                 elseif percent > MinHealth then
-                                                    wait(0.2)
                                                     if percent > MinHealth then
                                                         EquipWeapon(Melee_E)
                                                         TP(v.HumanoidRootPart.CFrame * CFrame.new(0,20,0))
@@ -237,7 +241,7 @@ spawn(function()
                                                         game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                                                     end
                                                 end
-                                            until v.Humanoid.Health <= 0 or not v.Parent or Auto_Farm == false or game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false or game.Players.LocalPlayer.Character.Humanoid.Health <= 0
+                                            until v.Humanoid.Health <= 0 or not v.Parent or Auto_Farm_Fruit == false or Auto_Farm == false or game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false or game.Players.LocalPlayer.Character.Humanoid.Health <= 0
                                         else
                                             repeat game:GetService("RunService").Stepped:wait()
                                                 TP(v.HumanoidRootPart.CFrame * CFrame.new(0,20,0))
@@ -1125,7 +1129,7 @@ spawn(function()
 end)
 
 local New = page1:CreateSection("New! UPDATE")
-New:CreateToggle("Auto Boss Katakuri",false,function()
+New:CreateToggle("Auto Boss Katakuri ❌",false,function()
     
 end)
 New:CreateToggle("Auto Awake Phoenix ❌",false,function()
@@ -1144,7 +1148,7 @@ Main6:CreateToggle("AutoFarm DevilFruit",_G.Setting_table.Auto_Farm_Fruit,functi
     _G.Setting_table.Auto_Farm_Fruit = vu
     savesetting()
 end)
-Main6:CreateToggle("AutoFarm Gun",false,function()
+Main6:CreateToggle("AutoFarm Gun ❌",false,function()
     
 end)
 MinHealth = 25
@@ -1170,7 +1174,7 @@ end)
 
 
 local Main3 = page1:CreateSection("Melee")
-Main3:CreateToggle("Auto Superhuman",false,function()
+Main3:CreateToggle("Auto Superhuman ❌",false,function()
     
 end)
 Main3:CreateToggle("Auto Sharkman Karate ❌",false,function()
@@ -1249,4 +1253,31 @@ end)
 
 
 local Main8 = page1:CreateSection("Accessory")
+Main8:CreateToggle("Auto Swan Glass ❌",false,function()
+    
+end)
+Main8:CreateToggle("Auto Dark Code ❌",false,function()
+    
+end)
+
+
+local Main9 = page1:CreateSection("Evo Ability")
+Main9:CreateToggle("Auto Evo Mink ❌",false,function()
+    
+end)
+Main9:CreateToggle("Auto Evo Sky ❌",false,function()
+    
+end)
+Main9:CreateToggle("Auto Evo Human ❌",false,function()
+    
+end)
+Main9:CreateToggle("Auto Evo FishMan ❌",false,function()
+    
+end)
+Main9:CreateToggle("Auto Evo Ghool ❌",false,function()
+    
+end)
+Main9:CreateToggle("Auto Evo Cyborg ❌",false,function()
+    
+end)
 -------------------------------------------------- Blox Fruit
