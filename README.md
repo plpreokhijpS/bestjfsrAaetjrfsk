@@ -1293,6 +1293,175 @@ end)
 
 local Main10 = page5:CreateSection("Teleport Map")
 
+local Map_Misc = page5:CreateSection("Teleport Server")
+
+local PlaceID = game.PlaceId
+local AllIDs = {}
+local foundAnything = ""
+local actualHour = os.date("!*t").hour
+local Deleted = false
+local File = pcall(function()
+	AllIDs = game:GetService('HttpService'):JSONDecode(readfile("NotSameServers.json"))
+end)
+if not File then
+	table.insert(AllIDs, actualHour)
+	writefile("NotSameServers.json", game:GetService('HttpService'):JSONEncode(AllIDs))
+end
+function TPReturner()
+	local Site;
+	if foundAnything == "" then
+		Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100'))
+	else
+		Site = game.HttpService:JSONDecode(game:HttpGet('https://games.roblox.com/v1/games/' .. PlaceID .. '/servers/Public?sortOrder=Asc&limit=100&cursor=' .. foundAnything))
+	end
+	local ID = ""
+	if Site.nextPageCursor and Site.nextPageCursor ~= "null" and Site.nextPageCursor ~= nil then
+		foundAnything = Site.nextPageCursor
+	end
+	local num = 0;
+	for i,v in pairs(Site.data) do
+		local Possible = true
+		ID = tostring(v.id)
+		if tonumber(v.maxPlayers) > tonumber(v.playing) then
+		    game.StarterGui:SetCore("SendNotification", {
+                Title = "Hop Server", 
+                Text = "Players : " ..tonumber(v.playing),
+                Icon = "http://www.roblox.com/asset/?id=8987392618",
+                Duration = 1.5
+            })
+			for _,Existing in pairs(AllIDs) do
+				if num ~= 0 then
+					if ID == tostring(Existing) then
+						Possible = false
+					end
+				else
+				if tonumber(actualHour) ~= tonumber(Existing) then
+					local delFile = pcall(function()
+						--delfile("NotSameServers.json")
+						AllIDs = {}
+						table.insert(AllIDs, actualHour)
+					end)
+				end
+			end
+			num = num + 1
+		end
+		if Possible == true then
+			table.insert(AllIDs, ID)
+			wait(0.2)
+			pcall(function()
+				--writefile("NotSameServers.json", game:GetService('HttpService'):JSONEncode(AllIDs))
+				wait(0.2)
+				game:GetService("TeleportService"):TeleportToPlaceInstance(PlaceID, ID, game.Players.LocalPlayer)
+			end)
+			end
+		end
+	end
+end
+
+function Teleport()
+	while wait(0.2) do
+		pcall(function()
+			TPReturner()
+			if foundAnything ~= "" then
+				TPReturner()
+			end
+		end)
+	end
+end
+
+function HopLowerServer()
+	local maxplayers, gamelink, goodserver, data_table = math.huge, "https://games.roblox.com/v1/games/" .. game.PlaceId .. "/servers/Public?sortOrder=Asc&limit=100"
+	if not _G.FailedServerID then _G.FailedServerID = {} end
+	local function serversearch()
+		data_table = game:GetService"HttpService":JSONDecode(game:HttpGetAsync(gamelink))
+		for _, v in pairs(data_table.data) do
+			pcall(function()
+				if type(v) == "table" and v.id and v.playing and tonumber(maxplayers) > tonumber(v.playing) and not table.find(_G.FailedServerID, v.id) then
+				    game.StarterGui:SetCore("SendNotification", {
+                             Title = "Hop LowerServer", 
+                             Text = "Players : " ..tonumber(v.playing),
+                             Icon = "http://www.roblox.com/asset/?id=8987392618",
+                             Duration = 1.5
+                       })
+                   _G.Teleport = true
+					maxplayers = v.playing
+					goodserver = v.id
+				end
+			end)
+		end
+	end
+	function getservers()
+		pcall(serversearch)
+		for i, v in pairs(data_table) do
+			if i == "nextPageCursor" then
+				if gamelink:find"&cursor=" then
+					local a = gamelink:find"&cursor="
+					local b = gamelink:sub(a)
+					gamelink = gamelink:gsub(b, "")
+				end
+				gamelink = gamelink .. "&cursor=" .. v
+				pcall(getservers)
+			end
+		end
+	end
+	pcall(getservers)
+	if goodserver == game.JobId or maxplayers == #game:GetService"Players":GetChildren() - 1 then
+	end
+	table.insert(_G.FailedServerID, goodserver)
+	game:GetService"TeleportService":TeleportToPlaceInstance(game.PlaceId, goodserver)
+end
+Map_Misc:CreateButton("Hop Server",function()
+    Teleport()
+end)
+Map_Misc:CreateButton("Hop LowerServer",function()
+    HopLowerServer()
+end)
+local games = game:HttpGet("https://games.roblox.com/v1/games/" .. game.PlaceId .. "/servers/Public") -- send request to API
+local json = game:GetService("HttpService"):JSONDecode(games)
+local maxplayerCount = 4
+
+function PlayerDetect()
+               local Players = game.Players:GetPlayers()
+               if #Players  > maxplayerCount then
+                   _G.Teleport = true
+                   HopLowerServer()
+                   for i = 1,#json.data do
+                       if json.data[i].id ~= game.JobId then
+                           --HopLowerServer()
+                           if json.data[i].maxPlayers ~= json.data[i].playing then
+                               --HopLowerServer()
+                               if json.data[i].playing < 3 or json.data[i].playing < maxplayerCount then
+                               end
+                           end
+                       end
+                   end
+               end
+            end
+
+spawn(function()
+    while wait(2) do
+        if _G.Setting_table.HopLowerServer then
+            game.Players.PlayerAdded:Connect(function()
+                if _G.Teleport == nil then
+                    PlayerDetect()
+                    wait(10)
+                end
+            end)
+        end
+    end
+end)
+Map_Misc:CreateToggle("Auto Hop LowerServer",_G.Setting_table.HopLowerServer,function(vu)
+     _G.Setting_table.HopLowerServer = vu
+    if _G.Hop then
+        
+    else
+        if _G.Setting_table.HopLowerServer then
+            PlayerDetect()
+        end
+    end
+end)
+
+
 if Old_World then
           Main10:CreateButton("Start Island",function()
              TP2(CFrame.new(1071.2832, 16.3085976, 1426.86792))
@@ -1437,6 +1606,8 @@ if Three_World then
 			TP2(CFrame.new(5310.8095703125, 21.594484329224, 129.39053344727))
 		end)
 end
+
+
 
 spawn(function()
     while wait() do
