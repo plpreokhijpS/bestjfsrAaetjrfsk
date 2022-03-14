@@ -208,29 +208,31 @@ spawn(function()
                                                 task.wait(time)
                                                 vim:SendKeyEvent(false, keyCode, false, game)
                                             end
+                                            game.Workspace.CurrentCamera.CameraSubject = v.Humanoid
                                             repeat wait(.1)
+                                                pcall(function()
                                             health = v.Humanoid.Health
                                             maxhealth = v.Humanoid.MaxHealth
                                             percent = (health / maxhealth) * 100 --percentage
                                                 if percent <= MinHealth then
                                                     EquipWeapon(Fruit_E)
-                                                    TP(v.HumanoidRootPart.CFrame * CFrame.new(0,0,15))
+                                                    TP(v.HumanoidRootPart.CFrame * CFrame.new(0,-10,0))
                                                     wait(0.3)
-                                                    game.Workspace.CurrentCamera.CoordinateFrame = CFrame.new(game.Workspace.CurrentCamera.CoordinateFrame.p,v.HumanoidRootPart.CFrame.p)
+                                                    --game.Workspace.CurrentCamera.CoordinateFrame = CFrame.new(game.Workspace.CurrentCamera.CoordinateFrame.p,v.HumanoidRootPart.CFrame)
                                                     if Auto_Skill_Z then
-                                                        game.Workspace.CurrentCamera.CoordinateFrame = CFrame.new(game.Workspace.CurrentCamera.CoordinateFrame.p,v.HumanoidRootPart.CFrame.p)
+                                                    
                                                         hold(Enum.KeyCode.Z, 0.1)
                                                     end
                                                     if Auto_Skill_X then
-                                                        game.Workspace.CurrentCamera.CoordinateFrame = CFrame.new(game.Workspace.CurrentCamera.CoordinateFrame.p,v.HumanoidRootPart.CFrame.p)
+                                                        
                                                         hold(Enum.KeyCode.X, 0.1)
                                                     end
                                                     if Auto_Skill_C then
-                                                        game.Workspace.CurrentCamera.CoordinateFrame = CFrame.new(game.Workspace.CurrentCamera.CoordinateFrame.p,v.HumanoidRootPart.CFrame.p)
+                                                        
                                                         hold(Enum.KeyCode.C, 0.1)
                                                     end
                                                     if Auto_Skill_V then
-                                                        game.Workspace.CurrentCamera.CoordinateFrame = CFrame.new(game.Workspace.CurrentCamera.CoordinateFrame.p,v.HumanoidRootPart.CFrame.p)
+                                                        
                                                         hold(Enum.KeyCode.V, 0.1)
                                                     end
                                                 elseif percent > MinHealth then
@@ -241,6 +243,7 @@ spawn(function()
                                                         game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                                                     end
                                                 end
+                                                end)
                                             until v.Humanoid.Health <= 0 or not v.Parent or Auto_Farm_Fruit == false or Auto_Farm == false or game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false or game.Players.LocalPlayer.Character.Humanoid.Health <= 0
                                         else
                                             repeat game:GetService("RunService").Stepped:wait()
@@ -249,6 +252,7 @@ spawn(function()
                                                 game:GetService'VirtualUser':Button1Down(Vector2.new(1280, 672))
                                             until v.Humanoid.Health <= 0 or not v.Parent or Auto_Farm == false or game.Players.LocalPlayer.PlayerGui.Main.Quest.Visible == false or game.Players.LocalPlayer.Character.Humanoid.Health <= 0 
                                         end
+                                        game.Workspace.CurrentCamera.CameraSubject = game.Players.LocalPlayer.Character.Humanoid
                                         CheckLevel()
                                     else
     									game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("AbandonQuest")
@@ -786,7 +790,7 @@ function CheckLevel()
 		    Ms = "Cake Guard [Lv. 2225]"
 		    NameQuest = "CakeQuest1"
 		    QuestLv = 2
-		    NameMon = "Cake Guard"
+		    NameMon = "Cake Guards"
 		    CFrameMon = CFrame.new(-1430.4925537109375, 36.85621643066406, -12322.162109375)
 		    CFrameQ = CFrame.new(-2017.4874267578125, 36.85276412963867, -12027.53515625)
         end
@@ -1280,4 +1284,151 @@ end)
 Main9:CreateToggle("Auto Evo Cyborg ❌",false,function()
     
 end)
+
+local Main10 = page5:CreateSection("Teleport Map")
+
+if Old_World then
+          Main10:CreateButton("Start Island",function()
+             TP2(CFrame.new(1071.2832, 16.3085976, 1426.86792))
+          end)
+          Main10:CreateButton("Marine Start",function()
+             TP2(CFrame.new(-2573.3374, 6.88881969, 2046.99817))
+          end)
+          Main10:CreateButton("Middle Town",function()
+             TP2(CFrame.new(-655.824158, 7.88708115, 1436.67908))
+          end)
+          Main10:CreateButton("Jungle",function()
+             TP2(CFrame.new(-1249.77222, 11.8870859, 341.356476))
+          end)
+          Main10:CreateButton("Pirate Village",function()
+             TP2(CFrame.new(-1122.34998, 4.78708982, 3855.91992))
+          end)
+          Main10:CreateButton("Desert",function()
+             TP2(CFrame.new(1094.14587, 6.47350502, 4192.88721))
+          end)
+          Main10:CreateButton("Frozen Village",function()
+             TP2(CFrame.new(1198.00928, 27.0074959, -1211.73376))
+          end)
+          Main10:CreateButton("MarineFord",function()
+             TP2(CFrame.new(-4505.375, 20.687294, 4260.55908))
+          end)
+          Main10:CreateButton("Colosseum",function()
+             TP2(CFrame.new(-1428.35474, 7.38933945, -3014.37305))
+          end)
+          Main10:CreateButton("Sky 1st Floor",function()
+             TP2(CFrame.new(-4970.21875, 717.707275, -2622.35449))
+          end)
+          Main10:CreateButton("Sky 2st Floor",function()
+             TP2(CFrame.new(-4813.0249, 903.708557, -1912.69055))
+          end)
+          Main10:CreateButton("Sky 3st Floor",function()
+             TP2(CFrame.new(-7952.31006, 5545.52832, -320.704956))
+          end)
+          Main10:CreateButton("Prison",function()
+             TP2(CFrame.new(4854.16455, 5.68742752, 740.194641))
+          end)
+          Main10:CreateButton("Magma Village",function()
+             TP2(CFrame.new(-5231.75879, 8.61593437, 8467.87695))
+          end)
+          Main10:CreateButton("UndeyWater City",function()
+             TP2(CFrame.new(61163.8516, 11.7796879, 1819.78418))
+          end)
+          Main10:CreateButton("Fountain City",function()
+             TP2(CFrame.new(5132.7124, 4.53632832, 4037.8562))
+          end)
+          Main10:CreateButton("House Cyborg's",function()
+             TP2(CFrame.new(6262.72559, 71.3003616, 3998.23047))
+          end)
+          Main10:CreateButton("Shank's Room",function()
+             TP2(CFrame.new(-1442.16553, 29.8788261, -28.3547478))
+          end)
+          Main10:CreateButton("Mob Island",function()
+             TP2(CFrame.new(-2850.20068, 7.39224768, 5354.99268))
+          end)
+end
+if New_World then
+    		Main10:CreateButton("Dock",function()
+			TP2(CFrame.new(82.9490662, 18.0710983, 2834.98779))
+		end)
+		Main10:CreateButton("Kingdom of Rose",function()
+			TP2(CFrame.new(-394.983521, 118.503128, 1245.8446))
+		end)
+		Main10:CreateButton("Dark Arena",function()
+			TP2(game.Workspace["_WorldOrigin"].Locations["Dark Arena"].CFrame)
+		end)
+		Main10:CreateButton("Mansion",function()
+			TP2(CFrame.new(-390.096313, 331.886475, 673.464966))
+		end)
+		Main10:CreateButton("Flamingo Room",function()
+			TP2(CFrame.new(2302.19019, 15.1778421, 663.811035))
+		end)
+		Main10:CreateButton("Green Zone",function()
+			TP2(CFrame.new(-2372.14697, 72.9919434, -3166.51416))
+		end)
+		Main10:CreateButton("Cafe",function()
+			TP2(CFrame.new(-385.250916, 73.0458984, 297.388397))
+		end)
+		Main10:CreateButton("Factroy",function()
+			TP2(CFrame.new(430.42569, 210.019623, -432.504791))
+		end)
+		Main10:CreateButton("Colosseum",function()
+			TP2(CFrame.new(-1836.58191, 44.5890656, 1360.30652))
+		end)
+		Main10:CreateButton("GraveIsland",function()
+			TP2(CFrame.new(-5411.47607, 48.8234024, -721.272522))
+		end)
+		Main10:CreateButton("Snow Mountain",function()
+			TP2(CFrame.new(511.825226, 401.765198, -5380.396))
+		end)
+		Main10:CreateButton("Cold Island",function()
+			TP2(CFrame.new(-6026.96484, 14.7461271, -5071.96338))
+		end)
+		Main10:CreateButton("Hot Island",function()
+			TP2(CFrame.new(-5478.39209, 15.9775667, -5246.9126))
+		end)
+		Main10:CreateButton("Cursed Ship",function()
+			TP2(CFrame.new(902.059143, 124.752518, 33071.8125))
+		end)
+		Main10:CreateButton("IceCastle",function()
+			TP2(CFrame.new(5400.40381, 28.21698, -6236.99219))
+		end)
+		Main10:CreateButton("Forgotten Island",function()
+			TP2(CFrame.new(-3043.31543, 238.881271, -10191.5791))
+		end)
+		Main10:CreateButton("Usoapp Island",function()
+			TP2(CFrame.new(4748.78857, 8.35370827, 2849.57959))
+		end)
+		Main10:CreateButton("Minisky Island",function()
+			TP2(CFrame.new(-260.358917, 49325.7031, -35259.3008))
+		end)
+end
+if Three_World then
+    Main10:CreateButton("Port Towen",function()
+			TP2(CFrame.new(-610.309692, 57.8323097, 6436.33594, 1, 0, 0, 0, 1, 0, 0, 0, 1))
+		end)
+		Main10:CreateButton("Hydra Island",function()
+			TP2(CFrame.new(5229.99561, 603.916565, 345.154022, -0.137452736, 6.26227887e-08, -0.990508318, 5.81512971e-08, 1, 5.51532295e-08, 0.990508318, -5.00183823e-08, -0.137452736))
+		end)
+		Main10:CreateButton("Great Tree",function()
+			TP2(CFrame.new(2174.94873, 28.7312393, -6728.83154, 0.864815354, 2.51030592e-08, -0.502090037, -5.24263299e-09, 1, 4.09670555e-08, 0.502090037, -3.27966632e-08, 0.864815354))
+		end)
+		Main10:CreateButton("Castle on the Sea",function()
+			TP2(CFrame.new(-5477.62842, 313.794739, -2808.4585, 0.914748192, -2.40542199e-08, 0.404024392, -8.97737973e-09, 1, 7.98621613e-08, -0.404024392, -7.66808483e-08, 0.914748192))
+		end)
+		Main10:CreateButton("Floating Turtle",function()
+			TP2(CFrame.new(-10919.2998, 331.788452, -8637.57227, 0.606543362, 0, -0.795050383, -0, 1, -0, 0.795050383, 0, 0.606543362))
+		end)
+		Main10:CreateButton("Mansion",function()
+			TP2(CFrame.new(-12553.8125, 332.403961, -7621.91748, -0.999466479, 2.33264661e-08, 0.0326608531, 2.2023519e-08, 1, -4.02529707e-08, -0.0326608531, -3.95121873e-08, -0.999466479))
+		end)
+		Main10:CreateButton("Secret Temple",function()
+			TP2(CFrame.new(5217.35693, 6.56511116, 1100.88159, 0.00408430398, 7.00437894e-08, -0.999991655, 1.42367229e-08, 1, 7.01025229e-08, 0.999991655, -1.45229242e-08, 0.00408430398))
+		end)
+		Main10:CreateButton("Friendly Arena",function()
+			TP2(CFrame.new(5220.28955, 72.8193436, -1450.86304, 1, 0, 0, 0, 1, 0, 0, 0, 1))
+		end)
+		Main10:CreateButton("Beautiful Pirate Domain",function()
+			TP2(CFrame.new(5310.8095703125, 21.594484329224, 129.39053344727))
+		end)
+end
 -------------------------------------------------- Blox Fruit
